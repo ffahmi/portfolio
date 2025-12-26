@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UI/UX Designer Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3b82f6",
+                        "primary-dark": "#2563eb",
+                        "accent-cyan": "#06b6d4",
+                        "background-dark": "#0f172a",
+                        "background-darker": "#020617",
+                        "text-main": "#f8fafc",
+                        "text-muted": "#94a3b8",
+                        "tech-panel": "rgba(30, 41, 59, 0.7)"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.375rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    backgroundImage: {
+                         'cyber-grid': "url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop')",
+                    }
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+    @layer utilities {
+        .glass-panel {
+            @apply bg-tech-panel backdrop-blur-xl border border-white/10 shadow-2xl;
+        }
+        .text-glow {
+            text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+        .icon-glow:hover {
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+        }::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #020617; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3b82f6; 
+        }
+    }
+</style>
+</head>
+<body class="bg-background-darker text-text-main font-display antialiased overflow-x-hidden selection:bg-accent-cyan/30 selection:text-white">
+<div class="relative flex flex-col min-h-screen w-full">
+<div class="fixed inset-0 z-0 pointer-events-none opacity-20 bg-cyber-grid bg-cover bg-center mix-blend-screen"></div>
+<div class="fixed inset-0 z-0 pointer-events-none bg-gradient-to-b from-transparent via-background-darker/80 to-background-darker"></div>
+<header class="sticky top-0 z-50 w-full border-b border-white/5 bg-background-darker/80 backdrop-blur-md">
+<div class="w-full max-w-[1280px] mx-auto px-4 sm:px-10 lg:px-20">
+<div class="flex items-center justify-between h-20">
+<div class="flex items-center gap-3 text-white">
+<div class="flex items-center justify-center size-9 bg-gradient-to-tr from-primary to-accent-cyan rounded-lg text-white shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-[20px]">design_services</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight">AlexDesign</h2>
+</div>
+<nav class="hidden md:flex flex-1 justify-end gap-8 items-center">
+<div class="flex items-center gap-8">
+<a class="text-sm font-medium hover:text-accent-cyan transition-colors text-gray-300" href="#">Home</a>
+<a class="text-sm font-medium hover:text-accent-cyan transition-colors text-gray-300" href="#">Work</a>
+<a class="text-sm font-medium hover:text-accent-cyan transition-colors text-gray-300" href="#">About</a>
+<a class="text-sm font-medium hover:text-accent-cyan transition-colors text-gray-300" href="#contact">Contact</a>
+</div>
+<button class="flex items-center justify-center bg-white text-background-darker hover:bg-gray-100 text-sm font-bold h-10 px-6 rounded-lg transition-all shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                            Hire Me
+                        </button>
+</nav>
+<button class="md:hidden p-2 text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-grow relative z-10">
+<section class="w-full max-w-[1280px] mx-auto px-4 sm:px-10 lg:px-20 py-12 md:py-24">
+<div class="@container">
+<div class="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-20">
+<div class="flex flex-col gap-6 flex-1 text-center lg:text-left">
+<div class="space-y-4">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-cyan/10 border border-accent-cyan/20 text-accent-cyan text-sm font-semibold w-fit mx-auto lg:mx-0 shadow-[0_0_10px_rgba(6,182,212,0.1)]">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>Available for Freelance</span>
+</div>
+<h1 class="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight text-white text-glow">
+                                    Hello, I'm Alex. <br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent-cyan to-primary animate-gradient bg-300%">Designing</span> the future.
+                                </h1>
+<h2 class="text-lg md:text-xl text-gray-400 font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                                    I craft aesthetic and functional interfaces for web and mobile within the digital realm. 
+                                    Specializing in high-fidelity UI/UX design and creative development.
+                                </h2>
+</div>
+<div class="flex flex-wrap justify-center lg:justify-start gap-4 mt-2">
+<button class="flex items-center justify-center bg-primary hover:bg-primary-dark text-white h-12 px-8 rounded-lg text-base font-bold transition-all shadow-[0_0_20px_rgba(59,130,246,0.3)]">
+                                    View Work
+                                </button>
+<button class="flex items-center justify-center bg-white/5 border border-white/10 hover:bg-white/10 text-white h-12 px-8 rounded-lg text-base font-bold transition-all backdrop-blur-sm">
+                                    Contact Me
+                                </button>
+</div>
+<div class="flex items-center justify-center lg:justify-start gap-6 mt-6 opacity-80">
+<div class="flex -space-x-3">
+<img class="w-10 h-10 rounded-full border-2 border-background-darker object-cover" data-alt="User avatar 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASYQcwYTEoHmddwTL9xq4WRWZ8byyGBc0pexGtGu7np_aZ3p0D1iZVWIFh0nUm9W5VzfDSaQD5akX1ye2ibLzh2RbFJd__Xeq5s66tpNMPYb8NqyN8qoIgSlvAxbciWypg27AlnbmmAdq7x6L9-dJFxhMdokQCEPBc37yxSeaw4JhJv8gDhyRfCtwdErgL7lARv7mWe6t1k2D6gt7Gp8v3AnnTxCIhXENAKBq-wH_cU3X5-VIgZmLGEs8JimnCa4pEi9dCTJSkJWk"/>
+<img class="w-10 h-10 rounded-full border-2 border-background-darker object-cover" data-alt="User avatar 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClxlRmT3FmCKTZIE75k1TiwLzH4bc0CkQt6669SyZOemZPxJqjsDifWq6hB2igN36j-d46D_SiJp6KbHX79z6IjS19YMt4uPzH10RBDSGWuoIQtHnJ4xpp4xN3T7kXUqFtDNyXLCXDpYKBhpKpEUq4IHo37wgV0dBKow-fuQaeLblaykmI3potCBwztE8pYhOfQstczKxdKqjxRLwOiPgL9LoxY29ALboh0LEP9Xf-sYnQx84CzNqbBfVbJsY1YU31l3HXWBtpp5A"/>
+<img class="w-10 h-10 rounded-full border-2 border-background-darker object-cover" data-alt="User avatar 3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0mpbGDpAGDz8PkWt9oQjbLCSufK1XDB180xMKFFnCXEyDeVJAQqhco8LxZX7vPyfkaUq4Ldx_fND76Y8ojwGfUaOMeAgZPWe7g7QEjhRnp385lWEnjb9wyxMdvjpwY5s19TMQbCidhyjaR9SZ4OQ9yb4goFKMhRUWegGiiquOO3jDOHpwWETnwA-dpgYVPGd94iwIYtlLSfzPOr_RMq22Wgy6WG3W9gXLRiQV-cEyxS7sfUabMS8ft--QxsXmoC_blML8cXeVwCw"/>
+<div class="w-10 h-10 rounded-full border-2 border-background-darker bg-gray-800 flex items-center justify-center text-xs font-bold text-white">+2k</div>
+</div>
+<div class="text-sm font-medium text-gray-400">
+                                    Trusted by <span class="text-white font-bold">2,000+</span> clients
+                                </div>
+</div>
+</div>
+<div class="w-full lg:w-1/2 flex justify-center lg:justify-end relative">
+<div class="absolute inset-0 bg-accent-cyan/20 blur-[120px] rounded-full opacity-40 pointer-events-none"></div>
+<div class="relative w-full aspect-square max-w-[500px] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-gray-800 to-gray-900 border border-white/10 ring-1 ring-white/5">
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&amp;w=2070&amp;auto=format&amp;fit=crop')] bg-cover bg-center opacity-80 mix-blend-overlay" data-alt="Modern minimalist workspace setup with laptop and design tools"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background-darker via-transparent to-transparent opacity-60"></div>
+<div class="absolute bottom-6 left-6 right-6 p-4 bg-background-dark/80 backdrop-blur-md rounded-xl border border-white/10 shadow-lg">
+<div class="flex items-center gap-4">
+<div class="size-10 rounded-full bg-accent-cyan/20 flex items-center justify-center text-accent-cyan animate-pulse">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+<div>
+<p class="text-sm font-bold text-white">Project Completed</p>
+<p class="text-xs text-gray-400">Website Redesign - Delivered Today</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="w-full max-w-[1280px] mx-auto px-4 sm:px-10 lg:px-20 py-16 relative">
+<div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-primary/10 rounded-full blur-[100px]"></div>
+</div>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 relative z-10">
+<div>
+<h2 class="text-3xl font-bold tracking-tight text-white text-glow">My Skills</h2>
+<p class="text-gray-400 mt-2 text-lg">The digital arsenal I use to craft experiences.</p>
+</div>
+<a class="text-accent-cyan font-semibold hover:text-white transition-colors inline-flex items-center gap-1 group" href="#">
+            See full resume
+            <span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<div class="glass-panel rounded-3xl p-8 md:p-12 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+<div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-8 justify-items-center">
+<div class="group flex flex-col items-center gap-3">
+<div class="w-16 h-16 bg-[#1e1e1e] rounded-2xl flex items-center justify-center border border-white/10 shadow-lg transition-transform group-hover:-translate-y-1 group-hover:shadow-primary/20 group-hover:border-primary/50 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<img alt="Figma" class="w-8 h-8 icon-glow transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnzceyxLt96t4NUZdxu5s30seSXh-pNjM3yASiSeAAlEUTR-jbhiB8qLe23zLH7heHbGG3ZQeyUg8e_YQVdbyCS1oioZtObOruOYFMndj3lSTKTRM7eccWWOVrR35-EMI1ldkBjkXN2E_ehM50g4SsFlD7_j2IKj21cgQ4zVNWvEzNdWQ1nXcSfec4uzhoU82wpoDZfJIw1cItUYt9a5mszRz-T7yaG4JI73R7XAB1W1tQCF0L1p_30jEymvs2cqJR_Ir1p_Wxli0"/>
+</div>
+<span class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">Figma</span>
+</div>
+<div class="group flex flex-col items-center gap-3">
+<div class="w-16 h-16 bg-[#1e1e1e] rounded-2xl flex items-center justify-center border border-white/10 shadow-lg transition-transform group-hover:-translate-y-1 group-hover:shadow-[#FF3366]/20 group-hover:border-[#FF3366]/50 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="material-symbols-outlined text-[#FF3366] text-3xl icon-glow">smartphone</span>
+</div>
+<span class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">Invision</span>
+</div>
+<div class="group flex flex-col items-center gap-3">
+<div class="w-16 h-16 bg-[#1e1e1e] rounded-2xl flex items-center justify-center border border-white/10 shadow-lg transition-transform group-hover:-translate-y-1 group-hover:shadow-[#F7B500]/20 group-hover:border-[#F7B500]/50 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<img alt="Sketch" class="w-8 h-8 icon-glow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDk2y-WTgbglD5xE-hIeSjRpd6GrZ_57e2QSdP25vxgHUJ4jnwdAotu6ogC6hGDKVxkpDt21FMYw_kq65CfP_hn5LHA8iiAhXZfztGgmgHni3P1UcwLui4KDo1Hm--67wTTmFdAN-XbEF1opW_xCafIYGczu8uChcu1pG14Ib8bALK8MVL7vkDLaq_1yqfXlMHOOnCEbp2wZxLpZCUH6ml10W1LjK24WN9Yfygb6W-DRvGWvma9yOnm_8WAUcr4PsSTpHqSURI-VEI"/>
+</div>
+<span class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">Sketch</span>
+</div>
+<div class="group flex flex-col items-center gap-3">
+<div class="w-16 h-16 bg-[#330000] rounded-2xl flex items-center justify-center border border-[#FF9A00]/30 shadow-lg transition-transform group-hover:-translate-y-1 group-hover:shadow-[#FF9A00]/20 group-hover:border-[#FF9A00] relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="font-bold text-[#FF9A00] text-2xl icon-glow">Ai</span>
+</div>
+<span class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">Illustrator</span>
+</div>
+<div class="group flex flex-col items-center gap-3">
+<div class="w-16 h-16 bg-[#001E36] rounded-2xl flex items-center justify-center border border-[#31A8FF]/30 shadow-lg transition-transform group-hover:-translate-y-1 group-hover:shadow-[#31A8FF]/20 group-hover:border-[#31A8FF] relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="font-bold text-[#31A8FF] text-2xl icon-glow">Ps</span>
+</div>
+<span class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">Photoshop</span>
+</div>
+<div class="group flex flex-col items-center gap-3">
+<div class="w-16 h-16 bg-[#1e1e1e] rounded-2xl flex items-center justify-center border border-white/10 shadow-lg transition-transform group-hover:-translate-y-1 group-hover:shadow-[#38B2AC]/20 group-hover:border-[#38B2AC]/50 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="material-symbols-outlined text-[#38B2AC] text-3xl icon-glow">css</span>
+</div>
+<span class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">Tailwind</span>
+</div>
+<div class="group flex flex-col items-center gap-3">
+<div class="w-16 h-16 bg-[#1e1e1e] rounded-2xl flex items-center justify-center border border-white/10 shadow-lg transition-transform group-hover:-translate-y-1 group-hover:shadow-[#E34F26]/20 group-hover:border-[#E34F26]/50 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="material-symbols-outlined text-[#E34F26] text-3xl icon-glow">html</span>
+</div>
+<span class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">HTML</span>
+</div>
+<div class="group flex flex-col items-center gap-3">
+<div class="w-16 h-16 bg-[#1e1e1e] rounded-2xl flex items-center justify-center border border-white/10 shadow-lg transition-transform group-hover:-translate-y-1 group-hover:shadow-[#8BC0D0]/20 group-hover:border-[#8BC0D0]/50 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="material-symbols-outlined text-[#8BC0D0] text-3xl icon-glow">javascript</span>
+</div>
+<span class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">Alpine.js</span>
+</div>
+<div class="group flex flex-col items-center gap-3">
+<div class="w-16 h-16 bg-[#1e1e1e] rounded-2xl flex items-center justify-center border border-white/10 shadow-lg transition-transform group-hover:-translate-y-1 group-hover:shadow-[#21759B]/20 group-hover:border-[#21759B]/50 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="material-symbols-outlined text-[#21759B] text-3xl icon-glow">public</span>
+</div>
+<span class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">WordPress</span>
+</div>
+<div class="group flex flex-col items-center gap-3">
+<div class="w-16 h-16 bg-[#1e1e1e] rounded-2xl flex items-center justify-center border border-white/10 shadow-lg transition-transform group-hover:-translate-y-1 group-hover:shadow-[#7F54B3]/20 group-hover:border-[#7F54B3]/50 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="material-symbols-outlined text-[#7F54B3] text-3xl icon-glow">build</span>
+</div>
+<span class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">Oxygen</span>
+</div>
+<div class="group flex flex-col items-center gap-3">
+<div class="w-16 h-16 bg-[#1e1e1e] rounded-2xl flex items-center justify-center border border-white/10 shadow-lg transition-transform group-hover:-translate-y-1 group-hover:shadow-[#009E49]/20 group-hover:border-[#009E49]/50 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="material-symbols-outlined text-[#009E49] text-3xl icon-glow">palette</span>
+</div>
+<span class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">CorelDRAW</span>
+</div>
+</div>
+<div class="flex justify-center gap-2 mt-8">
+<div class="w-2 h-2 rounded-full bg-accent-cyan/40"></div>
+<div class="w-8 h-2 rounded-full bg-white"></div>
+<div class="w-2 h-2 rounded-full bg-accent-cyan/40"></div>
+<div class="w-2 h-2 rounded-full bg-accent-cyan/40"></div>
+</div>
+</div>
+</section>
+<section class="w-full max-w-[1280px] mx-auto px-4 sm:px-10 lg:px-20 py-16">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+<div>
+<h2 class="text-3xl font-bold tracking-tight text-white text-glow">Recent Projects</h2>
+<p class="text-gray-400 mt-2 text-lg">Highlights of my creative journey.</p>
+</div>
+<a class="text-accent-cyan font-semibold hover:text-white transition-colors inline-flex items-center gap-1 group" href="#">
+            View All Projects
+            <span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<div class="flex flex-col gap-10">
+<div class="w-full rounded-3xl overflow-hidden bg-gradient-to-br from-blue-700 to-blue-900 border border-white/10 shadow-xl relative group">
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1557683316-973673baf926?q=80&amp;w=2029&amp;auto=format&amp;fit=crop')] opacity-10 mix-blend-overlay"></div>
+<div class="flex flex-col lg:flex-row h-full">
+<div class="p-8 lg:p-12 lg:w-1/2 flex flex-col justify-center gap-6 relative z-10">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-white">account_balance_wallet</span>
+</div>
+<h3 class="text-2xl font-bold text-white">Moota.co</h3>
+</div>
+<div class="flex gap-2 flex-wrap">
+<span class="px-3 py-1 bg-white/10 rounded-full text-xs font-medium text-white border border-white/20">Product Manager</span>
+<span class="px-3 py-1 bg-white/10 rounded-full text-xs font-medium text-white border border-white/20">UI/UX Designer</span>
+</div>
+<div class="bg-black/20 backdrop-blur-md rounded-xl p-6 border border-white/5">
+<h4 class="text-sm font-semibold text-blue-200 mb-2 uppercase tracking-wider">Background</h4>
+<p class="text-sm text-gray-200 mb-4 leading-relaxed">
+                                    Moota.co is an Indonesian fintech platform designed to help businesses and individuals track and manage bank transactions. It connects with multiple bank accounts, allowing users to automatically monitor their incoming and outgoing transactions in real-time.
+                                </p>
+<h4 class="text-sm font-semibold text-blue-200 mb-2 uppercase tracking-wider">Objective</h4>
+<ul class="text-sm text-gray-200 space-y-1 list-disc list-inside marker:text-blue-300">
+<li>User-Centric and Simple Design</li>
+<li>Secure and Reliable Design</li>
+<li>Color Scheme and Branding</li>
+<li>Accessibility and Inclusive Design</li>
+</ul>
+</div>
+</div>
+<div class="lg:w-1/2 relative bg-blue-600/30 flex items-center justify-center p-8 lg:p-0 overflow-hidden">
+<div class="relative z-10 transform group-hover:scale-105 transition-transform duration-500 ease-out">
+<img alt="Moota App Screens" class="w-full max-w-[450px] shadow-2xl rounded-xl border border-white/10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpuk-4jztcMSR1fShvecb3-_g9HACAKGNPVnRRLPLcaCvGnEukyr7HgDCjovIW-DHcuNG_32vQzY7hfT0ERr2VO_E5XeBlRyQcYsdcc98sv3p0-AtGhpfPp7xmBOXrJECXTB-4zYIvEONPR3hwaxO93gXyXVim6wy9mxiiu6LboMjMpbrOcL1zmurAbWqFXYTWS3Bjl8WbbJOIyITas2yX7F91miRd7jHQL8hnlv547wKzIZOFoQH7028NEUyf-ntPvPGD6tKucg8"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-r from-blue-900 via-transparent to-transparent lg:w-32 z-20"></div>
+</div>
+</div>
+</div>
+<div class="w-full rounded-3xl overflow-hidden bg-gradient-to-br from-cyan-700 to-sky-900 border border-white/10 shadow-xl relative group">
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&amp;w=2070&amp;auto=format&amp;fit=crop')] opacity-10 mix-blend-overlay"></div>
+<div class="flex flex-col lg:flex-row h-full">
+<div class="p-8 lg:p-12 lg:w-1/2 flex flex-col justify-center gap-6 relative z-10">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-white">volunteer_activism</span>
+</div>
+<h3 class="text-2xl font-bold text-white">Rumah Yatim</h3>
+</div>
+<div class="flex gap-2 flex-wrap">
+<span class="px-3 py-1 bg-white/10 rounded-full text-xs font-medium text-white border border-white/20">UI Designer</span>
+<span class="px-3 py-1 bg-white/10 rounded-full text-xs font-medium text-white border border-white/20">UX Designer</span>
+</div>
+<div class="bg-black/20 backdrop-blur-md rounded-xl p-6 border border-white/5">
+<h4 class="text-sm font-semibold text-cyan-200 mb-2 uppercase tracking-wider">Background</h4>
+<p class="text-sm text-gray-200 mb-4 leading-relaxed">
+                                    Rumah Yatim Mobile Apps is an Mobile platform designed to facilitate online fundraising, primarily for charitable and social causes. The platform allows individuals to create campaigns to raise funds for various needs easily.
+                                </p>
+<h4 class="text-sm font-semibold text-cyan-200 mb-2 uppercase tracking-wider">Design Concept</h4>
+<ul class="text-sm text-gray-200 space-y-1 list-disc list-inside marker:text-cyan-300">
+<li>Trust &amp; Transparency</li>
+<li>Compassionate Imagery</li>
+<li>Call-to-Action for Donors</li>
+<li>Impact Dashboard</li>
+</ul>
+</div>
+</div>
+<div class="lg:w-1/2 relative bg-cyan-600/30 flex items-center justify-center p-8 lg:p-0 overflow-hidden">
+<div class="relative z-10 transform group-hover:scale-105 transition-transform duration-500 ease-out">
+<img alt="Rumah Yatim App Screens" class="w-full max-w-[450px] shadow-2xl rounded-xl border border-white/10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVBlxdXjrT03usx3yNVxteaw7kzTVZ9tNaRDJM-02gcaYhIMEf8fNJmat0tkMq5qncrfzb3Tre7GBglQBoqAmbhoszSkcCFtmLnL8-i0U_trk94Ag-JUJ3xvVIVklIiZKsSHfTWh8LYE0DmWoE15500VypcwyDSoq0fvaODyOK6H35FZO21p_-syir-bhAtJg0wYjN1_m7YAs0CPpNNZ6x2PMPvwnjugWTBboeVuu4WwjiaQKQafyB3N89jMa-jGn0dgZn-LgX-NQ"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-r from-sky-900 via-transparent to-transparent lg:w-32 z-20"></div>
+</div>
+</div>
+</div>
+<div class="w-full rounded-3xl overflow-hidden bg-gradient-to-br from-green-700 to-emerald-900 border border-white/10 shadow-xl relative group">
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&amp;w=2015&amp;auto=format&amp;fit=crop')] opacity-10 mix-blend-overlay"></div>
+<div class="flex flex-col lg:flex-row h-full">
+<div class="p-8 lg:p-12 lg:w-1/2 flex flex-col justify-center gap-6 relative z-10">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-white">dataset</span>
+</div>
+<h3 class="text-2xl font-bold text-white">Bargo System (ERP)</h3>
+</div>
+<div class="flex gap-2 flex-wrap">
+<span class="px-3 py-1 bg-white/10 rounded-full text-xs font-medium text-white border border-white/20">Product Owner</span>
+<span class="px-3 py-1 bg-white/10 rounded-full text-xs font-medium text-white border border-white/20">UI/UX</span>
+</div>
+<div class="bg-black/20 backdrop-blur-md rounded-xl p-6 border border-white/5">
+<h4 class="text-sm font-semibold text-green-200 mb-2 uppercase tracking-wider">Background</h4>
+<p class="text-sm text-gray-200 mb-4 leading-relaxed">
+                                    Bargosystem.id is an Bargo is an enterprise application to meet business needs such as managing employee data, recruitment, payroll, attendance and others.
+                                </p>
+<h4 class="text-sm font-semibold text-green-200 mb-2 uppercase tracking-wider">Design Concept</h4>
+<ul class="text-sm text-gray-200 space-y-1 list-disc list-inside marker:text-green-300">
+<li>Consistency</li>
+<li>Accessibility and Inclusive Design</li>
+<li>Clean and modern design</li>
+</ul>
+</div>
+</div>
+<div class="lg:w-1/2 relative bg-green-600/30 flex items-center justify-center p-8 lg:p-0 overflow-hidden">
+<div class="relative z-10 transform group-hover:scale-105 transition-transform duration-500 ease-out">
+<img alt="Bargo System Screens" class="w-full max-w-[450px] shadow-2xl rounded-xl border border-white/10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4cDllq7X58qEy2sUSCgHiX0k0FWTdzJNe5UOfZRsSep8uOf0cf_5KzvewgidaqzRGaBstfgNKs_WThPKSBLZLJtWf_6U1nUL9c1mI3FPyc5__oRs1Jx_DOl1LPpWvooaKrdrJqTvCTuKvPG0XMYECEYb7XicagDUVCHVH7mKhe2TgbgaXnDmPfBOBn7dXR2PQ_q8aZdmtVR0EtWL6RKGu3ZmxZVMcTmPD-hM-1ykadyhx6AHdqYZKLZnWtXhySOCD4_n3OeGOH3Q"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-r from-emerald-900 via-transparent to-transparent lg:w-32 z-20"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="w-full max-w-[1280px] mx-auto px-4 sm:px-10 lg:px-20 py-20 relative" id="contact">
+<div class="glass-panel rounded-3xl p-8 lg:p-16 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+<div class="absolute bottom-0 left-0 w-[300px] h-[300px] bg-accent-cyan/10 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/3 pointer-events-none"></div>
+<div class="grid lg:grid-cols-2 gap-16 relative z-10">
+<div>
+<h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Let's work together</h2>
+<p class="text-gray-400 text-lg mb-8 leading-relaxed">
+                        I'm currently available for freelance projects and open to new opportunities. If you have a project that needs some creative injection, let's chat.
+                    </p>
+<div class="space-y-6">
+<div class="flex items-center gap-4 group cursor-pointer">
+<div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-primary/20 group-hover:border-primary/50 transition-all duration-300">
+<span class="material-symbols-outlined text-gray-300 group-hover:text-primary transition-colors">mail</span>
+</div>
+<div>
+<h4 class="text-sm text-gray-500 font-medium">Email Me</h4>
+<p class="text-white font-medium group-hover:text-primary transition-colors">hello@alexdesign.com</p>
+</div>
+</div>
+<div class="flex items-center gap-4 group cursor-pointer">
+<div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-accent-cyan/20 group-hover:border-accent-cyan/50 transition-all duration-300">
+<span class="material-symbols-outlined text-gray-300 group-hover:text-accent-cyan transition-colors">call</span>
+</div>
+<div>
+<h4 class="text-sm text-gray-500 font-medium">Call Me</h4>
+<p class="text-white font-medium group-hover:text-accent-cyan transition-colors">+1 (555) 123-4567</p>
+</div>
+</div>
+<div class="flex items-center gap-4 group cursor-pointer">
+<div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-[#EA4C89]/20 group-hover:border-[#EA4C89]/50 transition-all duration-300">
+<span class="material-symbols-outlined text-gray-300 group-hover:text-[#EA4C89] transition-colors">sports_basketball</span>
+</div>
+<div>
+<h4 class="text-sm text-gray-500 font-medium">Dribbble</h4>
+<p class="text-white font-medium group-hover:text-[#EA4C89] transition-colors">dribbble.com/alexdesign</p>
+</div>
+</div>
+</div>
+</div>
+<div>
+<form class="space-y-5 bg-background-darker/50 p-8 rounded-2xl border border-white/5">
+<div class="grid grid-cols-2 gap-5">
+<div class="space-y-2">
+<label class="text-sm font-medium text-gray-400" for="name">Name</label>
+<input class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all" id="name" placeholder="John Doe" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-medium text-gray-400" for="email">Email</label>
+<input class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all" id="email" placeholder="john@example.com" type="email"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-medium text-gray-400" for="subject">Subject</label>
+<select class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all" id="subject">
+<option class="bg-gray-900">Project Inquiry</option>
+<option class="bg-gray-900">Freelance Opportunity</option>
+<option class="bg-gray-900">General Question</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-medium text-gray-400" for="message">Message</label>
+<textarea class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all min-h-[120px]" id="message" placeholder="Tell me about your project..."></textarea>
+</div>
+<button class="w-full bg-gradient-to-r from-primary to-accent-cyan text-white font-bold py-3.5 rounded-lg shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:scale-[1.01] active:scale-[0.99] transition-all duration-300" type="submit">
+                                Send Message
+                            </button>
+</form>
+</div>
+</div>
+</div>
+</section>
+<section class="w-full bg-background-darker border-t border-white/5 py-20 px-4 relative overflow-hidden">
+<div class="absolute inset-0 bg-primary/5 pointer-events-none"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-accent-cyan/10 rounded-full blur-[80px]"></div>
+<div class="max-w-[800px] mx-auto text-center flex flex-col items-center gap-8 relative z-10">
+<h2 class="text-3xl md:text-4xl font-black text-white leading-tight">
+                        Ready to start your next project? <br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent-cyan">Let's build something amazing.</span>
+</h2>
+<p class="text-gray-400 text-lg max-w-lg">
+                        I am currently open for freelance opportunities and full-time roles. Get in touch and let's discuss your vision.
+                    </p>
+<div class="flex flex-col sm:flex-row gap-4 w-full justify-center">
+<button class="flex items-center justify-center bg-primary hover:bg-primary-dark text-white h-12 px-8 rounded-lg text-base font-bold transition-all shadow-[0_0_20px_rgba(59,130,246,0.3)] min-w-[160px]">
+                            Get in Touch
+                        </button>
+<button class="flex items-center justify-center bg-white/5 border border-white/10 hover:bg-white/10 text-white h-12 px-8 rounded-lg text-base font-bold transition-all min-w-[160px] backdrop-blur-sm">
+                            Download CV
+                        </button>
+</div>
+</div>
+</section>
+</main>
+<footer class="w-full border-t border-white/5 bg-background-darker py-10 relative z-20">
+<div class="max-w-[1280px] mx-auto px-4 sm:px-10 lg:px-20">
+<div class="flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="flex items-center gap-3 text-white">
+<div class="flex items-center justify-center size-6 bg-gradient-to-tr from-primary to-accent-cyan rounded text-white">
+<span class="material-symbols-outlined text-[16px]">design_services</span>
+</div>
+<span class="font-bold text-lg">AlexDesign</span>
+</div>
+<div class="flex gap-6 text-gray-400">
+<a class="hover:text-accent-cyan transition-colors" href="#">Dribbble</a>
+<a class="hover:text-accent-cyan transition-colors" href="#">Behance</a>
+<a class="hover:text-accent-cyan transition-colors" href="#">LinkedIn</a>
+<a class="hover:text-accent-cyan transition-colors" href="#">Twitter</a>
+</div>
+<div class="text-sm text-gray-500">
+                        © 2023 AlexDesign. All rights reserved.
+                    </div>
+</div>
+</div>
+</footer>
+</div>
+</body></html>
