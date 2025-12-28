@@ -12,6 +12,16 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
       rel="stylesheet"
     />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
+      rel="stylesheet"
+    />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
       tailwind.config = {
@@ -76,7 +86,7 @@
     </style>
   </head>
   <body
-    class="bg-background-darker text-text-main font-display antialiased overflow-x-hidden selection:bg-accent-cyan/30 selection:text-white"
+    class=" bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark font-display transition-colors duration-300 text-text-main font-display antialiased overflow-x-hidden selection:bg-accent-cyan/30 selection:text-white"
   >
     <div class="relative flex flex-col min-h-screen w-full">
       <div
@@ -85,59 +95,87 @@
       <div
         class="fixed inset-0 z-0 pointer-events-none bg-gradient-to-b from-transparent via-background-darker/80 to-background-darker"
       ></div>
-      <header
-        class="sticky top-0 z-50 w-full border-b border-white/5 bg-background-darker/80 backdrop-blur-md"
+      <nav
+        class="fixed w-full z-50 top-0 start-0 border-b border-gray-200 dark:border-gray-800 bg-white/90 dark:bg-background-dark/80 backdrop-blur-lg"
       >
-        <div class="w-full max-w-[1280px] mx-auto px-4 sm:px-10 lg:px-20">
-          <div class="flex items-center justify-between h-20">
-            <div class="flex items-center gap-3 text-white">
-              <div
-                class="flex items-center justify-center size-9 bg-gradient-to-tr from-primary to-accent-cyan rounded-lg text-white shadow-lg shadow-primary/20"
-              >
-                <span class="material-symbols-outlined text-[20px]"
-                  >design_services</span
-                >
-              </div>
-              <h2 class="text-xl font-bold tracking-tight">FahmiDesign</h2>
+        <div
+          class="max-w-7xl mx-auto flex flex-wrap items-center justify-between mx-auto p-4"
+        >
+          <a
+            class="flex items-center space-x-3 rtl:space-x-reverse group"
+            href="#"
+          >
+            <div
+              class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-lg group-hover:rotate-12 transition-transform"
+            >
+              <span class="material-icons-round text-sm">design_services</span>
             </div>
-            <nav class="hidden md:flex flex-1 justify-end gap-8 items-center">
-              <div class="flex items-center gap-8">
+            <span
+              class="self-center text-xl font-semibold whitespace-nowrap dark:text-white text-blue-700 tracking-tight"
+              >FahmiDesign</span
+            >
+          </a>
+          <div
+            class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
+          >
+           <a
+                href="https://wa.me/6289655008922?text=Hello%20Fahmi%2C%20I%27m%20interested%20in%20your%20services"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center justify-center bg-primary hover:bg-primary-dark text-white h-12 px-4 rounded-lg text-base font-bold transition-all shadow-[0_0_20px_rgba(59,130,246,0.3)] min-w-[120px]"
+              >
+                Hire Me
+              </a>
+            <button
+              class="ml-4 p-2 text-gray-500 rounded-lg hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700"
+              onclick="document.documentElement.classList.toggle('dark')"
+            >
+              <span class="material-icons-round">brightness_4</span>
+            </button>
+          </div>
+          <div
+            class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+            id="navbar-sticky"
+          >
+            <ul
+              class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700"
+            >
+              <li>
                 <a
-                  class="text-sm font-medium hover:text-accent-cyan transition-colors text-gray-300"
-                  href="#"
+                  aria-current="page"
+                  class="block py-2 md:dark:text-primary px-3 text-primary rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 dark:text-white dark:hover:text-primary dark:hover:bg-gray-700 md:dark:hover:bg-transparent transition-colors"
+                  href="/index.html"
                   >Home</a
                 >
+              </li>
+              <li>
                 <a
-                  class="text-sm font-medium hover:text-accent-cyan transition-colors text-gray-300"
-                  href="#"
+                  class="block py-2 px-3 text-gray-900 rounded md:bg-transparent  md:hover:text-primary md:p-0 dark:text-white"
+                  href="#work"
                   >Work</a
                 >
+              </li>
+              <li>
                 <a
-                  class="text-sm font-medium hover:text-accent-cyan transition-colors text-gray-300"
+                  class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 dark:text-white dark:hover:text-primary dark:hover:bg-gray-700 md:dark:hover:bg-transparent transition-colors"
                   href="#"
                   >About</a
                 >
+              </li>
+              <li>
                 <a
-                  class="text-sm font-medium hover:text-accent-cyan transition-colors text-gray-300"
-                  href="#contact"
+                  class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 dark:text-white dark:hover:text-primary dark:hover:bg-gray-700 md:dark:hover:bg-transparent transition-colors"
+                  href="#"
                   >Contact</a
                 >
-              </div>
-              <button
-                class="flex items-center justify-center bg-white text-background-darker hover:bg-gray-100 text-sm font-bold h-10 px-6 rounded-lg transition-all shadow-[0_0_15px_rgba(255,255,255,0.1)]"
-              >
-                Hire Me
-              </button>
-            </nav>
-            <button class="md:hidden p-2 text-white">
-              <span class="material-symbols-outlined">menu</span>
-            </button>
+              </li>
+            </ul>
           </div>
         </div>
-      </header>
+      </nav>
       <main class="flex-grow relative z-10">
         <section
-          class="w-full max-w-[1280px] mx-auto px-4 sm:px-10 lg:px-20 py-12 md:py-24"
+          class="w-full max-w-[1280px] mx-auto px-4 sm:px-10 lg:px-20 py-16 md:py-24"
         >
           <div class="@container">
             <div
@@ -146,7 +184,7 @@
               <div class="flex flex-col gap-6 flex-1 text-center lg:text-left">
                 <div class="space-y-4">
                   <div
-                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-cyan/10 border border-accent-cyan/20 text-accent-cyan text-sm font-semibold w-fit mx-auto lg:mx-0 shadow-[0_0_10px_rgba(6,182,212,0.1)]"
+                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 dark:bg-accent-cyan/10 border dark:border-accent-cyan/20 text-primary dark:text-accent-cyan text-sm font-semibold w-fit mx-auto lg:mx-0 shadow-[0_0_10px_rgba(6,182,212,0.1)]"
                   >
                     <span class="material-symbols-outlined text-[18px]"
                       >verified</span
@@ -185,39 +223,10 @@
                     Contact Me
                   </button>
                 </div>
-                <div
-                  class="flex items-center justify-center lg:justify-start gap-6 mt-6 opacity-80"
-                >
-                  <div class="flex -space-x-3">
-                    <img
-                      class="w-10 h-10 rounded-full border-2 border-background-darker object-cover"
-                      data-alt="User avatar 1"
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuASYQcwYTEoHmddwTL9xq4WRWZ8byyGBc0pexGtGu7np_aZ3p0D1iZVWIFh0nUm9W5VzfDSaQD5akX1ye2ibLzh2RbFJd__Xeq5s66tpNMPYb8NqyN8qoIgSlvAxbciWypg27AlnbmmAdq7x6L9-dJFxhMdokQCEPBc37yxSeaw4JhJv8gDhyRfCtwdErgL7lARv7mWe6t1k2D6gt7Gp8v3AnnTxCIhXENAKBq-wH_cU3X5-VIgZmLGEs8JimnCa4pEi9dCTJSkJWk"
-                    />
-                    <img
-                      class="w-10 h-10 rounded-full border-2 border-background-darker object-cover"
-                      data-alt="User avatar 2"
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuClxlRmT3FmCKTZIE75k1TiwLzH4bc0CkQt6669SyZOemZPxJqjsDifWq6hB2igN36j-d46D_SiJp6KbHX79z6IjS19YMt4uPzH10RBDSGWuoIQtHnJ4xpp4xN3T7kXUqFtDNyXLCXDpYKBhpKpEUq4IHo37wgV0dBKow-fuQaeLblaykmI3potCBwztE8pYhOfQstczKxdKqjxRLwOiPgL9LoxY29ALboh0LEP9Xf-sYnQx84CzNqbBfVbJsY1YU31l3HXWBtpp5A"
-                    />
-                    <img
-                      class="w-10 h-10 rounded-full border-2 border-background-darker object-cover"
-                      data-alt="User avatar 3"
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0mpbGDpAGDz8PkWt9oQjbLCSufK1XDB180xMKFFnCXEyDeVJAQqhco8LxZX7vPyfkaUq4Ldx_fND76Y8ojwGfUaOMeAgZPWe7g7QEjhRnp385lWEnjb9wyxMdvjpwY5s19TMQbCidhyjaR9SZ4OQ9yb4goFKMhRUWegGiiquOO3jDOHpwWETnwA-dpgYVPGd94iwIYtlLSfzPOr_RMq22Wgy6WG3W9gXLRiQV-cEyxS7sfUabMS8ft--QxsXmoC_blML8cXeVwCw"
-                    />
-                    <div
-                      class="w-10 h-10 rounded-full border-2 border-background-darker bg-gray-800 flex items-center justify-center text-xs font-bold text-white"
-                    >
-                      +2k
-                    </div>
-                  </div>
-                  <div class="text-sm font-medium text-gray-400">
-                    Trusted by
-                    <span class="text-white font-bold">2,000+</span> clients
-                  </div>
-                </div>
+                
               </div>
               <div
-                class="w-full lg:w-1/2 flex justify-center lg:justify-end relative"
+                class="w-full lg:w-1/2 flex justify-center lg:justify-end relative md:py-12"
               >
                 <div
                   class="absolute inset-0 bg-accent-cyan/20 blur-[120px] rounded-full opacity-40 pointer-events-none"
@@ -261,6 +270,7 @@
 
         <section
           class="w-full max-w-[1280px] mx-auto px-4 sm:px-10 lg:px-20 py-16"
+          id="work"
         >
           <div
             class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10"
@@ -796,160 +806,7 @@
             </div>
           </div>
         </section>
-        <section
-          class="w-full max-w-[1280px] mx-auto px-4 sm:px-10 lg:px-20 py-20 relative"
-          id="contact"
-        >
-          <div
-            class="glass-panel rounded-3xl p-8 lg:p-16 relative overflow-hidden"
-          >
-            <div
-              class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none"
-            ></div>
-            <div
-              class="absolute bottom-0 left-0 w-[300px] h-[300px] bg-accent-cyan/10 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/3 pointer-events-none"
-            ></div>
-            <div class="grid lg:grid-cols-2 gap-16 relative z-10">
-              <div>
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
-                  Let's work together
-                </h2>
-                <p class="text-gray-400 text-lg mb-8 leading-relaxed">
-                  I'm currently available for freelance projects and open to new
-                  opportunities. If you have a project that needs some creative
-                  injection, let's chat.
-                </p>
-                <div class="space-y-6">
-                  <div class="flex items-center gap-4 group cursor-pointer">
-                    <div
-                      class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-primary/20 group-hover:border-primary/50 transition-all duration-300"
-                    >
-                      <span
-                        class="material-symbols-outlined text-gray-300 group-hover:text-primary transition-colors"
-                        >mail</span
-                      >
-                    </div>
-                    <div>
-                      <h4 class="text-sm text-gray-500 font-medium">
-                        Email Me
-                      </h4>
-                      <p
-                        class="text-white font-medium group-hover:text-primary transition-colors"
-                      >
-                        hello@Fahmidesign.com
-                      </p>
-                    </div>
-                  </div>
-                  <div class="flex items-center gap-4 group cursor-pointer">
-                    <div
-                      class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-accent-cyan/20 group-hover:border-accent-cyan/50 transition-all duration-300"
-                    >
-                      <span
-                        class="material-symbols-outlined text-gray-300 group-hover:text-accent-cyan transition-colors"
-                        >call</span
-                      >
-                    </div>
-                    <div>
-                      <h4 class="text-sm text-gray-500 font-medium">Call Me</h4>
-                      <p
-                        class="text-white font-medium group-hover:text-accent-cyan transition-colors"
-                      >
-                        +1 (555) 123-4567
-                      </p>
-                    </div>
-                  </div>
-                  <div class="flex items-center gap-4 group cursor-pointer">
-                    <div
-                      class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-[#EA4C89]/20 group-hover:border-[#EA4C89]/50 transition-all duration-300"
-                    >
-                      <span
-                        class="material-symbols-outlined text-gray-300 group-hover:text-[#EA4C89] transition-colors"
-                        >sports_basketball</span
-                      >
-                    </div>
-                    <div>
-                      <h4 class="text-sm text-gray-500 font-medium">
-                        Dribbble
-                      </h4>
-                      <p
-                        class="text-white font-medium group-hover:text-[#EA4C89] transition-colors"
-                      >
-                        dribbble.com/Fahmidesign
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <form
-                  class="space-y-5 bg-background-darker/50 p-8 rounded-2xl border border-white/5"
-                >
-                  <div class="grid grid-cols-2 gap-5">
-                    <div class="space-y-2">
-                      <label
-                        class="text-sm font-medium text-gray-400"
-                        for="name"
-                        >Name</label
-                      >
-                      <input
-                        class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all"
-                        id="name"
-                        placeholder="John Doe"
-                        type="text"
-                      />
-                    </div>
-                    <div class="space-y-2">
-                      <label
-                        class="text-sm font-medium text-gray-400"
-                        for="email"
-                        >Email</label
-                      >
-                      <input
-                        class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all"
-                        id="email"
-                        placeholder="john@example.com"
-                        type="email"
-                      />
-                    </div>
-                  </div>
-                  <div class="space-y-2">
-                    <label
-                      class="text-sm font-medium text-gray-400"
-                      for="subject"
-                      >Subject</label
-                    >
-                    <select
-                      class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all"
-                      id="subject"
-                    >
-                      <option class="bg-gray-900">Project Inquiry</option>
-                      <option class="bg-gray-900">Freelance Opportunity</option>
-                      <option class="bg-gray-900">General Question</option>
-                    </select>
-                  </div>
-                  <div class="space-y-2">
-                    <label
-                      class="text-sm font-medium text-gray-400"
-                      for="message"
-                      >Message</label
-                    >
-                    <textarea
-                      class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all min-h-[120px]"
-                      id="message"
-                      placeholder="Tell me about your project..."
-                    ></textarea>
-                  </div>
-                  <button
-                    class="w-full bg-gradient-to-r from-primary to-accent-cyan text-white font-bold py-3.5 rounded-lg shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:scale-[1.01] active:scale-[0.99] transition-all duration-300"
-                    type="submit"
-                  >
-                    Send Message
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </section>
+
         <section
           class="w-full bg-background-darker border-t border-white/5 py-20 px-4 relative overflow-hidden"
         >
@@ -974,16 +831,15 @@
               roles. Get in touch and let's discuss your vision.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 w-full justify-center">
-              <button
+             
+              <a
+                href="https://wa.me/6289655008922?text=Hello%20Fahmi%2C%20I%27m%20interested%20in%20your%20services"
+                target="_blank"
+                rel="noopener noreferrer"
                 class="flex items-center justify-center bg-primary hover:bg-primary-dark text-white h-12 px-8 rounded-lg text-base font-bold transition-all shadow-[0_0_20px_rgba(59,130,246,0.3)] min-w-[160px]"
               >
                 Get in Touch
-              </button>
-              <button
-                class="flex items-center justify-center bg-white/5 border border-white/10 hover:bg-white/10 text-white h-12 px-8 rounded-lg text-base font-bold transition-all min-w-[160px] backdrop-blur-sm"
-              >
-                Download CV
-              </button>
+              </a>
             </div>
           </div>
         </section>
