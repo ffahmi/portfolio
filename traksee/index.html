@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Moota.co Case Study | FahmiDesign</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#3B82F6", // Bright Blue from the reference
+              "primary-dark": "#2563EB",
+              "background-light": "#F3F4F6",
+              "background-dark": "#050912", // Very dark, almost black navy
+              "card-light": "#FFFFFF",
+              "card-dark": "#111827", // Slightly lighter for contrast
+              "text-light": "#1F2937",
+              "text-dark": "#E5E7EB",
+              "subtext-light": "#4B5563",
+              "subtext-dark": "#9CA3AF",
+            },
+            fontFamily: {
+              display: ["'Plus Jakarta Sans'", "sans-serif"],
+              body: ["'Plus Jakarta Sans'", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.5rem",
+              xl: "1rem",
+              "2xl": "1.5rem",
+              "3xl": "2rem",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #111827;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #374151;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #4b5563;
+      }
+      .glass-effect {
+        background: rgba(17, 24, 39, 0.7);
+        backdrop-filter: blur(10px);
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark font-display transition-colors duration-300"
+  >
+    <nav
+      class="fixed w-full z-50 top-0 start-0 border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-lg"
+    >
+      <div
+        class="max-w-7xl mx-auto flex flex-wrap items-center justify-between mx-auto p-4"
+      >
+        <a
+          class="flex items-center space-x-3 rtl:space-x-reverse group"
+          href="/index.html"
+        >
+          <img src="/images/logo-fahmi.png" class="w-12" />
+        </a>
+        <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+          <button
+            class="text-white bg-primary hover:bg-primary-dark focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-all shadow-lg shadow-primary/30"
+            type="button"
+          >
+            Hire Me
+          </button>
+          <button
+            class="ml-4 p-2 text-gray-500 rounded-lg hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700"
+            onclick="document.documentElement.classList.toggle('dark')"
+          >
+            <span class="material-icons-round">brightness_4</span>
+          </button>
+        </div>
+
+        <div
+          class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+          id="navbar-sticky"
+        >
+          <ul
+            class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700"
+          >
+            <li>
+              <a
+                class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 dark:text-white dark:hover:text-primary dark:hover:bg-gray-700 md:dark:hover:bg-transparent transition-colors"
+                href="/index.html"
+                >Home</a
+              >
+            </li>
+            <li>
+              <a
+                aria-current="page"
+                class="block py-2 px-3 text-primary bg-blue-700 rounded md:bg-transparent md:text-primary md:p-0 md:dark:text-primary"
+                href="/index.html#work"
+                >Work</a
+              >
+            </li>
+            <li>
+              <a
+                class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 dark:text-white dark:hover:text-primary dark:hover:bg-gray-700 md:dark:hover:bg-transparent transition-colors"
+                href="/index.html"
+                >About</a
+              >
+            </li>
+            <li>
+              <a
+                class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 dark:text-white dark:hover:text-primary dark:hover:bg-gray-700 md:dark:hover:bg-transparent transition-colors"
+                href="/index.html#contact"
+                >Contact</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <main class="pt-32 pb-20 px-4 sm:px-6">
+      <div class="max-w-5xl mx-auto">
+        <a
+          class="inline-flex items-center text-sm font-medium text-subtext-light dark:text-subtext-dark hover:text-primary dark:hover:text-primary mb-8 transition-colors"
+          href="/index.html"
+        >
+          <span class="material-icons-round text-base mr-1">arrow_back</span>
+          Back to Projects
+        </a>
+        <header class="mb-16">
+          <div class="flex items-center gap-4 mb-6">
+            <img
+              src="https://moota.co/file/2025/11/logo-moota-baru-taut.png"
+              class="w-44"
+            />
+          </div>
+          <p
+            class="text-xl md:text-2xl text-subtext-light dark:text-subtext-dark font-light leading-relaxed max-w-3xl mb-8"
+          >
+            Redesigning the financial dashboard experience for Indonesia's
+            leading automated bank transaction platform.
+          </p>
+          <div class="flex flex-wrap gap-4 text-sm font-medium">
+            <div class="flex flex-col">
+              <span
+                class="text-xs text-subtext-light dark:text-subtext-dark uppercase tracking-wider mb-1"
+                >Role</span
+              >
+              <span
+                class="px-4 py-2 rounded-full bg-white dark:bg-card-dark border border-gray-200 dark:border-gray-700 shadow-sm text-gray-900 dark:text-white"
+              >
+                UI/UX Designer
+              </span>
+            </div>
+            <div class="flex flex-col">
+              <span
+                class="text-xs text-subtext-light dark:text-subtext-dark uppercase tracking-wider mb-1"
+                >Timeline</span
+              >
+              <span
+                class="px-4 py-2 rounded-full bg-white dark:bg-card-dark border border-gray-200 dark:border-gray-700 shadow-sm text-gray-900 dark:text-white"
+              >
+                4 Weeks (2024)
+              </span>
+            </div>
+            <div class="flex flex-col">
+              <span
+                class="text-xs text-subtext-light dark:text-subtext-dark uppercase tracking-wider mb-1"
+                >Platform</span
+              >
+              <span
+                class="px-4 py-2 rounded-full bg-white dark:bg-card-dark border border-gray-200 dark:border-gray-700 shadow-sm text-gray-900 dark:text-white"
+              >
+                Mobile Application
+              </span>
+            </div>
+            <div class="flex flex-col">
+              <span
+                class="text-xs text-subtext-light dark:text-subtext-dark uppercase tracking-wider mb-1"
+                >Tools</span
+              >
+              <span
+                class="px-4 py-2 rounded-full bg-white dark:bg-card-dark border border-gray-200 dark:border-gray-700 shadow-sm text-gray-900 dark:text-white flex items-center gap-2"
+              >
+                <span class="w-2 h-2 rounded-full bg-purple-500"></span> Figma
+              </span>
+            </div>
+          </div>
+        </header>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
+          <div class="lg:col-span-8 space-y-12">
+            <section class="prose prose-lg dark:prose-invert max-w-none">
+              <h3
+                class="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center"
+              >
+                <span class="w-8 h-1 bg-primary rounded mr-4"></span>
+                Project Overview
+              </h3>
+              <p
+                class="text-subtext-light dark:text-subtext-dark leading-relaxed"
+              >
+                Moota.co is an Indonesian fintech platform designed to help
+                businesses and individuals track and manage bank transactions
+                across multiple accounts. The goal of this redesign was to
+                modernize the interface, improve data visualization for
+                financial health, and streamline the user flow for connecting
+                new bank accounts. The existing platform suffered from high
+                churn during the onboarding process and a cluttered dashboard
+                that made quick analysis difficult.
+              </p>
+            </section>
+            <section
+              class="bg-white dark:bg-card-dark p-8 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm"
+            >
+              <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                The Problem
+              </h3>
+              <p class="text-subtext-light dark:text-subtext-dark mb-6">
+                Through user interviews and heatmap analysis, we identified
+                several critical friction points:
+              </p>
+              <ul class="space-y-4">
+                <li class="flex items-start">
+                  <span
+                    class="flex-shrink-0 w-6 h-6 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 flex items-center justify-center mt-0.5 mr-4"
+                  >
+                    <span class="material-icons-round text-sm">close</span>
+                  </span>
+                  <span class="text-subtext-light dark:text-subtext-dark"
+                    ><strong>Complex Onboarding:</strong> Users felt overwhelmed
+                    by the 7-step process to link their first bank
+                    account.</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <span
+                    class="flex-shrink-0 w-6 h-6 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 flex items-center justify-center mt-0.5 mr-4"
+                  >
+                    <span class="material-icons-round text-sm">close</span>
+                  </span>
+                  <span class="text-subtext-light dark:text-subtext-dark"
+                    ><strong>Data Overload:</strong> The dashboard displayed raw
+                    tables without visual summaries, making it hard to spot
+                    trends.</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <span
+                    class="flex-shrink-0 w-6 h-6 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 flex items-center justify-center mt-0.5 mr-4"
+                  >
+                    <span class="material-icons-round text-sm">close</span>
+                  </span>
+                  <span class="text-subtext-light dark:text-subtext-dark"
+                    ><strong>Inconsistent UI:</strong> Legacy design elements
+                    clashed with newer features, creating a disjointed trust
+                    experience.</span
+                  >
+                </li>
+              </ul>
+            </section>
+            <section class="prose prose-lg dark:prose-invert max-w-none">
+              <h3
+                class="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center"
+              >
+                <span class="w-8 h-1 bg-green-500 rounded mr-4"></span>
+                The Solution
+              </h3>
+              <p
+                class="text-subtext-light dark:text-subtext-dark leading-relaxed"
+              >
+                We adopted a <strong>"Focus and Clarity"</strong> design
+                philosophy. We simplified the onboarding into a 3-step wizard
+                with clear progress indicators. For the dashboard, we introduced
+                modular widgets allowing users to customize their
+                view—prioritizing charts and aggregate totals over raw data
+                rows. The visual language was updated to a deep, trustworthy
+                blue palette with high-contrast accents for critical financial
+                alerts, ensuring accessibility and a modern aesthetic.
+              </p>
+            </section>
+          </div>
+          <div class="lg:col-span-4 space-y-6">
+            <div
+              class="sticky top-32 p-6 rounded-2xl bg-primary/5 dark:bg-card-dark border border-primary/10 dark:border-gray-800"
+            >
+              <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-4">
+                Key Outcomes
+              </h4>
+              <div class="space-y-4">
+                <div
+                  class="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-2"
+                >
+                  <span
+                    class="text-subtext-light dark:text-subtext-dark text-sm"
+                    >Conversion Rate</span
+                  >
+                  <span class="text-green-600 dark:text-green-400 font-bold"
+                    >+24%</span
+                  >
+                </div>
+                <div
+                  class="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-2"
+                >
+                  <span
+                    class="text-subtext-light dark:text-subtext-dark text-sm"
+                    >Time on Task</span
+                  >
+                  <span class="text-green-600 dark:text-green-400 font-bold"
+                    >-40%</span
+                  >
+                </div>
+                <div class="flex items-center justify-between pb-2">
+                  <span
+                    class="text-subtext-light dark:text-subtext-dark text-sm"
+                    >User Satisfaction</span
+                  >
+                  <span class="text-green-600 dark:text-green-400 font-bold"
+                    >4.8/5</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <section class="mb-24">
+          <div class="flex items-end justify-between mb-10">
+            <div>
+              <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                Design Screens
+              </h2>
+              <p class="text-subtext-light dark:text-subtext-dark">
+                High-fidelity explorations and final deliverables.
+              </p>
+            </div>
+            <!--
+            <div class="hidden md:flex gap-2">
+              <span class="w-3 h-3 rounded-full bg-primary"></span>
+              <span
+                class="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-700"
+              ></span>
+              <span
+                class="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-700"
+              ></span>
+            </div>
+            -->
+          </div>
+          <div class="grid grid-cols-1 gap-8">
+            
+            <div
+              class="group relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-800"
+            >
+              <div
+                class="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full z-10"
+              >
+                Dashboard Mobile View & Bank
+              </div>
+              <img
+                alt="User flow diagrams and wireframes on a whiteboard"
+                class="w-full h-85 object-cover transform group-hover:scale-105 transition-transform duration-500"
+                src="/moota/images/moota-image-1.png"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6"
+              >
+                <p class="text-white font-medium">
+                  Simplified 3-step connection wizard
+                </p>
+              </div>
+            </div>
+            <div
+              class="group relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-800"
+            >
+              <div
+                class="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full z-10"
+              >
+                Transaction & Form
+              </div>
+              <img
+                alt="Dark mode mobile interface showing transaction list"
+                class="w-full h-85 object-cover object-center transform group-hover:scale-105 transition-transform duration-500"
+                src="/moota/images/moota-image-2.png"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6"
+              >
+                <p class="text-white font-medium">
+                  Detailed transaction filtering &amp; tagging
+                </p>
+              </div>
+            </div>
+            <div
+              class="group relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-800"
+            >
+              <div
+                class="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full z-10"
+              >
+                Main Dashboard
+              </div>
+              <img
+                alt="Main Dashboard Analytics View with charts and graphs"
+                class="w-full h-85 object-cover object-top transform group-hover:scale-105 transition-transform duration-500"
+                src="/moota/images/moota-image-3.png"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6"
+              >
+                <p class="text-white font-medium">
+                  Consolidated view of all assets
+                </p>
+              </div>
+            </div>
+            <div
+              class="group relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-800"
+            >
+              <div
+                class="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full z-10"
+              >
+                Landing Page
+              </div>
+              <img
+                alt="Hand holding phone with final app design"
+                class="w-full h-95 object-cover object-center transform group-hover:scale-105 transition-transform duration-500"
+                src="/moota/images/moota-image-4.png"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6"
+              >
+                <p class="text-white font-medium">
+                  Responsive mobile adaptation
+                </p>
+              </div>
+            </div>
+             <div
+              class="group relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-800"
+            >
+              <div
+                class="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full z-10"
+              >
+               UX Flow
+              </div>
+              <img
+                alt="Hand holding phone with final app design"
+                class="w-full h-95 object-cover object-center transform group-hover:scale-105 transition-transform duration-500"
+                src="/moota/images/moota-image-5.png"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6"
+              >
+                <p class="text-white font-medium">
+                  Responsive mobile adaptation
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div
+          class="text-center py-12 bg-gray-50 dark:bg-card-dark rounded-3xl border border-gray-200 dark:border-gray-800 relative overflow-hidden"
+        >
+          <div
+            class="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-primary/20 rounded-full blur-3xl pointer-events-none"
+          ></div>
+          <h3
+            class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-6 relative z-10"
+          >
+            Interested in other projects?
+          </h3>
+          <!--
+          <p
+            class="text-subtext-light dark:text-subtext-dark mb-8 max-w-lg mx-auto relative z-10"
+          >
+            See the full pixel-perfect breakdown, interaction components, and
+            design system on my Dribbble profile.
+          </p>-->
+          <a
+            class="relative z-10 inline-flex items-center gap-2 bg-[#ea4c89] hover:bg-[#d83a74] text-white font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105 shadow-lg shadow-[#ea4c89]/40"
+            href="https://dribbble.com/ffahmi11"
+          >
+            <span class="material-icons-round">sports_basketball</span>
+            View on Dribbble
+          </a>
+        </div>
+      </div>
+    </main>
+    <footer
+      class="border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-background-dark py-8"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center"
+      >
+        <div class="flex items-center space-x-2 mb-4 md:mb-0">
+          <img src="/images/logo-fahmi.png" class="w-10" />
+        </div>
+        <div
+          class="flex space-x-6 text-sm text-subtext-light dark:text-subtext-dark"
+        >
+          <a
+            class="hover:text-primary transition-colors"
+            href="https://dribbble.com/ffahmi11"
+            >Dribbble</a
+          >
+          <a
+            class="hover:text-primary transition-colors"
+            href="https://github.com/ffahmi"
+            >Github</a
+          >
+          <a
+            class="hover:text-primary transition-colors"
+            href="https://www.linkedin.com/in/ffahmi-id/"
+            >LinkedIn</a
+          >
+        </div>
+        <div class="mt-4 md:mt-0 text-xs text-gray-500">
+          © 2025 FahmiDesign. All rights reserved.
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
