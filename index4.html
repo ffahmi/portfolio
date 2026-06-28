@@ -1,0 +1,1238 @@
+<!doctype html>
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Fahmi | UI/UX Designer Portfolio</title>
+    <link rel="icon" href="/portfolio/images/favicon.ico" type="image/x-icon" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#3b82f6",
+              "primary-dark": "#2563eb",
+              "accent-cyan": "#06b6d4",
+              "background-dark": "#0f172a",
+              "background-darker": "#020617",
+              "text-main": "#f8fafc",
+              "text-muted": "#94a3b8",
+              "tech-panel": "rgba(30, 41, 59, 0.7)",
+            },
+            fontFamily: {
+              display: ["Inter", "sans-serif"],
+              body: ["Inter", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.375rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              "2xl": "1rem",
+              "3xl": "1.5rem",
+              full: "9999px",
+            },
+            backgroundImage: {
+              "cyber-grid":
+                "url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop')",
+            },
+          },
+        },
+      };
+    </script>
+    <!-- Hotjar Tracking Code for Portfolio  -->
+    <script>
+      (function (h, o, t, j, a, r) {
+        h.hj =
+          h.hj ||
+          function () {
+            (h.hj.q = h.hj.q || []).push(arguments);
+          };
+        h._hjSettings = { hjid: 6610746, hjsv: 6 };
+        a = o.getElementsByTagName("head")[0];
+        r = o.createElement("script");
+        r.async = 1;
+        r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+        a.appendChild(r);
+      })(window, document, "https://static.hotjar.com/c/hotjar-", ".js?sv=");
+    </script>
+    <style type="text/tailwindcss">
+      @layer utilities {
+        .glass-panel {
+          @apply bg-tech-panel backdrop-blur-xl border border-white/10 shadow-2xl;
+        }
+        .text-glow {
+          text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+        .icon-glow:hover {
+          filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+        }
+        ::-webkit-scrollbar {
+          width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+          background: #020617;
+        }
+        ::-webkit-scrollbar-thumb {
+          background: #1e293b;
+          border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+          background: #3b82f6;
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark font-display transition-colors duration-300 text-text-main font-display antialiased overflow-x-hidden selection:bg-accent-cyan/30 selection:text-white"
+  >
+    <div class="relative flex flex-col min-h-screen w-full">
+      <div
+        class="fixed inset-0 z-0 pointer-events-none opacity-20 bg-cyber-grid bg-cover bg-center mix-blend-screen"
+      ></div>
+      <div
+        class="fixed inset-0 z-0 pointer-events-none bg-gradient-to-b from-transparent via-background-darker/80 to-background-darker"
+      ></div>
+      <nav
+        class="fixed w-full z-50 top-0 start-0 border-b border-gray-200 dark:border-gray-800 bg-white/90 dark:bg-background-dark/80 backdrop-blur-lg"
+      >
+        <div
+          class="max-w-7xl mx-auto flex flex-wrap items-center justify-between mx-auto p-4"
+        >
+          <a
+            class="flex items-center space-x-3 rtl:space-x-reverse group"
+            href="https://ffahmi.github.io/portfolio"
+          >
+            <img
+              src="/images/logo-fahmi.png"
+              alt="FahmiDesign Logo"
+              class="w-11 h-11"
+            />
+          </a>
+          <div
+            class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
+          >
+            <a
+              href="https://wa.me/6289655008922?text=Hello%20Fahmi%2C%20I%27m%20interested%20in%20your%20services"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center justify-center bg-primary hover:bg-primary-dark text-white h-12 px-4 rounded-lg text-base font-bold transition-all shadow-[0_0_20px_rgba(59,130,246,0.3)] min-w-[120px]"
+            >
+              Hire Me
+            </a>
+            <button
+              class="ml-4 p-2 text-gray-500 rounded-lg hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700"
+              onclick="document.documentElement.classList.toggle('dark')"
+            >
+              <span class="material-icons-round">brightness_4</span>
+            </button>
+          </div>
+          <div
+            class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+            id="navbar-sticky"
+          >
+            <ul
+              class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700"
+            >
+              <li>
+                <a
+                  aria-current="page"
+                  class="block py-2 md:dark:text-primary px-3 text-primary rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 dark:text-white dark:hover:text-primary dark:hover:bg-gray-700 md:dark:hover:bg-transparent transition-colors"
+                  href="https://ffahmi.github.io/portfolio"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:hover:text-primary md:p-0 dark:text-white"
+                  href="#work"
+                  >Work</a
+                >
+              </li>
+              <li>
+                <a
+                  class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 dark:text-white dark:hover:text-primary dark:hover:bg-gray-700 md:dark:hover:bg-transparent transition-colors"
+                  href="#"
+                  >About</a
+                >
+              </li>
+              <li>
+                <a
+                  class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 dark:text-white dark:hover:text-primary dark:hover:bg-gray-700 md:dark:hover:bg-transparent transition-colors"
+                  href="#contact"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <main class="flex-grow relative z-10">
+        <section
+          class="w-full max-w-[1280px] mx-auto px-4 sm:px-10 lg:px-20 py-16 md:py-24"
+        >
+          <div class="@container">
+            <div
+              class="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-20"
+            >
+              <div class="flex flex-col gap-6 flex-1 text-center lg:text-left">
+                <div class="space-y-4">
+                  <div
+                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 dark:bg-accent-cyan/10 border dark:border-accent-cyan/20 text-primary dark:text-accent-cyan text-sm font-semibold w-fit mx-auto lg:mx-0 shadow-[0_0_10px_rgba(6,182,212,0.1)]"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >verified</span
+                    >
+                    <span>Available for Freelance</span>
+                  </div>
+                  <h1
+                    class="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight text-white text-glow"
+                  >
+                    Hello, I'm Fahmi. <br />
+                    <span
+                      class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent-cyan to-primary animate-gradient bg-300%"
+                      >Designing
+                    </span>
+                    idea into reality.
+                  </h1>
+                  <h2
+                    class="text-lg md:text-xl text-gray-400 font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0"
+                  >
+                    I craft aesthetic and functional interfaces for web and
+                    mobile within the digital realm. Specialising in
+                    high-fidelity UI/UX design and creative development.
+                  </h2>
+                </div>
+                <div
+                  class="flex flex-wrap justify-center lg:justify-start gap-4 mt-2"
+                >
+                  <a
+                    href="#work"
+                    class="flex items-center justify-center bg-primary hover:bg-primary-dark text-white h-13 px-8 rounded-xl text-base font-bold transition-all shadow-[0_0_20px_rgba(59,130,246,0.3)]"
+                  >
+                    View Work
+                  </a>
+                  <a
+                    href="https://dribbble.com/ffahmi"
+                    class="inline-flex items-center gap-2 px-4 py-4 rounded-xl border border-white/40 bg-white/20 text-white backdrop-blur-md shadow-lg shadow-white/10 hover:bg-pink-500/30 hover:border-pink-400/50 hover:shadow-pink-400/30 active:scale-[.97] transition-all duration-200 dark:border-white/30 dark:bg-white/10 dark:hover:bg-pink-500/25"
+                  >
+                    <!-- Icon Dribbble putih -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="w-5 h-5"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm6.63 6.04c.9 1.22 1.47 2.7 1.55 4.3-2.07-.33-3.9-.3-5.52.06-.2-.46-.4-.9-.63-1.34 2.52-1.05 4.02-2.58 4.6-3.02zM12 3.95c1.8 0 3.45.6 4.78 1.6-.44.64-1.72 2.25-4.36 3.28A31 31 0 0 0 9.6 5.1 7.97 7.97 0 0 1 12 3.95zM8.3 5.6c.9.86 2.1 2.2 2.77 3.07-2.77.8-6.5 1-6.93 1.01A8.04 8.04 0 0 1 8.3 5.6zM4 11.9v-.16c.5.01 4.96-.02 8.23-1.22.18.34.35.7.5 1.06-3.1 1.03-4.82 3.2-5.6 4.47A7.97 7.97 0 0 1 4 11.9zm4.48 5.5c.62-1.02 1.98-2.93 4.83-3.78.52 1.37.9 2.83 1.15 4.33A7.97 7.97 0 0 1 12 20.05c-1.56 0-3-.45-4.2-1.2zM15.7 17.6c-.22-1.3-.55-2.6-.98-3.84 1.5-.32 3.2-.35 5.17-.07a8.02 8.02 0 0 1-4.2 3.91z"
+                      />
+                    </svg>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/ffahmi-id/"
+                    class="inline-flex items-center gap-2 px-4 py-4 rounded-xl border border-white/40 bg-white/20 text-white backdrop-blur-md shadow-lg shadow-white/10 hover:bg-blue-500/30 hover:border-blue-400/50 hover:shadow-blue-400/30 active:scale-[.97] transition-all duration-200 dark:border-white/30 dark:bg-white/10 dark:hover:bg-blue-500/25"
+                  >
+                    <!-- Icon LinkedIn putih -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="w-5 h-5"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V24h-4V8zm7.5 0h3.8v2.2h.1C12.7 8.6 14.6 7.8 16.7 7.8 21 7.8 24 10.6 24 15.8V24h-4v-7.3c0-2.5-.1-5.7-3.5-5.7-3.5 0-4 2.7-4 5.5V24h-4V8z"
+                      />
+                    </svg>
+                  </a>
+                  <!-- Tombol YouTube Modern - Dark Mode Ready -->
+                  <a
+                    href="https://www.youtube.com/@channeltilembur"
+                    class="inline-flex items-center gap-2 px-4 py-4 rounded-xl border border-white/40 bg-white/20 text-white backdrop-blur-md shadow-lg shadow-white/10 hover:bg-red-500/30 hover:border-red-400/50 hover:shadow-red-400/30 active:scale-[.97] transition-all duration-200 dark:border-white/30 dark:bg-white/10 dark:hover:bg-red-500/25"
+                  >
+                    <!-- Ikon YouTube putih -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="w-5 h-5"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M23.5 6.2s-.2-1.7-.9-2.4c-.9-.9-1.9-.9-2.4-1C16.6 2.5 12 2.5 12 2.5s-4.6 0-8.2.3c-.5.1-1.5.1-2.4 1C.7 4.5.5 6.2.5 6.2S0 8.2 0 10.1v1.8c0 1.9.5 3.9.5 3.9s.2 1.7.9 2.4c.9.9 2.1.9 2.7 1 2 .2 8 .3 8 .3s4.6 0 8.2-.3c.5-.1 1.5-.1 2.4-1 .7-.7.9-2.4.9-2.4s.5-1.9.5-3.9v-1.8c0-1.9-.5-3.9-.5-3.9zM9.7 14.7V7.8l6.2 3.4-6.2 3.5z"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <div
+                class="w-full lg:w-1/2 flex justify-center lg:justify-end relative md:py-12"
+              >
+                <div
+                  class="absolute inset-0 bg-accent-cyan/20 blur-[120px] rounded-full opacity-40 pointer-events-none"
+                ></div>
+                <div
+                  class="relative w-full aspect-square max-w-[500px] rounded-2xl overflow-hidden"
+                >
+                  <img src="/images/fahmi.png" alt="fahmi" />
+                  <div
+                    class="absolute inset-0 bg-blue bg-cover bg-center opacity-50 mix-blend-overlay"
+                    data-alt="Modern minimalist workspace setup with laptop and design tools"
+                  ></div>
+                  <div
+                    class="absolute inset-0 bg-gradient-to-t from-background-darker via-transparent to-transparent opacity-60"
+                  ></div>
+                  <div
+                    class="absolute bottom-6 left-6 right-6 p-4 bg-background-dark/80 backdrop-blur-md rounded-xl border border-white/10 shadow-lg"
+                  >
+                    <div class="flex items-center gap-4">
+                      <div
+                        class="size-10 rounded-full bg-accent-cyan/20 flex items-center justify-center text-accent-cyan animate-pulse"
+                      >
+                        <span class="material-symbols-outlined"
+                          >check_circle</span
+                        >
+                      </div>
+                      <div>
+                        <p class="text-sm font-bold text-white">
+                          Project Completed
+                        </p>
+                        <p class="text-xs text-gray-400">
+                          Website Redesign - Delivered Today
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="w-full max-w-[1280px] mx-auto px-4 sm:px-10 lg:px-20 py-16"
+          id="work"
+        >
+          <div
+            class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10"
+          >
+            <div>
+              <h2
+                class="text-3xl font-bold tracking-tight text-white text-glow"
+              >
+                Recent Projects
+              </h2>
+              <p class="text-gray-400 mt-2 text-lg">
+                Highlights of my creative journey.
+              </p>
+            </div>
+            <a
+              class="text-accent-cyan grayscale font-semibold hover:text-white transition-colors inline-flex items-center gap-1 group"
+              href="#"
+            >
+              View All Projects
+              <span
+                class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform"
+                >arrow_forward</span
+              >
+            </a>
+          </div>
+          <div class="flex flex-col gap-10">
+            <div
+              class="w-full rounded-3xl overflow-hidden bg-gradient-to-br from-blue-700 to-blue-900 border border-white/10 shadow-xl relative group"
+            >
+              <div
+                class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1557683316-973673baf926?q=80&amp;w=2029&amp;auto=format&amp;fit=crop')] opacity-10 mix-blend-overlay"
+              ></div>
+              <div class="flex flex-col lg:flex-row h-full">
+                <div
+                  class="p-8 lg:p-12 lg:w-1/2 flex flex-col justify-center gap-6 relative z-10"
+                >
+                  <div class="flex items-center gap-3 mb-2">
+                    <img
+                      src="/images/logo-moota-white.png"
+                      alt="moota"
+                      class="w-32"
+                    />
+                  </div>
+                  <div class="flex gap-2 flex-wrap">
+                    <span
+                      class="px-3 py-1 bg-white/10 rounded-full text-xs font-medium text-white border border-white/20"
+                      >Product Manager</span
+                    >
+                    <span
+                      class="px-3 py-1 bg-white/10 rounded-full text-xs font-medium text-white border border-white/20"
+                      >UI/UX Engineer</span
+                    >
+                  </div>
+                  <div
+                    class="bg-black/20 backdrop-blur-md rounded-xl p-6 border border-white/5"
+                  >
+                    <h4
+                      class="text-sm font-semibold text-blue-200 mb-2 uppercase tracking-wider"
+                    >
+                      Background
+                    </h4>
+                    <p class="text-sm text-gray-200 mb-4 leading-relaxed">
+                      Moota.co is an Indonesian fintech platform designed to
+                      help businesses and individuals track and manage bank
+                      transactions. It connects with multiple bank accounts,
+                      allowing users to automatically monitor their incoming and
+                      outgoing transactions in real-time.
+                    </p>
+                    <h4
+                      class="text-sm font-semibold text-blue-200 mb-2 uppercase tracking-wider"
+                    >
+                      Objective
+                    </h4>
+                    <ul
+                      class="text-sm text-gray-200 space-y-1 list-disc list-inside marker:text-blue-300"
+                    >
+                      <li>User-Centric and Simple Design</li>
+                      <li>Secure and Reliable Design</li>
+                      <li>Color Scheme and Branding</li>
+                      <li>Accessibility and Inclusive Design</li>
+                    </ul>
+                  </div>
+                  <div class="mt-4 flex gap-x-2">
+                    <a
+                      href="https://frontendmoota.vercel.app/"
+                      class="inline-flex items-center gap-2 bg-white/20 border border-white/10 hover:bg-white/30 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        class="size-6"
+                      >
+                        <path
+                          d="M21.721 12.752a9.711 9.711 0 0 0-.945-5.003 12.754 12.754 0 0 1-4.339 2.708 18.991 18.991 0 0 1-.214 4.772 17.165 17.165 0 0 0 5.498-2.477ZM14.634 15.55a17.324 17.324 0 0 0 .332-4.647c-.952.227-1.945.347-2.966.347-1.021 0-2.014-.12-2.966-.347a17.515 17.515 0 0 0 .332 4.647 17.385 17.385 0 0 0 5.268 0ZM9.772 17.119a18.963 18.963 0 0 0 4.456 0A17.182 17.182 0 0 1 12 21.724a17.18 17.18 0 0 1-2.228-4.605ZM7.777 15.23a18.87 18.87 0 0 1-.214-4.774 12.753 12.753 0 0 1-4.34-2.708 9.711 9.711 0 0 0-.944 5.004 17.165 17.165 0 0 0 5.498 2.477ZM21.356 14.752a9.765 9.765 0 0 1-7.478 6.817 18.64 18.64 0 0 0 1.988-4.718 18.627 18.627 0 0 0 5.49-2.098ZM2.644 14.752c1.682.971 3.53 1.688 5.49 2.099a18.64 18.64 0 0 0 1.988 4.718 9.765 9.765 0 0 1-7.478-6.816ZM13.878 2.43a9.755 9.755 0 0 1 6.116 3.986 11.267 11.267 0 0 1-3.746 2.504 18.63 18.63 0 0 0-2.37-6.49ZM12 2.276a17.152 17.152 0 0 1 2.805 7.121c-.897.23-1.837.353-2.805.353-.968 0-1.908-.122-2.805-.353A17.151 17.151 0 0 1 12 2.276ZM10.122 2.43a18.629 18.629 0 0 0-2.37 6.49 11.266 11.266 0 0 1-3.746-2.504 9.754 9.754 0 0 1 6.116-3.985Z"
+                        />
+                      </svg>
+
+                      View Details
+                      <span class="material-symbols-outlined text-[18px]"
+                        >arrow_forward</span
+                      >
+                    </a>
+                    <a
+                      href="https://www.figma.com/proto/WDmn7lKcRteVmaFgtZV1dB/Moota-NEXTGEN?node-id=1201-5623&starting-point-node-id=1201%3A5623"
+                      class="inline-flex items-center gap-2 bg-white/20 border border-white/10 hover:bg-white/30 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all"
+                      target="_blank"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="80"
+                        height="100"
+                        fill="none"
+                        viewBox="0 0 480 720"
+                        aria-label="Homepage"
+                        class="fig-7vzs6a w-5 h-5"
+                      >
+                        <path
+                          fill="#24CB71"
+                          d="M0 600c0-66.274 53.726-120 120-120h120v120c0 66.274-53.726 120-120 120S0 666.274 0 600"
+                        ></path>
+                        <path
+                          fill="#FF7237"
+                          d="M240 0v240h120c66.274 0 120-53.726 120-120S426.274 0 360 0z"
+                        ></path>
+                        <circle
+                          cx="359"
+                          cy="360"
+                          r="120"
+                          fill="#00B6FF"
+                        ></circle>
+                        <path
+                          fill="#FF3737"
+                          d="M0 120c0 66.274 53.726 120 120 120h120V0H120C53.726 0 0 53.726 0 120"
+                        ></path>
+                        <path
+                          fill="#874FFF"
+                          d="M0 360c0 66.274 53.726 120 120 120h120V240H120C53.726 240 0 293.726 0 360"
+                        ></path>
+                      </svg>
+                      View Details
+                      <span class="material-symbols-outlined text-[18px]"
+                        >arrow_forward</span
+                      >
+                    </a>
+                  </div>
+                </div>
+                <div
+                  class="lg:w-1/2 relative bg-blue-600/30 flex items-center justify-center p-8 lg:p-0 overflow-hidden"
+                >
+                  <div
+                    class="relative z-10 transform group-hover:scale-105 transition-transform duration-500 ease-out"
+                  >
+                    <img
+                      alt="Moota App Screens"
+                      class="w-full max-w-[450px] shadow-2xl rounded-xl"
+                      src="/images/moota-image.png"
+                    />
+                  </div>
+                  <div
+                    class="absolute inset-0 bg-gradient-to-r from-blue-900 via-transparent to-transparent lg:w-32 z-20"
+                  ></div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="w-full rounded-3xl overflow-hidden bg-gradient-to-br from-cyan-700 to-sky-900 border border-white/10 shadow-xl relative group"
+            >
+              <div
+                class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&amp;w=2070&amp;auto=format&amp;fit=crop')] opacity-10 mix-blend-overlay"
+              ></div>
+              <div class="flex flex-col lg:flex-row h-full">
+                <div
+                  class="p-8 lg:p-12 lg:w-1/2 flex flex-col justify-center gap-6 relative z-10"
+                >
+                  <div class="flex items-center gap-3 mb-2">
+                    <img src="images/ry-white.png" class="w-32" />
+                  </div>
+                  <div class="flex gap-2 flex-wrap">
+                    <span
+                      class="px-3 py-1 bg-white/10 rounded-full text-xs font-medium text-white border border-white/20"
+                      >UI Designer</span
+                    >
+                    <span
+                      class="px-3 py-1 bg-white/10 rounded-full text-xs font-medium text-white border border-white/20"
+                      >UX Designer</span
+                    >
+                  </div>
+                  <div
+                    class="bg-black/20 backdrop-blur-md rounded-xl p-6 border border-white/5"
+                  >
+                    <h4
+                      class="text-sm font-semibold text-cyan-200 mb-2 uppercase tracking-wider"
+                    >
+                      Background
+                    </h4>
+                    <p class="text-sm text-gray-200 mb-4 leading-relaxed">
+                      Rumah Yatim Mobile Apps is an Mobile platform designed to
+                      facilitate online fundraising, primarily for charitable
+                      and social causes. The platform allows individuals to
+                      create campaigns to raise funds for various needs easily.
+                    </p>
+                    <h4
+                      class="text-sm font-semibold text-cyan-200 mb-2 uppercase tracking-wider"
+                    >
+                      Design Concept
+                    </h4>
+                    <ul
+                      class="text-sm text-gray-200 space-y-1 list-disc list-inside marker:text-cyan-300"
+                    >
+                      <li>Trust &amp; Transparency</li>
+                      <li>Compassionate Imagery</li>
+                      <li>Call-to-Action for Donors</li>
+                      <li>Impact Dashboard</li>
+                    </ul>
+                  </div>
+                  <div class="mt-4">
+                    <a
+                      href="https://www.figma.com/proto/AkhXunPVUcZttJcXwvDIXR/donasee-terbaru?node-id=223-3782&t=FOS9CevLybrNPk5s-0&scaling=scale-down&content-scaling=fixed&page-id=162%3A801&starting-point-node-id=223%3A3782"
+                      class="inline-flex items-center gap-2 bg-white/20 border border-white/10 hover:bg-white/30 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all"
+                      target="_blank"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="80"
+                        height="100"
+                        fill="none"
+                        viewBox="0 0 480 720"
+                        aria-label="Homepage"
+                        class="fig-7vzs6a w-5 h-5"
+                      >
+                        <path
+                          fill="#24CB71"
+                          d="M0 600c0-66.274 53.726-120 120-120h120v120c0 66.274-53.726 120-120 120S0 666.274 0 600"
+                        ></path>
+                        <path
+                          fill="#FF7237"
+                          d="M240 0v240h120c66.274 0 120-53.726 120-120S426.274 0 360 0z"
+                        ></path>
+                        <circle
+                          cx="359"
+                          cy="360"
+                          r="120"
+                          fill="#00B6FF"
+                        ></circle>
+                        <path
+                          fill="#FF3737"
+                          d="M0 120c0 66.274 53.726 120 120 120h120V0H120C53.726 0 0 53.726 0 120"
+                        ></path>
+                        <path
+                          fill="#874FFF"
+                          d="M0 360c0 66.274 53.726 120 120 120h120V240H120C53.726 240 0 293.726 0 360"
+                        ></path>
+                      </svg>
+                      View Details
+                      <span class="material-symbols-outlined text-[18px]"
+                        >arrow_forward</span
+                      >
+                    </a>
+                  </div>
+                </div>
+                <div
+                  class="lg:w-1/2 relative bg-cyan-600/30 flex items-center justify-center p-8 lg:p-0 overflow-hidden"
+                >
+                  <div
+                    class="relative z-10 transform group-hover:scale-105 transition-transform duration-500 ease-out"
+                  >
+                    <img
+                      alt="Rumah Yatim App Screens"
+                      class="w-full max-w-[450px] shadow-2xl rounded-xl"
+                      src="/images/RY.png"
+                    />
+                  </div>
+                  <div
+                    class="absolute inset-0 bg-gradient-to-r from-sky-900 via-transparent to-transparent lg:w-32 z-20"
+                  ></div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="w-full rounded-3xl overflow-hidden bg-gradient-to-br from-green-700 to-emerald-900 border border-white/10 shadow-xl relative group"
+            >
+              <div
+                class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&amp;w=2015&amp;auto=format&amp;fit=crop')] opacity-10 mix-blend-overlay"
+              ></div>
+              <div class="flex flex-col lg:flex-row h-full">
+                <div
+                  class="p-8 lg:p-12 lg:w-1/2 flex flex-col justify-center gap-6 relative z-10"
+                >
+                  <div class="flex items-center gap-3 mb-2">
+                    <img
+                      src="/images/logo-bargo.png"
+                      alt="bargo"
+                      class="w-32"
+                    />
+                  </div>
+                  <div class="flex gap-2 flex-wrap">
+                    <span
+                      class="px-3 py-1 bg-white/10 rounded-full text-xs font-medium text-white border border-white/20"
+                      >Product Owner</span
+                    >
+                    <span
+                      class="px-3 py-1 bg-white/10 rounded-full text-xs font-medium text-white border border-white/20"
+                      >UI/UX</span
+                    >
+                  </div>
+                  <div
+                    class="bg-black/20 backdrop-blur-md rounded-xl p-6 border border-white/5"
+                  >
+                    <h4
+                      class="text-sm font-semibold text-green-200 mb-2 uppercase tracking-wider"
+                    >
+                      Background
+                    </h4>
+                    <p class="text-sm text-gray-200 mb-4 leading-relaxed">
+                      Bargosystem.id is an Bargo is an enterprise application to
+                      meet business needs such as managing employee data,
+                      recruitment, payroll, attendance and others.
+                    </p>
+                    <h4
+                      class="text-sm font-semibold text-green-200 mb-2 uppercase tracking-wider"
+                    >
+                      Design Concept
+                    </h4>
+                    <ul
+                      class="text-sm text-gray-200 space-y-1 list-disc list-inside marker:text-green-300"
+                    >
+                      <li>Consistency</li>
+                      <li>Accessibility and Inclusive Design</li>
+                      <li>Clean and modern design</li>
+                    </ul>
+                  </div>
+                  <div class="mt-4">
+                    <a
+                      href="https://www.figma.com/proto/d4GvtBjvEDlj0OVf7wmSZX/IT-RESOURCE-MANAGEMENT?node-id=1-3&t=4zrdpcMMvlFl3wXv-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A3"
+                      class="inline-flex items-center gap-2 bg-white/20 border border-white/10 hover:bg-white/30 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all"
+                      target="_blank"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="80"
+                        height="100"
+                        fill="none"
+                        viewBox="0 0 480 720"
+                        aria-label="Homepage"
+                        class="fig-7vzs6a w-5 h-5"
+                      >
+                        <path
+                          fill="#24CB71"
+                          d="M0 600c0-66.274 53.726-120 120-120h120v120c0 66.274-53.726 120-120 120S0 666.274 0 600"
+                        ></path>
+                        <path
+                          fill="#FF7237"
+                          d="M240 0v240h120c66.274 0 120-53.726 120-120S426.274 0 360 0z"
+                        ></path>
+                        <circle
+                          cx="359"
+                          cy="360"
+                          r="120"
+                          fill="#00B6FF"
+                        ></circle>
+                        <path
+                          fill="#FF3737"
+                          d="M0 120c0 66.274 53.726 120 120 120h120V0H120C53.726 0 0 53.726 0 120"
+                        ></path>
+                        <path
+                          fill="#874FFF"
+                          d="M0 360c0 66.274 53.726 120 120 120h120V240H120C53.726 240 0 293.726 0 360"
+                        ></path>
+                      </svg>
+                      View Details
+                      <span class="material-symbols-outlined text-[18px]"
+                        >arrow_forward</span
+                      >
+                    </a>
+                  </div>
+                </div>
+                <div
+                  class="lg:w-1/2 relative bg-green-600/30 flex items-center justify-center p-8 lg:p-0 overflow-hidden"
+                >
+                  <div
+                    class="relative z-10 transform group-hover:scale-105 transition-transform duration-500 ease-out"
+                  >
+                    <img
+                      alt="Bargo System Screens"
+                      class="w-full max-w-[450px] shadow-2xl rounded-xl"
+                      src="/images/bargo-image.png"
+                    />
+                  </div>
+                  <div
+                    class="absolute inset-0 bg-gradient-to-r from-emerald-900 via-transparent to-transparent lg:w-32 z-20"
+                  ></div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="w-full rounded-3xl overflow-hidden bg-gradient-to-br from-blue-300 to-blue-900 border border-white/10 shadow-xl relative group"
+            >
+              <div
+                class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&amp;w=2015&amp;auto=format&amp;fit=crop')] opacity-10 mix-blend-overlay"
+              ></div>
+              <div class="flex flex-col lg:flex-row h-full">
+                <div
+                  class="p-8 lg:p-12 lg:w-1/2 flex flex-col justify-center gap-6 relative z-10"
+                >
+                  <div class="flex items-center gap-3 mb-2">
+                    <img
+                      src="/images/logo-traksee.png"
+                      alt="bargo"
+                      class="w-32"
+                    />
+                  </div>
+                  <div class="flex gap-2 flex-wrap">
+                    <span
+                      class="px-3 py-1 bg-white/10 rounded-full text-xs font-medium text-white border border-white/20"
+                      >UI/UX</span
+                    >
+                  </div>
+                  <div
+                    class="bg-black/20 backdrop-blur-md rounded-xl p-6 border border-white/5"
+                  >
+                    <h4
+                      class="text-sm font-semibold text-blue-200 mb-2 uppercase tracking-wider"
+                    >
+                      Background
+                    </h4>
+                    <p class="text-sm text-gray-200 mb-4 leading-relaxed">
+                      Traksee is an Indonesian SaaS platform that helps
+                      businesses easily create their own online store with
+                      built-in payments and shipping integration
+                    </p>
+                    <h4
+                      class="text-sm font-semibold text-blue-200 mb-2 uppercase tracking-wider"
+                    >
+                      Design Concept
+                    </h4>
+                    <ul
+                      class="text-sm text-gray-200 space-y-1 list-disc list-inside marker:text-blue-400"
+                    >
+                      <li>Clear and Easy Navigation</li>
+                      <li>Strong Emphasis on Promotions & Flash Sales</li>
+                      <li>Bright Blue as a Strong Brand Identity</li>
+                      <li>Clean Product Grid Layout</li>
+                    </ul>
+                  </div>
+                  <div class="mt-4">
+                    <a
+                      href="https://www.figma.com/proto/Fu3CpsgPAslyvXrgpw7bBR/traksee?node-id=543-739&starting-point-node-id=543%3A739"
+                      class="inline-flex items-center gap-2 bg-white/20 border border-white/10 hover:bg-white/30 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all"
+                      target="_blank"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="80"
+                        height="100"
+                        fill="none"
+                        viewBox="0 0 480 720"
+                        aria-label="Homepage"
+                        class="fig-7vzs6a w-5 h-5"
+                      >
+                        <path
+                          fill="#24CB71"
+                          d="M0 600c0-66.274 53.726-120 120-120h120v120c0 66.274-53.726 120-120 120S0 666.274 0 600"
+                        ></path>
+                        <path
+                          fill="#FF7237"
+                          d="M240 0v240h120c66.274 0 120-53.726 120-120S426.274 0 360 0z"
+                        ></path>
+                        <circle
+                          cx="359"
+                          cy="360"
+                          r="120"
+                          fill="#00B6FF"
+                        ></circle>
+                        <path
+                          fill="#FF3737"
+                          d="M0 120c0 66.274 53.726 120 120 120h120V0H120C53.726 0 0 53.726 0 120"
+                        ></path>
+                        <path
+                          fill="#874FFF"
+                          d="M0 360c0 66.274 53.726 120 120 120h120V240H120C53.726 240 0 293.726 0 360"
+                        ></path>
+                      </svg>
+                      View Details
+                      <span class="material-symbols-outlined text-[18px]"
+                        >arrow_forward</span
+                      >
+                    </a>
+                  </div>
+                </div>
+                <div
+                  class="lg:w-1/2 relative bg-green-600/30 flex items-center justify-center p-8 lg:p-0 overflow-hidden"
+                >
+                  <div
+                    class="relative z-10 transform group-hover:scale-105 transition-transform duration-500 ease-out"
+                  >
+                    <img
+                      alt="Bargo System Screens"
+                      class="w-full max-w-[450px] shadow-2xl rounded-xl"
+                      src="/images/traksee-ilustration.png"
+                    />
+                  </div>
+                  <div
+                    class="absolute inset-0 bg-gradient-to-r from-emerald-900 via-transparent to-transparent lg:w-32 z-20"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section
+          class="w-full max-w-[1280px] mx-auto px-4 sm:px-10 lg:px-20 py-12 relative"
+        >
+          <div class="flex flex-col mb-10 relative z-10">
+            <div>
+              <h2
+                class="text-3xl font-bold tracking-tight text-white text-glow"
+              >
+                Others projects
+              </h2>
+            </div>
+            <div class="space-y-4 mt-4">
+              <!-- Item -->
+              <div
+                class="flex items-center justify-between p-4 rounded-xl border bg-white border-gray-200 shadow-sm dark:bg-gray-900 dark:border-gray-700 dark:shadow-none hover:shadow-md dark:hover:bg-gray-800 transition"
+              >
+                <span class="font-medium text-gray-800 dark:text-gray-200">
+                  Web Earfun
+                </span>
+                <a
+                  href="https://earfun.id"
+                  target="_blank"
+                  class="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline"
+                >
+                  View Detail →
+                </a>
+              </div>
+
+              <div
+                class="flex items-center justify-between p-4 rounded-xl border bg-white border-gray-200 shadow-sm dark:bg-gray-900 dark:border-gray-700 dark:shadow-none hover:shadow-md dark:hover:bg-gray-800 transition"
+              >
+                <span class="font-medium text-gray-800 dark:text-gray-200">
+                  Web Kama
+                </span>
+                <a
+                  href="https://kama.co.id/"
+                  target="_blank"
+                  class="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline"
+                >
+                  View Detail →
+                </a>
+              </div>
+
+              <div
+                class="flex items-center justify-between p-4 rounded-xl border bg-white border-gray-200 shadow-sm dark:bg-gray-900 dark:border-gray-700 dark:shadow-none hover:shadow-md dark:hover:bg-gray-800 transition"
+              >
+                <span class="font-medium text-gray-800 dark:text-gray-200">
+                  Web Baturan
+                </span>
+                <a
+                  href="https://baturan.co"
+                  target="_blank"
+                  class="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline"
+                >
+                  View Detail →
+                </a>
+              </div>
+
+              <div
+                class="flex items-center justify-between p-4 rounded-xl border bg-white border-gray-200 shadow-sm dark:bg-gray-900 dark:border-gray-700 dark:shadow-none hover:shadow-md dark:hover:bg-gray-800 transition"
+              >
+                <span class="font-medium text-gray-800 dark:text-gray-200">
+                  Alpha-technology
+                </span>
+                <a
+                  href="https://alphatechnology.vercel.app/"
+                  target="_blank"
+                  class="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline"
+                >
+                  View Detail →
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section
+          class="w-full max-w-[1280px] mx-auto px-4 sm:px-10 lg:px-20 py-16 relative"
+        >
+          <div
+            class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none"
+          >
+            <div
+              class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-primary/10 rounded-full blur-[100px]"
+            ></div>
+          </div>
+
+          <div
+            class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 relative z-10"
+          >
+            <div>
+              <h2
+                class="text-3xl font-bold tracking-tight text-white text-glow"
+              >
+                My Skills
+              </h2>
+              <p class="text-gray-400 mt-2 text-lg">
+                The digital arsenal I use to craft experiences.
+              </p>
+            </div>
+            <a
+              class="text-accent-cyan font-semibold hover:text-white transition-colors inline-flex items-center gap-1 group"
+              href="#"
+            >
+              See full resume
+              <span
+                class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform"
+                >arrow_forward</span
+              >
+            </a>
+          </div>
+          <div
+            class="glass-panel rounded-3xl p-8 md:p-12 relative overflow-hidden"
+          >
+            <div
+              class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
+            ></div>
+            <div
+              class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
+            ></div>
+            <div
+              class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-8 justify-items-center"
+            >
+              <div class="group flex flex-col items-center gap-3">
+                <div
+                  class="w-16 h-16 bg-[#1e1e1e] p-4 rounded-2xl flex items-center justify-center border border-white/10 shadow-lg transition-transform group-hover:-translate-y-1 group-hover:shadow-primary/20 group-hover:border-primary/50 relative overflow-hidden"
+                >
+                  <div
+                    class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
+                  ></div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="480"
+                    height="720"
+                    fill="none"
+                    viewBox="0 0 480 720"
+                    aria-label="Homepage"
+                    class="fig-7vzs6a"
+                  >
+                    <path
+                      fill="#24CB71"
+                      d="M0 600c0-66.274 53.726-120 120-120h120v120c0 66.274-53.726 120-120 120S0 666.274 0 600"
+                    ></path>
+                    <path
+                      fill="#FF7237"
+                      d="M240 0v240h120c66.274 0 120-53.726 120-120S426.274 0 360 0z"
+                    ></path>
+                    <circle cx="359" cy="360" r="120" fill="#00B6FF"></circle>
+                    <path
+                      fill="#FF3737"
+                      d="M0 120c0 66.274 53.726 120 120 120h120V0H120C53.726 0 0 53.726 0 120"
+                    ></path>
+                    <path
+                      fill="#874FFF"
+                      d="M0 360c0 66.274 53.726 120 120 120h120V240H120C53.726 240 0 293.726 0 360"
+                    ></path>
+                  </svg>
+                </div>
+                <span
+                  class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors"
+                  >Figma</span
+                >
+              </div>
+              <div class="group flex flex-col items-center gap-3">
+                <div
+                  class="w-16 h-16 bg-[#1e1e1e] rounded-2xl flex items-center justify-center border border-white/10 shadow-lg transition-transform group-hover:-translate-y-1 group-hover:shadow-[#FF3366]/20 group-hover:border-[#FF3366]/50 relative overflow-hidden"
+                >
+                  <img
+                    src="https://images.g2crowd.com/uploads/product/image/social_landscape/social_landscape_a80410421359ac77ab7691c63881741d/invision.png"
+                    class="w-32"
+                  />
+                </div>
+                <span
+                  class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors"
+                  >Invision</span
+                >
+              </div>
+              <div class="group flex flex-col items-center gap-3">
+                <div
+                  class="w-16 h-16 bg-[#1e1e1e] rounded-2xl flex items-center justify-center border border-white/10 shadow-lg transition-transform group-hover:-translate-y-1 group-hover:shadow-[#F7B500]/20 group-hover:border-[#F7B500]/50 relative overflow-hidden"
+                >
+                  <div
+                    class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
+                  ></div>
+                  <img
+                    alt="Sketch"
+                    class="w-8 h-8 icon-glow w-32"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Sketch_Logo.svg/1133px-Sketch_Logo.svg.png"
+                  />
+                </div>
+                <span
+                  class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors"
+                  >Sketch</span
+                >
+              </div>
+              <div class="group flex flex-col items-center gap-3">
+                <div
+                  class="w-16 h-16 bg-[#330000] rounded-2xl flex items-center justify-center border border-[#FF9A00]/30 shadow-lg transition-transform group-hover:-translate-y-1 group-hover:shadow-[#FF9A00]/20 group-hover:border-[#FF9A00] relative overflow-hidden"
+                >
+                  <div
+                    class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
+                  ></div>
+                  <span class="font-bold text-[#FF9A00] text-2xl icon-glow"
+                    >Ai</span
+                  >
+                </div>
+                <span
+                  class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors"
+                  >Illustrator</span
+                >
+              </div>
+              <div class="group flex flex-col items-center gap-3">
+                <div
+                  class="w-16 h-16 bg-[#001E36] rounded-2xl flex items-center justify-center border border-[#31A8FF]/30 shadow-lg transition-transform group-hover:-translate-y-1 group-hover:shadow-[#31A8FF]/20 group-hover:border-[#31A8FF] relative overflow-hidden"
+                >
+                  <div
+                    class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
+                  ></div>
+                  <span class="font-bold text-[#31A8FF] text-2xl icon-glow"
+                    >Ps</span
+                  >
+                </div>
+                <span
+                  class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors"
+                  >Photoshop</span
+                >
+              </div>
+              <div class="group flex flex-col items-center gap-3">
+                <div
+                  class="w-16 h-16 p-3 bg-[#1e1e1e] rounded-2xl flex items-center justify-center border border-white/10 shadow-lg transition-transform group-hover:-translate-y-1 group-hover:shadow-[#38B2AC]/20 group-hover:border-[#38B2AC]/50 relative overflow-hidden"
+                >
+                  <img
+                    src="https://tailwindcss.com/_next/static/media/tailwindcss-mark.96ee6a5a.svg"
+                    class="w-32"
+                  />
+                </div>
+                <span
+                  class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors"
+                  >Tailwind</span
+                >
+              </div>
+              <div class="group flex flex-col items-center gap-3">
+                <div
+                  class="w-16 h-16 p-2 bg-[#1e1e1e] rounded-2xl flex items-center justify-center border border-white/10 shadow-lg transition-transform group-hover:-translate-y-1 group-hover:shadow-[#E34F26]/20 group-hover:border-[#E34F26]/50 relative overflow-hidden"
+                >
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/500px-HTML5_logo_and_wordmark.svg.png"
+                    class="w-32"
+                  />
+                </div>
+                <span
+                  class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors"
+                  >HTML</span
+                >
+              </div>
+              <div class="group flex flex-col items-center gap-3">
+                <div
+                  class="w-16 p-3 h-16 bg-[#1e1e1e] rounded-2xl flex items-center justify-center border border-white/10 shadow-lg transition-transform group-hover:-translate-y-1 group-hover:shadow-[#8BC0D0]/20 group-hover:border-[#8BC0D0]/50 relative overflow-hidden"
+                >
+                  <img
+                    src="https://cdn.worldvectorlogo.com/logos/alpinejs-2.svg"
+                    class="w-32"
+                  />
+                </div>
+                <span
+                  class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors"
+                  >Alpine.js</span
+                >
+              </div>
+              <div class="group flex flex-col items-center gap-3">
+                <div
+                  class="w-16 h-16 p-3 bg-[#1e1e1e] rounded-2xl flex items-center justify-center border border-white/10 shadow-lg transition-transform group-hover:-translate-y-1 group-hover:shadow-[#21759B]/20 group-hover:border-[#21759B]/50 relative overflow-hidden"
+                >
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/9/93/Wordpress_Blue_logo.png"
+                    class="w-32"
+                  />
+                </div>
+                <span
+                  class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors"
+                  >WordPress</span
+                >
+              </div>
+              <div class="group flex flex-col items-center gap-3">
+                <div
+                  class="w-16 h-16 bg-[#1e1e1e] rounded-2xl flex items-center justify-center border border-white/10 shadow-lg transition-transform group-hover:-translate-y-1 group-hover:shadow-[#7F54B3]/20 group-hover:border-[#7F54B3]/50 relative overflow-hidden"
+                >
+                  <img
+                    src="https://oxygenbuilder.com/wp-content/uploads/2025/01/Icon@2x.png"
+                    class="w-32"
+                  />
+                </div>
+                <span
+                  class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors"
+                  >Oxygen</span
+                >
+              </div>
+              <div class="group flex flex-col items-center gap-3">
+                <div
+                  class="w-16 h-16 bg-[#1e1e1e] rounded-2xl flex items-center justify-center border border-white/10 shadow-lg transition-transform group-hover:-translate-y-1 group-hover:shadow-[#009E49]/20 group-hover:border-[#009E49]/50 relative overflow-hidden"
+                >
+                  <img
+                    src="https://images.seeklogo.com/logo-png/37/2/coreldraw-2019-logo-png_seeklogo-377875.png"
+                    class="w-32"
+                  />
+                </div>
+                <span
+                  class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors"
+                  >CorelDRAW</span
+                >
+              </div>
+            </div>
+            <div class="flex justify-center gap-2 mt-8">
+              <div class="w-2 h-2 rounded-full bg-accent-cyan/40"></div>
+              <div class="w-8 h-2 rounded-full bg-white"></div>
+              <div class="w-2 h-2 rounded-full bg-accent-cyan/40"></div>
+              <div class="w-2 h-2 rounded-full bg-accent-cyan/40"></div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="contact"
+          class="w-full bg-background-darker border-t border-white/5 py-20 px-4 relative overflow-hidden"
+        >
+          <div class="absolute inset-0 bg-primary/5 pointer-events-none"></div>
+          <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-accent-cyan/10 rounded-full blur-[80px]"
+          ></div>
+          <div
+            class="max-w-[800px] mx-auto text-center flex flex-col items-center gap-8 relative z-10"
+          >
+            <h2
+              class="text-3xl md:text-4xl font-black text-white leading-tight"
+            >
+              Ready to start your next project? <br />
+              <span
+                class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent-cyan"
+                >Let's build something amazing.</span
+              >
+            </h2>
+            <p class="text-gray-400 text-lg max-w-lg">
+              I am currently open for freelance opportunities and full-time
+              roles. Get in touch and let's discuss your vision.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 w-full justify-center">
+              <a
+                href="https://wa.me/6289655008922?text=Hello%20Fahmi%2C%20I%27m%20interested%20in%20your%20services"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center justify-center bg-primary hover:bg-primary-dark text-white h-12 px-8 rounded-lg text-base font-bold transition-all shadow-[0_0_20px_rgba(59,130,246,0.3)] min-w-[160px]"
+              >
+                Get in Touch
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer
+        class="w-full border-t border-white/5 bg-background-darker py-10 relative z-20"
+      >
+        <div class="max-w-[1280px] mx-auto px-4 sm:px-10 lg:px-20">
+          <div
+            class="flex flex-col md:flex-row items-center justify-between gap-6"
+          >
+            <div class="flex items-center gap-3 text-white">
+              <img
+                src="/images/logo-fahmi.png"
+                alt="FahmiDesign Logo"
+                class="w-8 h-8"
+              />
+            </div>
+            <div class="flex gap-6 text-gray-400">
+              <a
+                class="hover:text-primary transition-colors"
+                href="https://dribbble.com/ffahmi11"
+                >Dribbble</a
+              >
+              <a
+                class="hover:text-primary transition-colors"
+                href="https://github.com/ffahmi"
+                >Github</a
+              >
+              <a
+                class="hover:text-primary transition-colors"
+                href="https://www.linkedin.com/in/ffahmi-id/"
+                >LinkedIn</a
+              >
+            </div>
+            <div class="text-sm text-gray-500">
+              © 2025 FahmiDesign. All rights reserved.
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

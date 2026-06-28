@@ -1,0 +1,737 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>About | Fahmi - Senior UI/UX Designer</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      body {
+        font-family: "Geist", sans-serif;
+        background-color: #13131b;
+        color: #e4e1ed;
+      }
+      .text-gradient {
+        background: linear-gradient(135deg, #c0c1ff 0%, #8083ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-highest": "#34343d",
+              "on-surface-variant": "#c7c4d7",
+              error: "#ffb4ab",
+              "secondary-container": "#44474d",
+              "on-tertiary-fixed": "#301400",
+              "on-primary-fixed": "#07006c",
+              "surface-container-high": "#292932",
+              background: "#13131b",
+              "primary-container": "#8083ff",
+              "error-container": "#93000a",
+              "secondary-fixed-dim": "#c4c6cd",
+              "tertiary-fixed": "#ffdcc5",
+              "on-secondary": "#2e3036",
+              "surface-variant": "#34343d",
+              "inverse-surface": "#e4e1ed",
+              "primary-fixed-dim": "#c0c1ff",
+              "primary-fixed": "#e1e0ff",
+              "on-primary-fixed-variant": "#2f2ebe",
+              "on-error-container": "#ffdad6",
+              "surface-dim": "#13131b",
+              "tertiary-fixed-dim": "#ffb783",
+              "on-secondary-container": "#b3b5bc",
+              "tertiary-container": "#d97721",
+              surface: "#13131b",
+              "surface-container": "#1f1f27",
+              "on-error": "#690005",
+              "surface-tint": "#c0c1ff",
+              "on-secondary-fixed-variant": "#44474d",
+              "on-tertiary-container": "#452000",
+              "on-primary": "#1000a9",
+              "surface-bright": "#393841",
+              "on-primary-container": "#0d0096",
+              "surface-container-lowest": "#0d0d15",
+              "on-tertiary-fixed-variant": "#703700",
+              "secondary-fixed": "#e1e2e9",
+              "inverse-primary": "#494bd6",
+              "on-secondary-fixed": "#191c21",
+              "inverse-on-surface": "#303038",
+              tertiary: "#ffb783",
+              "on-surface": "#e4e1ed",
+              outline: "#908fa0",
+              "on-background": "#e4e1ed",
+              "on-tertiary": "#4f2500",
+              secondary: "#c4c6cd",
+              "outline-variant": "#464554",
+              "surface-container-low": "#1b1b23",
+              primary: "#ffffff",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            spacing: {
+              margin: "32px",
+              sm: "16px",
+              base: "4px",
+              md: "24px",
+              lg: "48px",
+              xl: "80px",
+              gutter: "24px",
+              xs: "8px",
+              "max-width": "1280px",
+            },
+            fontFamily: {
+              "headline-md": ["Geist"],
+              "label-md": ["Geist"],
+              "headline-lg": ["Geist"],
+              display: ["Geist"],
+              "body-lg": ["Geist"],
+              "label-sm": ["Geist"],
+              "headline-lg-mobile": ["Geist"],
+              "headline-sm": ["Geist"],
+              "body-md": ["Geist"],
+            },
+            fontSize: {
+              "headline-md": [
+                "32px",
+                {
+                  lineHeight: "1.3",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "label-md": [
+                "14px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "0.05em",
+                  fontWeight: "500",
+                },
+              ],
+              "headline-lg": [
+                "48px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              display: [
+                "72px",
+                {
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.04em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-lg": [
+                "18px",
+                { lineHeight: "1.6", letterSpacing: "0em", fontWeight: "400" },
+              ],
+              "label-sm": [
+                "12px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "0.05em",
+                  fontWeight: "500",
+                },
+              ],
+              "headline-lg-mobile": [
+                "32px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "headline-sm": [
+                "24px",
+                { lineHeight: "1.4", letterSpacing: "0em", fontWeight: "600" },
+              ],
+              "body-md": [
+                "16px",
+                { lineHeight: "1.6", letterSpacing: "0em", fontWeight: "400" },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-background text-on-background selection:bg-primary selection:text-on-primary"
+  >
+    <!-- TopNavBar -->
+    <header
+      class="fixed top-0 left-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-outline-variant"
+    >
+      <nav
+        class="flex justify-between items-center h-20 px-margin max-w-max-width mx-auto"
+      >
+        <a
+          class="font-headline-sm text-headline-sm font-bold text-on-background tracking-tight"
+          href="/"
+          ><img
+            src="/images/logo-fahmi.png"
+            alt="Fahmi Logo"
+            class="w-12 h-auto"
+        /></a>
+        <div class="hidden md:flex items-center gap-lg">
+          <a
+            class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300"
+            href="#"
+            >Work</a
+          >
+          <a
+            class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300"
+            href="#"
+            >Experience</a
+          >
+          <a
+            class="font-label-md text-label-md text-primary font-bold border-b-2 border-primary pb-1"
+            href="#"
+            >About</a
+          >
+          <a
+            class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300"
+            href="#"
+            >Contact</a
+          >
+        </div>
+        <button class="md:hidden text-on-background">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+      </nav>
+    </header>
+    <main class="pt-32 pb-xl px-margin max-w-max-width mx-auto">
+      <!-- Hero / Bio Section -->
+      <section class="grid grid-cols-1 md:grid-cols-12 gap-xl items-start">
+        <!-- Left: Avatar & Quick Facts -->
+        <div class="md:col-span-4 space-y-lg">
+          <div
+            class="relative aspect-square rounded-xl overflow-hidden border border-outline-variant group"
+          >
+            <img
+              alt="Fahmi Portrait"
+              class="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-700"
+              data-alt="A professional, high-end portrait of a male UI/UX designer with a friendly and confident expression. The lighting is soft and cinematic, highlighting facial features against a dark, minimalist architectural background. The color palette consists of deep charcoals and subtle indigo shadows, matching a premium dark-mode portfolio aesthetic. The overall mood is sophisticated, technical, and approachable."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPOJdAN0EkALzj_cUt1vJkIeCJ8bd39ONToZRVxF6yc5anoMWm5tr5Wx6iLQU3NjtbYYe-xXJs2iZW8kgoclgLVRw_iFtFwQh1EAgfDltUzCEevPa98qH3v91vuhqEc0bphJOR7_CmU2A8WtW5YSPQNJTMd778lzDFPXXTmjYCrTuD_XaaanLD6twRYUpO6PeRkEYydlwNLkUuktKeBczPXJLhDxuOE3PIkOwMGKrb86yN4l7H4OqL1ukj93iqqhZrZ9n69f3nHId-"
+            />
+            <div
+              class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+            ></div>
+          </div>
+          <div class="space-y-md">
+            <h3 class="font-headline-sm text-headline-sm text-on-background">
+              Quick Facts
+            </h3>
+            <ul class="space-y-base">
+              <li
+                class="flex items-center gap-xs p-base rounded-lg hover:bg-surface-container-low transition-colors"
+              >
+                <span class="material-symbols-outlined text-primary text-[20px]"
+                  >verified</span
+                >
+                <span class="font-body-md text-body-md text-on-surface-variant"
+                  >5+ Years Experience</span
+                >
+              </li>
+              <li
+                class="flex items-center gap-xs p-base rounded-lg hover:bg-surface-container-low transition-colors"
+              >
+                <span class="material-symbols-outlined text-primary text-[20px]"
+                  >location_on</span
+                >
+                <span class="font-body-md text-body-md text-on-surface-variant"
+                  >Based in Johor, Malaysia</span
+                >
+              </li>
+              <li
+                class="flex items-center gap-xs p-base rounded-lg hover:bg-surface-container-low transition-colors"
+              >
+                <span class="material-symbols-outlined text-primary text-[20px]"
+                  >school</span
+                >
+                <span class="font-body-md text-body-md text-on-surface-variant"
+                  >STMIK AMIK BANDUNG
+                </span>
+              </li>
+              <li
+                class="flex items-center gap-xs p-base rounded-lg hover:bg-surface-container-low transition-colors"
+              >
+                <span class="material-symbols-outlined text-primary text-[20px]"
+                  >translate</span
+                >
+                <span class="font-body-md text-body-md text-on-surface-variant"
+                  >Bahasa Indonesia, English, Melayu</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- Right: Brief Story -->
+        <div class="md:col-span-8 space-y-lg">
+          <header>
+            <span
+              class="font-label-md text-label-md text-primary tracking-widest uppercase mb-xs block"
+              >Background</span
+            >
+            <h1
+              class="font-headline-lg text-headline-lg md:text-display text-on-background leading-tight"
+            >
+              Crafting digital precision with purpose.
+            </h1>
+          </header>
+          <div class="space-y-md max-w-2xl">
+            <p
+              class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed"
+            >
+              I am a Senior UI/UX Designer and Product Strategist currently
+              based in Johor, Malaysia. My journey in design began with a
+              fascination for the intersection of human psychology and digital
+              interfaces, how the placement of a single pixel can influence user
+              trust and behavior.
+            </p>
+            <p
+              class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed"
+            >
+              Over the past decade, I've partnered with venture-backed startups
+              and established tech giants to ship products that balance
+              technical constraints with uncompromising aesthetic standards. I
+              believe that good design is invisible; it should solve complex
+              problems without adding friction to the user's cognitive load.
+            </p>
+            <p
+              class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed"
+            >
+              My approach is deeply rooted in the "developer-adjacent"
+              philosophy. By understanding the underlying architecture of modern
+              frameworks like Tailwind and Laravel, I bridge the gap between
+              creative vision and functional implementation, ensuring that
+              design intent is never lost in translation.
+            </p>
+          </div>
+          <div class="pt-md flex gap-x-4">
+             <a href="https://wa.me/6289655008922?text=Hello%20Fahmi%2C%20I%27m%20interested%20in%20your%20services%20and%20would%20like%20to%20get%20in%20touch."
+              class=" bg-primary text-on-primary px-lg py-sm rounded-lg font-label-md text-label-md hover:brightness-110 transition-all active:scale-95"
+            >
+             Hire Me
+        </a>
+            <a
+              href="/resume.pdf"
+              download
+              class="border-2 border-primary text-primary px-lg py-sm rounded-lg font-label-md text-label-md hover:brightness-110 transition-all active:scale-95"
+            >
+              Download Resume
+            </a>
+          </div>
+        </div>
+      </section>
+      <!-- Skills Section (Bento Style Grid) -->
+      <section class="mt-xl pt-xl border-t border-outline-variant">
+        <div class="mb-lg">
+          <h2
+            class="font-headline-md text-headline-md text-on-background mb-xs"
+          >
+            Core Competencies
+          </h2>
+          <p class="font-body-md text-body-md text-on-surface-variant">
+            A breakdown of my technical and strategic expertise.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md">
+          <!-- Product Management -->
+          <div
+            class="bg-surface-container p-md rounded-xl border border-outline-variant hover:border-primary/50 transition-all duration-300 group"
+          >
+            <div
+              class="w-10 h-10 rounded-lg bg-primary-container/20 flex items-center justify-center mb-md group-hover:bg-primary-container/40 transition-colors"
+            >
+              <span class="material-symbols-outlined text-primary"
+                >strategy</span
+              >
+            </div>
+            <h3
+              class="font-headline-sm text-headline-sm text-on-background mb-sm"
+            >
+              Product Management
+            </h3>
+            <p class="font-body-md text-body-md text-on-surface-variant mb-md">
+              Roadmapping, stakeholder alignment, and agile execution.
+            </p>
+            <div class="flex flex-wrap gap-xs">
+              <span
+                class="px-xs py-[2px] bg-surface-container-high border border-outline-variant rounded-full font-label-sm text-label-sm"
+                >Jira</span
+              >
+              <span
+                class="px-xs py-[2px] bg-surface-container-high border border-outline-variant rounded-full font-label-sm text-label-sm"
+                >Notion</span
+              >
+            </div>
+          </div>
+          <!-- UI/UX Design -->
+          <div
+            class="bg-surface-container p-md rounded-xl border border-outline-variant hover:border-primary/50 transition-all duration-300 group"
+          >
+            <div
+              class="w-10 h-10 rounded-lg bg-primary-container/20 flex items-center justify-center mb-md group-hover:bg-primary-container/40 transition-colors"
+            >
+              <span class="material-symbols-outlined text-primary">draw</span>
+            </div>
+            <h3
+              class="font-headline-sm text-headline-sm text-on-background mb-sm"
+            >
+              UI/UX Design
+            </h3>
+            <p class="font-body-md text-body-md text-on-surface-variant mb-md">
+              High-fidelity prototyping, user research, and wireframing.
+            </p>
+            <div class="flex flex-wrap gap-xs">
+              <span
+                class="px-xs py-[2px] bg-surface-container-high border border-outline-variant rounded-full font-label-sm text-label-sm"
+                >Figma</span
+              >
+              <span
+                class="px-xs py-[2px] bg-surface-container-high border border-outline-variant rounded-full font-label-sm text-label-sm"
+                >Protopie</span
+              >
+            </div>
+          </div>
+          <!-- Design Systems -->
+          <div
+            class="bg-surface-container p-md rounded-xl border border-outline-variant hover:border-primary/50 transition-all duration-300 group"
+          >
+            <div
+              class="w-10 h-10 rounded-lg bg-primary-container/20 flex items-center justify-center mb-md group-hover:bg-primary-container/40 transition-colors"
+            >
+              <span class="material-symbols-outlined text-primary"
+                >grid_view</span
+              >
+            </div>
+            <h3
+              class="font-headline-sm text-headline-sm text-on-background mb-sm"
+            >
+              Design Systems
+            </h3>
+            <p class="font-body-md text-body-md text-on-surface-variant mb-md">
+              Building scalable component libraries and documentation.
+            </p>
+            <div class="flex flex-wrap gap-xs">
+              <span
+                class="px-xs py-[2px] bg-surface-container-high border border-outline-variant rounded-full font-label-sm text-label-sm"
+                >Storybook</span
+              >
+              <span
+                class="px-xs py-[2px] bg-surface-container-high border border-outline-variant rounded-full font-label-sm text-label-sm"
+                >Tokens</span
+              >
+            </div>
+          </div>
+          <!-- Frontend Development -->
+          <div
+            class="bg-surface-container p-md rounded-xl border border-outline-variant hover:border-primary/50 transition-all duration-300 group"
+          >
+            <div
+              class="w-10 h-10 rounded-lg bg-primary-container/20 flex items-center justify-center mb-md group-hover:bg-primary-container/40 transition-colors"
+            >
+              <span class="material-symbols-outlined text-primary">code</span>
+            </div>
+            <h3
+              class="font-headline-sm text-headline-sm text-on-background mb-sm"
+            >
+              Frontend Dev
+            </h3>
+            <p class="font-body-md text-body-md text-on-surface-variant mb-md">
+              Functional coding to realize design concepts accurately.
+            </p>
+            <div class="flex flex-wrap gap-xs">
+              <span
+                class="px-xs py-[2px] bg-surface-container-high border border-outline-variant rounded-full font-label-sm text-label-sm"
+                >Tailwind</span
+              >
+              <span
+                class="px-xs py-[2px] bg-surface-container-high border border-outline-variant rounded-full font-label-sm text-label-sm"
+                >Laravel</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Values Section -->
+      <section class="mt-xl pt-xl border-t border-outline-variant">
+        <div class="mb-lg">
+          <h2
+            class="font-headline-md text-headline-md text-on-background mb-xs"
+          >
+            Selected Projects
+          </h2>
+          <p class="font-body-md text-body-md text-on-surface-variant">
+            A curation of recent work focusing on interface systems and product
+            strategy.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+          <!-- Project Card 1 -->
+          <div
+            class="bg-surface-container rounded-xl border border-outline-variant overflow-hidden group hover:border-primary/50 transition-all duration-300"
+          >
+            <div
+              class="aspect-video bg-surface-container-highest relative overflow-hidden"
+            >
+              <img
+                alt="Linear Redesign"
+                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"
+              />
+              <div
+                class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity"
+              ></div>
+            </div>
+            <div class="p-md space-y-md">
+              <div>
+                <h3
+                  class="font-headline-sm text-headline-sm text-on-background mb-xs"
+                >
+                  Linear Redesign
+                </h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Optimizing complex workflows for high-performance engineering
+                  teams with a focus on keyboard-first navigation.
+                </p>
+              </div>
+              <div class="flex gap-sm pt-sm border-t border-outline-variant">
+                <a
+                  class="flex-1 flex items-center justify-center gap-xs px-sm py-xs bg-primary text-on-primary rounded-lg font-label-md text-label-md hover:brightness-110 transition-all"
+                  href="#"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >draw</span
+                  >
+                  Open Figma
+                </a>
+                <a
+                  class="flex-1 flex items-center justify-center gap-xs px-sm py-xs border border-outline-variant text-on-surface hover:bg-surface-container-high rounded-lg font-label-md text-label-md transition-all"
+                  href="#"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >open_in_new</span
+                  >
+                  Live Preview
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Project Card 2 -->
+          <div
+            class="bg-surface-container rounded-xl border border-outline-variant overflow-hidden group hover:border-primary/50 transition-all duration-300"
+          >
+            <div
+              class="aspect-video bg-surface-container-highest relative overflow-hidden"
+            >
+              <img
+                alt="Vercel Analytics"
+                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"
+              />
+              <div
+                class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity"
+              ></div>
+            </div>
+            <div class="p-md space-y-md">
+              <div>
+                <h3
+                  class="font-headline-sm text-headline-sm text-on-background mb-xs"
+                >
+                  Vercel Analytics
+                </h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Designing a real-time data visualization dashboard for
+                  developers to track performance metrics and user behavior.
+                </p>
+              </div>
+              <div class="flex gap-sm pt-sm border-t border-outline-variant">
+                <a
+                  class="flex-1 flex items-center justify-center gap-xs px-sm py-xs bg-primary text-on-primary rounded-lg font-label-md text-label-md hover:brightness-110 transition-all"
+                  href="#"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >draw</span
+                  >
+                  Open Figma
+                </a>
+                <a
+                  class="flex-1 flex items-center justify-center gap-xs px-sm py-xs border border-outline-variant text-on-surface hover:bg-surface-container-high rounded-lg font-label-md text-label-md transition-all"
+                  href="#"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >open_in_new</span
+                  >
+                  Live Preview
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="mt-xl pt-xl border-t border-outline-variant">
+        <div class="text-center mb-lg">
+          <span
+            class="font-label-md text-label-md text-primary tracking-widest uppercase mb-xs block"
+            >Philosophy</span
+          >
+          <h2 class="font-headline-md text-headline-md text-on-background">
+            Guiding Principles
+          </h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+          <!-- Simplicity -->
+          <div
+            class="relative p-lg rounded-xl bg-surface-container-low border border-outline-variant overflow-hidden"
+          >
+            <div class="relative z-10 space-y-sm">
+              <h4 class="font-headline-sm text-headline-sm text-on-background">
+                Simplicity
+              </h4>
+              <p class="font-body-md text-body-md text-on-surface-variant">
+                Complexity is easy; clarity is hard. I strive to strip away the
+                non-essential until only the most effective core remains.
+              </p>
+            </div>
+            <span
+              class="absolute -bottom-4 -right-4 material-symbols-outlined text-surface-container-highest opacity-20 text-[120px] pointer-events-none"
+              >auto_awesome</span
+            >
+          </div>
+          <!-- Scalability -->
+          <div
+            class="relative p-lg rounded-xl bg-surface-container-low border border-outline-variant overflow-hidden"
+          >
+            <div class="relative z-10 space-y-sm">
+              <h4 class="font-headline-sm text-headline-sm text-on-background">
+                Scalability
+              </h4>
+              <p class="font-body-md text-body-md text-on-surface-variant">
+                Design is a system, not a snapshot. Every solution is built with
+                a future-proof architecture that grows with the product.
+              </p>
+            </div>
+            <span
+              class="absolute -bottom-4 -right-4 material-symbols-outlined text-surface-container-highest opacity-20 text-[120px] pointer-events-none"
+              >expand</span
+            >
+          </div>
+          <!-- Empathy -->
+          <div
+            class="relative p-lg rounded-xl bg-surface-container-low border border-outline-variant overflow-hidden"
+          >
+            <div class="relative z-10 space-y-sm">
+              <h4 class="font-headline-sm text-headline-sm text-on-background">
+                Empathy
+              </h4>
+              <p class="font-body-md text-body-md text-on-surface-variant">
+                Data informs, but empathy understands. I prioritize the human
+                experience at the center of every technical decision.
+              </p>
+            </div>
+            <span
+              class="absolute -bottom-4 -right-4 material-symbols-outlined text-surface-container-highest opacity-20 text-[120px] pointer-events-none"
+              >favorite</span
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Footer -->
+    <footer class="border-t border-outline-variant bg-background">
+      <div
+        class="flex flex-col md:flex-row justify-between items-center px-margin max-w-max-width mx-auto gap-md py-xl"
+      >
+        <div class="space-y-xs">
+          <span
+            class="font-headline-sm text-headline-sm font-bold text-on-background block"
+            >Fahmi</span
+          >
+          <p class="font-body-md text-body-md text-on-surface-variant">
+            © 2024 Fahmi. Built with precision.
+          </p>
+        </div>
+        <div class="flex items-center gap-lg">
+          <a
+            class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300"
+            href="#"
+            >LinkedIn</a
+          >
+          <a
+            class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300"
+            href="#"
+            >GitHub</a
+          >
+          <a
+            class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300"
+            href="#"
+            >Dribbble</a
+          >
+          <a
+            class="font-label-md text-label-md text-primary font-semibold hover:underline"
+            href="#"
+            >Back to top</a
+          >
+        </div>
+      </div>
+    </footer>
+    <script>
+      // Simple scroll reveal effect for cards
+      const observerOptions = {
+        threshold: 0.1,
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("opacity-100", "translate-y-0");
+            entry.target.classList.remove("opacity-0", "translate-y-4");
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll("section > div > div").forEach((el) => {
+        el.classList.add(
+          "transition-all",
+          "duration-700",
+          "opacity-0",
+          "translate-y-4",
+        );
+        observer.observe(el);
+      });
+    </script>
+  </body>
+</html>
