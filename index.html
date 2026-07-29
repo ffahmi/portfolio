@@ -1,1737 +1,324 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fahmi — UI/UX Designer</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <style>
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-
-      :root {
-        --bg: #0a0a0b;
-        --bg2: #111113;
-        --surface: #18181b;
-        --surface2: #212126;
-        --border: rgba(255, 255, 255, 0.07);
-        --ink: #ffffff;
-        --ink-muted: rgba(240, 237, 232, 0.45);
-        --ink-dim: rgba(240, 237, 232, 0.22);
-        --accent: #ffffff;
-        --accent-glow: rgba(139, 108, 246, 0.18);
-        --accent-bright: #ffe5b4;
-        --serif: "Instrument Serif", Georgia, serif;
-        --sans: "DM Sans", system-ui, sans-serif;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        background: var(--bg);
-        color: var(--ink);
-        font-family: var(--sans);
-        font-size: 16px;
-        line-height: 1.6;
-        -webkit-font-smoothing: antialiased;
-        overflow-x: hidden;
-      }
-
-      /* ── NAV ── */
-      nav {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 100;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 48px;
-        height: 64px;
-        background: rgba(10, 10, 11, 0.82);
-        backdrop-filter: blur(20px) saturate(160%);
-        border-bottom: 1px solid var(--border);
-      }
-
-      .nav-logo {
-        font-family: var(--serif);
-        font-size: 1.1rem;
-        color: var(--ink);
-        text-decoration: none;
-        letter-spacing: 0.01em;
-      }
-      .nav-logo em {
-        font-style: italic;
-        color: var(--accent-bright);
-      }
-
-      .nav-links {
-        display: flex;
-        align-items: center;
-        gap: 36px;
-        list-style: none;
-      }
-      .nav-links a {
-        color: var(--ink-muted);
-        text-decoration: none;
-        font-size: 0.875rem;
-        font-weight: 400;
-        letter-spacing: 0.02em;
-        transition: color 0.2s;
-      }
-      .nav-links a:hover {
-        color: var(--ink);
-      }
-
-      .nav-cta {
-        background: var(--accent);
-        color: #fff !important;
-        padding: 8px 20px;
-        border-radius: 100px;
-        font-size: 0.8125rem !important;
-        font-weight: 500 !important;
-        transition:
-          background 0.2s,
-          transform 0.15s !important;
-      }
-      .nav-cta:hover {
-        background: var(--accent-bright) !important;
-        transform: scale(0.97);
-      }
-
-      /* ── HERO ── */
-      .hero {
-        min-height: 100svh;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        padding: 0 48px 80px;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .hero-bg-orb {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 55vw;
-        height: 80vh;
-        background: radial-gradient(
-          ellipse at 70% 20%,
-          rgba(139, 108, 246, 0.12) 0%,
-          transparent 65%
-        );
-        pointer-events: none;
-      }
-      .hero-bg-grid {
-        position: absolute;
-        inset: 0;
-        background-image:
-          linear-gradient(var(--border) 1px, transparent 1px),
-          linear-gradient(90deg, var(--border) 1px, transparent 1px);
-        background-size: 80px 80px;
-        mask-image: radial-gradient(
-          ellipse 80% 80% at 50% 50%,
-          black 0%,
-          transparent 100%
-        );
-        pointer-events: none;
-        opacity: 0.4;
-      }
-
-      .hero-eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        color: var(--accent-bright);
-        font-size: 0.75rem;
-        font-weight: 500;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        margin-bottom: 28px;
-      }
-      .hero-eyebrow::before {
-        content: "";
-        display: block;
-        width: 24px;
-        height: 1px;
-        background: var(--accent);
-      }
-
-      .hero-title {
-        font-family: var(--serif);
-        font-size: clamp(3rem, 7vw, 6.5rem);
-        font-weight: 400;
-        line-height: 1;
-        letter-spacing: -0.02em;
-        max-width: 14ch;
-        position: relative;
-        z-index: 1;
-      }
-      .hero-title em {
-        font-style: italic;
-        color: var(--accent-bright);
-      }
-      .hero-title .line-accent {
-        display: block;
-      }
-
-      .hero-meta {
-        display: flex;
-        align-items: flex-end;
-        justify-content: space-between;
-        margin-top: 52px;
-        position: relative;
-        z-index: 1;
-        gap: 40px;
-      }
-
-      .hero-desc {
-        max-width: 400px;
-        color: var(--ink-muted);
-        font-size: 0.9375rem;
-        font-weight: 300;
-        line-height: 1.7;
-      }
-
-      .hero-actions {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        flex-shrink: 0;
-      }
-
-      .btn-primary {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: var(--accent);
-        color: #fff;
-        padding: 14px 28px;
-        border-radius: 100px;
-        font-size: 0.875rem;
-        font-weight: 500;
-        text-decoration: none;
-        transition:
-          background 0.2s,
-          transform 0.15s;
-        letter-spacing: 0.01em;
-      }
-      .btn-primary:hover {
-        background: var(--accent-bright);
-        transform: scale(0.97);
-      }
-
-      .btn-ghost {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        color: var(--ink-muted);
-        padding: 14px 24px;
-        border-radius: 100px;
-        font-size: 0.875rem;
-        font-weight: 400;
-        text-decoration: none;
-        border: 1px solid var(--border);
-        transition:
-          color 0.2s,
-          border-color 0.2s,
-          transform 0.15s;
-      }
-      .btn-ghost:hover {
-        color: var(--ink);
-        border-color: rgba(255, 255, 255, 0.2);
-        transform: scale(0.97);
-      }
-
-      .hero-scroll-hint {
-        position: absolute;
-        bottom: 28px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 6px;
-        color: var(--ink-dim);
-        font-size: 0.6875rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-      }
-      .scroll-line {
-        width: 1px;
-        height: 40px;
-        background: linear-gradient(to bottom, transparent, var(--accent));
-        animation: scrollpulse 2s ease-in-out infinite;
-      }
-      @keyframes scrollpulse {
-        0%,
-        100% {
-          opacity: 0.3;
-          transform: scaleY(0.8);
-        }
-        50% {
-          opacity: 1;
-          transform: scaleY(1);
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio of Fahmi, a UI/UX designer creating clear, thoughtful, and user-centered digital products." />
+  <title>Fahmi — UI/UX Designer Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            paper: '#F3F1EA',
+            ink: '#121212',
+            muted: '#6C6A65',
+            line: '#D5D1C8',
+            orange: '#F26B3A',
+            lime: '#C7F36B',
+            sky: '#8CB7FF'
+          },
+          fontFamily: {
+            display: ['Space Grotesk', 'sans-serif'],
+            body: ['Inter', 'sans-serif']
+          },
+          boxShadow: {
+            soft: '0 18px 50px rgba(18,18,18,.08)'
+          }
         }
       }
-
-      /* ── MARQUEE ── */
-      .marquee-strip {
-        border-top: 1px solid var(--border);
-        border-bottom: 1px solid var(--border);
-        overflow: hidden;
-        padding: 18px 0;
-        background: var(--bg2);
-      }
-      .marquee-track {
-        display: flex;
-        gap: 0;
-        animation: marquee 28s linear infinite;
-        white-space: nowrap;
-      }
-      .marquee-item {
-        display: inline-flex;
-        align-items: center;
-        gap: 20px;
-        padding: 0 40px;
-        font-family: var(--serif);
-        font-style: italic;
-        font-size: 1rem;
-        color: var(--ink-muted);
-        flex-shrink: 0;
-      }
-      .marquee-dot {
-        width: 4px;
-        height: 4px;
-        border-radius: 50%;
-        background: var(--accent);
-        display: inline-block;
-      }
-      @keyframes marquee {
-        from {
-          transform: translateX(0);
-        }
-        to {
-          transform: translateX(-50%);
-        }
-      }
-
-      /* ── SECTIONS ── */
-      section {
-        padding: 100px 48px;
-      }
-      .section-label {
-        font-size: 0.6875rem;
-        font-weight: 500;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: var(--accent-bright);
-        margin-bottom: 16px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .section-label::after {
-        content: "";
-        height: 1px;
-        width: 40px;
-        background: var(--accent);
-      }
-
-      /* ── ABOUT ── */
-      .about-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 80px;
-        align-items: start;
-      }
-      .about-title {
-        font-family: var(--serif);
-        font-size: clamp(2rem, 4vw, 3.5rem);
-        font-weight: 400;
-        line-height: 1.15;
-        letter-spacing: -0.02em;
-      }
-      .about-title em {
-        font-style: italic;
-        color: var(--accent-bright);
-      }
-      .about-text {
-        color: var(--ink-muted);
-        font-size: 0.9375rem;
-        line-height: 1.8;
-        font-weight: 300;
-      }
-      .about-text + .about-text {
-        margin-top: 20px;
-      }
-
-      .stat-row {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1px;
-        background: var(--border);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        overflow: hidden;
-        margin-top: 48px;
-      }
-      .stat-item {
-        background: var(--surface);
-        padding: 28px 24px;
-        text-align: center;
-      }
-      .stat-num {
-        font-family: var(--serif);
-        font-size: 2.5rem;
-        font-style: italic;
-        color: var(--ink);
-        line-height: 1;
-      }
-      .stat-label {
-        font-size: 0.75rem;
-        color: var(--ink-muted);
-        margin-top: 6px;
-        letter-spacing: 0.04em;
-      }
-
-      /* ── WORK ── */
-      #work {
-        background: var(--bg2);
-      }
-      .work-header {
-        display: flex;
-        align-items: flex-end;
-        justify-content: space-between;
-        margin-bottom: 56px;
-      }
-      .work-title {
-        font-family: var(--serif);
-        font-size: clamp(2rem, 4vw, 3.5rem);
-        font-weight: 400;
-        letter-spacing: -0.02em;
-      }
-      .work-title em {
-        font-style: italic;
-        color: var(--accent-bright);
-      }
-
-      .work-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2px;
-      }
-
-      .project-card {
-        position: relative;
-        overflow: hidden;
-        background: var(--surface);
-        aspect-ratio: 4/3;
-        cursor: pointer;
-        group: true;
-      }
-      .project-card:nth-child(1) {
-        border-radius: 20px 0 0 0;
-      }
-      .project-card:nth-child(2) {
-        border-radius: 0 20px 0 0;
-      }
-      .project-card:nth-child(3) {
-        border-radius: 0 0 0 20px;
-        grid-column: span 1;
-      }
-      .project-card:nth-child(4) {
-        border-radius: 0 0 20px 0;
-      }
-      .project-card.wide {
-        grid-column: span 2;
-        aspect-ratio: 16/7;
-        border-radius: 0;
-      }
-
-      .project-bg {
-        position: absolute;
-        inset: 0;
-        background-size: cover;
-        background-position: center;
-        transition:
-          transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-          filter 0.4s;
-        filter: brightness(0.5) saturate(0.7);
-      }
-      .project-card:hover .project-bg {
-        transform: scale(1.04);
-        filter: brightness(0.6) saturate(0.9);
-      }
-
-      .project-overlay {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          to top,
-          rgba(10, 10, 11, 0.92) 0%,
-          rgba(10, 10, 11, 0.2) 60%,
-          transparent 100%
-        );
-      }
-
-      .project-content {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 32px;
-        transform: translateY(12px);
-        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      }
-      .project-card:hover .project-content {
-        transform: translateY(0);
-      }
-
-      .project-tags {
-        display: flex;
-        gap: 6px;
-        margin-bottom: 12px;
-      }
-      .project-tag {
-        font-size: 0.6875rem;
-        font-weight: 500;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: var(--accent-bright);
-        background: var(--accent-glow);
-        border: 1px solid rgba(139, 108, 246, 0.25);
-        padding: 3px 10px;
-        border-radius: 100px;
-      }
-
-      .project-name {
-        font-family: var(--serif);
-        font-size: 1.75rem;
-        font-weight: 400;
-        line-height: 1.2;
-        color: var(--ink);
-        margin-bottom: 8px;
-      }
-      .project-desc {
-        font-size: 0.8125rem;
-        color: var(--ink-muted);
-        font-weight: 300;
-        opacity: 0;
-        transform: translateY(6px);
-        transition:
-          opacity 0.3s 0.05s,
-          transform 0.3s 0.05s;
-      }
-      .project-card:hover .project-desc {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      .project-arrow {
-        position: absolute;
-        top: 28px;
-        right: 28px;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--ink);
-        opacity: 0;
-        transform: translateY(-4px);
-        transition:
-          opacity 0.3s,
-          transform 0.3s;
-        text-decoration: none;
-      }
-      .project-card:hover .project-arrow {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      /* color-coded card accents */
-      .card-violet .project-bg {
-        background-color: #1a1030;
-      }
-      .card-teal .project-bg {
-        background-color: #0a1e20;
-      }
-      .card-rose .project-bg {
-        background-color: #1e0f14;
-      }
-      .card-amber .project-bg {
-        background-color: #1a1208;
-      }
-      .card-blue .project-bg {
-        background-color: #0a1220;
-      }
-
-      /* ── SERVICES ── */
-      .services-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2px;
-        margin-top: 56px;
-        background: var(--border);
-        border: 1px solid var(--border);
-        border-radius: 20px;
-        overflow: hidden;
-      }
-      .service-item {
-        background: var(--surface);
-        padding: 40px 32px;
-        position: relative;
-        transition: background 0.25s;
-      }
-      .service-item:hover {
-        background: var(--surface2);
-      }
-      .service-num {
-        font-family: var(--serif);
-        font-style: italic;
-        font-size: 2rem;
-        color: var(--accent-bright);
-        opacity: 0.35;
-        margin-bottom: 20px;
-      }
-      .service-name {
-        font-family: var(--serif);
-        font-size: 1.25rem;
-        font-weight: 400;
-        margin-bottom: 12px;
-      }
-      .service-desc {
-        font-size: 0.8125rem;
-        color: var(--ink-muted);
-        line-height: 1.7;
-        font-weight: 300;
-      }
-
-      /* ── TOOLS ── */
-      #tools {
-        background: var(--bg2);
-      }
-      .tools-grid {
-        display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        gap: 12px;
-        margin-top: 48px;
-      }
-      .tool-chip {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 14px;
-        padding: 20px 16px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        transition:
-          background 0.2s,
-          border-color 0.2s,
-          transform 0.2s;
-        cursor: default;
-      }
-      .tool-chip:hover {
-        background: var(--surface2);
-        border-color: rgba(139, 108, 246, 0.3);
-        transform: translateY(-3px);
-      }
-      .tool-icon {
-        font-size: 1.5rem;
-        line-height: 1;
-      }
-      .tool-name {
-        font-size: 0.75rem;
-        color: var(--ink-muted);
-        font-weight: 400;
-        letter-spacing: 0.02em;
-      }
-
-      /* ── CTA ── */
-      .cta-section {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 24px;
-        padding: 80px;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-      }
-      .cta-orb {
-        position: absolute;
-        top: -60px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 400px;
-        height: 200px;
-        background: radial-gradient(
-          ellipse,
-          rgba(139, 108, 246, 0.2) 0%,
-          transparent 70%
-        );
-        pointer-events: none;
-      }
-      .cta-title {
-        font-family: var(--serif);
-        font-size: clamp(2rem, 5vw, 4rem);
-        font-weight: 400;
-        line-height: 1.1;
-        letter-spacing: -0.02em;
-        margin-bottom: 20px;
-        position: relative;
-        z-index: 1;
-      }
-      .cta-title em {
-        font-style: italic;
-        color: var(--accent-bright);
-      }
-      .cta-subtitle {
-        color: var(--ink-muted);
-        font-size: 0.9375rem;
-        font-weight: 300;
-        max-width: 480px;
-        margin: 0 auto 40px;
-        line-height: 1.7;
-        position: relative;
-        z-index: 1;
-      }
-      .cta-actions {
-        display: flex;
-        justify-content: center;
-        gap: 16px;
-        position: relative;
-        z-index: 1;
-      }
-      .cta-email {
-        font-size: 0.8125rem;
-        color: var(--ink-muted);
-        margin-top: 24px;
-        position: relative;
-        z-index: 1;
-      }
-      .cta-email a {
-        color: var(--accent-bright);
-        text-decoration: none;
-      }
-
-      /* ── FOOTER ── */
-      footer {
-        border-top: 1px solid var(--border);
-        padding: 32px 48px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      .footer-brand {
-        font-family: var(--serif);
-        font-size: 0.9375rem;
-        color: var(--ink-muted);
-      }
-      .footer-links {
-        display: flex;
-        gap: 28px;
-      }
-      .footer-links a {
-        font-size: 0.8125rem;
-        color: var(--ink-dim);
-        text-decoration: none;
-        transition: color 0.2s;
-      }
-      .footer-links a:hover {
-        color: var(--ink-muted);
-      }
-      .footer-copy {
-        font-size: 0.75rem;
-        color: var(--ink-dim);
-      }
-
-      /* ── AVAILABILITY BADGE ── */
-      .availability {
-        display: inline-flex;
-        align-items: center;
-        gap: 7px;
-        font-size: 0.75rem;
-        color: #6ee7b7;
-        font-weight: 500;
-        letter-spacing: 0.03em;
-        background: rgba(110, 231, 183, 0.08);
-        border: 1px solid rgba(110, 231, 183, 0.18);
-        padding: 5px 12px;
-        border-radius: 100px;
-      }
-      .avail-dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: #10b981;
-        box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
-        animation: pulse 2s ease-in-out infinite;
-      }
-      @keyframes pulse {
-        0%,
-        100% {
-          box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
-        }
-        50% {
-          box-shadow: 0 0 0 5px rgba(16, 185, 129, 0);
-        }
-      }
-
-      /* ── ABOUT AVATAR ── */
-      .about-visual {
-        position: relative;
-      }
-      .avatar-frame {
-        width: 100%;
-        aspect-ratio: 3/4;
-        border-radius: 20px;
-        overflow: hidden;
-        background: var(--surface);
-        border: 1px solid var(--border);
-        position: relative;
-      }
-      .avatar-placeholder {
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          135deg,
-          #18181b 0%,
-          #1a1230 50%,
-          #12121a 100%
-        );
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: var(--serif);
-        font-style: italic;
-        font-size: 6rem;
-        color: var(--accent-bright);
-        opacity: 0.25;
-      }
-      .avatar-real {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        filter: grayscale(20%) contrast(1.05);
-      }
-      .avatar-tag {
-        position: absolute;
-        bottom: -12px;
-        right: -12px;
-        background: var(--surface2);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 12px 16px;
-        font-size: 0.75rem;
-      }
-      .avatar-tag-title {
-        color: var(--ink-dim);
-        margin-bottom: 2px;
-        font-size: 0.6875rem;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-      }
-      .avatar-tag-value {
-        color: var(--ink);
-        font-weight: 500;
-      }
-
-      /* ── SKILLS LIST (left side) ── */
-      .skills-list {
-        margin-top: 40px;
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-        border: 1px solid var(--border);
-        border-radius: 14px;
-        overflow: hidden;
-      }
-      .skill-row {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 14px 20px;
-        background: var(--surface);
-        border-bottom: 1px solid var(--border);
-        font-size: 0.875rem;
-      }
-      .skill-row:last-child {
-        border-bottom: none;
-      }
-      .skill-bar-track {
-        width: 100px;
-        height: 3px;
-        background: rgba(255, 255, 255, 0.08);
-        border-radius: 2px;
-        overflow: hidden;
-      }
-      .skill-bar-fill {
-        height: 100%;
-        background: linear-gradient(
-          to right,
-          var(--accent),
-          var(--accent-bright)
-        );
-        border-radius: 2px;
-      }
-
-      /* ── MOBILE ── */
-      @media (max-width: 900px) {
-        nav {
-          padding: 0 24px;
-        }
-        .nav-links {
-          display: none;
-        }
-        .hero,
-        section {
-          padding-left: 24px;
-          padding-right: 24px;
-        }
-        section {
-          padding-top: 64px;
-          padding-bottom: 64px;
-        }
-        .hero {
-          padding-bottom: 56px;
-        }
-        .hero-meta {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 24px;
-        }
-        .about-grid {
-          grid-template-columns: 1fr;
-          gap: 48px;
-        }
-        .work-grid {
-          grid-template-columns: 1fr;
-        }
-        .project-card:nth-child(1),
-        .project-card:nth-child(2),
-        .project-card:nth-child(3),
-        .project-card:nth-child(4) {
-          border-radius: 16px;
-        }
-        .project-card.wide {
-          grid-column: span 1;
-          aspect-ratio: 4/3;
-        }
-        .services-grid {
-          grid-template-columns: 1fr;
-        }
-        .tools-grid {
-          grid-template-columns: repeat(3, 1fr);
-        }
-        .cta-section {
-          padding: 48px 28px;
-        }
-        .work-header {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 16px;
-        }
-        footer {
-          flex-direction: column;
-          gap: 20px;
-          text-align: center;
-        }
-        .footer-links {
-          flex-wrap: wrap;
-          justify-content: center;
-        }
-      }
-
-      /* ── TRANSITION ON LOAD ── */
-      @keyframes fadein {
-        from {
-          opacity: 0;
-          transform: translateY(18px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      .hero-eyebrow,
-      .hero-title,
-      .hero-meta {
-        animation: fadein 0.9s cubic-bezier(0.22, 0.9, 0.36, 1) both;
-      }
-      .hero-title {
-        animation-delay: 0.1s;
-      }
-      .hero-meta {
-        animation-delay: 0.25s;
-      }
-
-      /* section reveal */
-      .reveal {
-        opacity: 0;
-        transform: translateY(24px);
-        transition:
-          opacity 0.6s ease,
-          transform 0.6s ease;
-      }
-      .reveal.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      /* ── ABOUT BG ── */
-      #about {
-        background: var(--bg);
-      }
-
-      /* project color overlays */
-      .card-violet::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          135deg,
-          rgba(91, 60, 180, 0.15) 0%,
-          transparent 60%
-        );
-        pointer-events: none;
-      }
-      .card-teal::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          135deg,
-          rgba(6, 182, 212, 0.12) 0%,
-          transparent 60%
-        );
-        pointer-events: none;
-      }
-      .card-rose::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          135deg,
-          rgba(244, 63, 94, 0.12) 0%,
-          transparent 60%
-        );
-        pointer-events: none;
-      }
-      .card-amber::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          135deg,
-          rgba(245, 158, 11, 0.12) 0%,
-          transparent 60%
-        );
-        pointer-events: none;
-      }
-      .card-blue::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          135deg,
-          rgba(59, 130, 246, 0.12) 0%,
-          transparent 60%
-        );
-        pointer-events: none;
-      }
-    </style>
-  </head>
-  <body>
-    <!-- NAV -->
-    <nav>
-      <a href="#" class="nav-logo">Fahmi <em>·</em> Design</a>
-      <ul class="nav-links">
-        <li><a href="#work">Work</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li>
-          <a href="#contact" class="nav-cta text-black"
-            ><span class="text-black">Hire Me</span></a
-          >
-        </li>
-      </ul>
-    </nav>
-
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-bg-orb"></div>
-      <div class="hero-bg-grid"></div>
-
-      <div class="hero-eyebrow">Available for freelance</div>
-
-      <h1 class="hero-title">
-        Designing<br />
-        <em>interfaces</em><br />
-        <span class="line-accent">that feel</span>
-        human.
-      </h1>
-
-      <div class="hero-meta">
-        <p class="hero-desc">
-          I'm Fahmi, a UI/UX designer (Indonesian) based in Johor, Malaysia. I craft high-fidelity
-          digital experiences for web and mobile, where function meets form and
-          every pixel earns its place.
-        </p>
-        <div class="hero-actions">
-          <a href="#work" class="btn-primary text-black">
-            View Work
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path
-                d="M3 7h8M8 4l3 3-3 3"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </a>
-          <a
-            href="https://dribbble.com/ffahmi11"
-            class="btn-ghost"
-            target="_blank"
-            rel="noopener"
-          >
-            Dribbble
-          </a>
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { color-scheme: light; }
+    body { background:#F3F1EA; color:#121212; }
+    .noise::before {
+      content:""; position:absolute; inset:0; pointer-events:none; opacity:.14;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+      mix-blend-mode:multiply;
+    }
+    .marquee-track { animation: marquee 26s linear infinite; width:max-content; }
+    .marquee:hover .marquee-track { animation-play-state:paused; }
+    @keyframes marquee { to { transform:translateX(-50%); } }
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity .75s ease, transform .75s ease; }
+    .reveal.show { opacity:1; transform:none; }
+    .project-card img { transition:transform .7s cubic-bezier(.2,.7,.2,1); }
+    .project-card:hover img { transform:scale(1.045); }
+    .magnetic { transition:transform .18s ease; }
+    .float-a { animation:floatA 7s ease-in-out infinite; }
+    .float-b { animation:floatB 8s ease-in-out infinite; }
+    @keyframes floatA { 50% { transform:translateY(-10px) rotate(1deg); } }
+    @keyframes floatB { 50% { transform:translateY(12px) rotate(-1deg); } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:.01ms!important; animation-iteration-count:1!important; scroll-behavior:auto!important; transition-duration:.01ms!important; }
+    }
+  </style>
+</head>
+<body class="font-body antialiased overflow-x-hidden">
+  <header id="header" class="fixed inset-x-0 top-0 z-50 transition-all duration-300">
+    <div class="mx-auto max-w-[1440px] px-4 md:px-8">
+      <nav id="navPanel" class="mt-4 flex items-center justify-between rounded-2xl px-4 py-3 transition-all duration-300 md:px-5">
+        <a href="#top" class="font-display text-xl font-bold tracking-tight">FAHMI®</a>
+        <div class="hidden items-center gap-7 lg:flex">
+          <div class="flex items-center gap-2 text-sm"><span class="h-2 w-2 animate-pulse rounded-full bg-green-500"></span>Available for projects</div>
+          <a href="#work" class="text-sm hover:opacity-60">Projects</a>
+          <a href="#services" class="text-sm hover:opacity-60">Expertise</a>
+          <a href="#process" class="text-sm hover:opacity-60">Process</a>
+          <a href="#faq" class="text-sm hover:opacity-60">FAQ</a>
+          <button class="text-sm hover:opacity-60">About me</button>
+          <a href="#contact" class="magnetic rounded-full bg-ink px-5 py-3 text-sm font-semibold text-white">Let’s talk</a>
         </div>
-      </div>
-
-      <div class="hero-scroll-hint">
-        <div class="scroll-line"></div>
-        Scroll
-      </div>
-    </section>
-
-    <!-- MARQUEE -->
-    <div class="marquee-strip">
-      <div class="marquee-track">
-        <span class="marquee-item"
-          >UI Design <span class="marquee-dot"></span
-        ></span>
-        <span class="marquee-item"
-          >UX Research <span class="marquee-dot"></span
-        ></span>
-        <span class="marquee-item"
-          >Prototyping <span class="marquee-dot"></span
-        ></span>
-        <span class="marquee-item"
-          >Design Systems <span class="marquee-dot"></span
-        ></span>
-        <span class="marquee-item"
-          >Mobile Apps <span class="marquee-dot"></span
-        ></span>
-        <span class="marquee-item"
-          >Web Design <span class="marquee-dot"></span
-        ></span>
-        <span class="marquee-item"
-          >Figma <span class="marquee-dot"></span
-        ></span>
-        <span class="marquee-item"
-          >Frontend Dev <span class="marquee-dot"></span
-        ></span>
-        <!-- duplicate for seamless loop -->
-        <span class="marquee-item"
-          >UI Design <span class="marquee-dot"></span
-        ></span>
-        <span class="marquee-item"
-          >UX Research <span class="marquee-dot"></span
-        ></span>
-        <span class="marquee-item"
-          >Prototyping <span class="marquee-dot"></span
-        ></span>
-        <span class="marquee-item"
-          >Design Systems <span class="marquee-dot"></span
-        ></span>
-        <span class="marquee-item"
-          >Mobile Apps <span class="marquee-dot"></span
-        ></span>
-        <span class="marquee-item"
-          >Web Design <span class="marquee-dot"></span
-        ></span>
-        <span class="marquee-item"
-          >Figma <span class="marquee-dot"></span
-        ></span>
-        <span class="marquee-item"
-          >Frontend Dev <span class="marquee-dot"></span
-        ></span>
-      </div>
+        <button id="menuBtn" aria-label="Open menu" class="grid h-11 w-11 place-items-center rounded-full border border-line lg:hidden">
+          <span class="text-xl">☰</span>
+        </button>
+      </nav>
     </div>
+  </header>
 
-    <!-- WORK -->
-    <section id="work">
-      <div class="work-header reveal">
-        <div>
-          <div class="section-label">Selected Work</div>
-          <h2 class="work-title">Projects I'm <em>proud</em> of</h2>
+  <div id="mobileMenu" class="fixed inset-0 z-40 hidden bg-ink px-6 pt-28 text-paper lg:hidden">
+    <div class="flex flex-col gap-6 font-display text-4xl">
+      <a href="#work" class="mobile-link">Projects</a>
+      <a href="#services" class="mobile-link">Expertise</a>
+      <a href="#process" class="mobile-link">Process</a>
+      <a href="#faq" class="mobile-link">FAQ</a>
+      <a href="#contact" class="mobile-link text-lime">Let’s talk ↗</a>
+    </div>
+  </div>
+
+  <main id="top">
+    <section class="relative min-h-screen overflow-hidden px-5 pb-16 pt-36 md:px-8 md:pt-44">
+      <div class="mx-auto max-w-[1400px]">
+        <div class="mb-8 flex items-center justify-between text-xs font-semibold uppercase tracking-[.2em] text-muted">
+          <span>UI/UX Designer</span><span>Based in Indonesia · Available worldwide</span>
         </div>
-        <a
-          href="https://dribbble.com/ffahmi11"
-          class="btn-ghost"
-          target="_blank"
-          rel="noopener"
-          style="flex-shrink: 0"
-        >
-          All work
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path
-              d="M3 7h8M8 4l3 3-3 3"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </a>
-      </div>
 
-      <div class="work-grid reveal">
-        <!-- Card 1 — Moota -->
-        <div class="project-card card-violet relative">
-          <div
-            class="project-bg"
-            style="
-              background-image: url(&quot;https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80&quot;);
-              background-color: #16102a;
-            "
-          ></div>
-          <div class="project-overlay"></div>
-          <a
-            class="absolute top-0 right-0 bottom-0 left-0 z-20"
-            href="https://frontendmoota.vercel.app/"
-            target="_blank"
-            rel="noopener"
-          >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path
-                d="M4 12L12 4M12 4H6M12 4v6"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </a>
-          <div class="project-content">
-            <div class="project-tags">
-              <span class="project-tag">Mobile</span>
-              <span class="project-tag">Fintech</span>
+        <h1 class="font-display text-[14vw] font-semibold leading-[.84] tracking-[-.075em] md:text-[10.2vw] lg:text-[9.2vw]">
+          <span class="reveal block">Thoughtful</span>
+          <span class="reveal flex items-center gap-[2vw]">
+            <span class="inline-flex h-[.68em] w-[1.14em] overflow-hidden rounded-[.18em] bg-sky align-middle shadow-soft">
+              <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=600&q=85" alt="UI UX designer collaborating on a digital product" class="h-full w-full object-cover" />
+            </span>
+            design
+          </span>
+          <span class="reveal block text-right">experiences</span>
+          <span class="reveal flex items-center justify-between">
+            <span>for meaningful</span>
+            <span class="float-a hidden h-[.76em] w-[.76em] place-items-center rounded-full bg-orange text-[.26em] md:grid">↗</span>
+          </span>
+          <span class="reveal block text-right italic">digital products.</span>
+        </h1>
+
+        <div class="mt-12 grid gap-8 md:grid-cols-12 md:items-end">
+          <div class="md:col-span-5 md:col-start-7">
+            <p class="reveal max-w-xl text-lg leading-relaxed text-muted md:text-xl">I design intuitive digital experiences that balance user needs, business goals, and strong visual clarity—from early research to polished interfaces.</p>
+            <div class="reveal mt-7 flex flex-wrap gap-3">
+              <a href="#contact" class="magnetic rounded-full bg-ink px-6 py-4 font-semibold text-white">Start a conversation</a>
+              <a href="#work" class="rounded-full border border-ink px-6 py-4 font-semibold hover:bg-ink hover:text-white">View my work</a>
             </div>
-            <div class="project-name">Moota App</div>
-            <div class="project-desc">
-              A bank mutation monitoring app redesigned for clarity and speed —
-              40% faster task completion.
+          </div>
+          <div class="reveal md:col-span-4 md:col-start-1 md:row-start-1">
+            <div class="rounded-3xl border border-line bg-white/50 p-4">
+              <div class="mb-3 flex items-center justify-between text-xs text-muted"><span>Design process</span><span>Research → UI</span></div>
+              <div class="grid h-24 grid-cols-8 items-end gap-2">
+                <span class="h-[35%] rounded-t bg-sky"></span><span class="h-[50%] rounded-t bg-sky"></span><span class="h-[44%] rounded-t bg-sky"></span><span class="h-[68%] rounded-t bg-orange"></span><span class="h-[58%] rounded-t bg-sky"></span><span class="h-[75%] rounded-t bg-sky"></span><span class="h-[88%] rounded-t bg-lime"></span><span class="h-full rounded-t bg-ink"></span>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Card 2 — Rumah Yatim -->
-        <div class="project-card card-teal relative">
-          <div
-            class="project-bg"
-            style="
-              background-image: url(&quot;https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=900&q=80&quot;);
-              background-color: #0a2020;
-            "
-          ></div>
-          <div class="project-overlay"></div>
-          <a
-            class="absolute top-0 right-0 bottom-0 left-0 z-20"
-            href="https://www.figma.com/proto/AkhXunPVUcZttJcXwvDIXR/donasee-terbaru?node-id=223-3782&t=FOS9CevLybrNPk5s-0&scaling=scale-down&content-scaling=fixed&page-id=162%3A801&starting-point-node-id=223%3A3782"
-            target="_blank"
-            rel="noopener"
-          >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path
-                d="M4 12L12 4M12 4H6M12 4v6"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </a>
-          <div class="project-content">
-            <div class="project-tags">
-              <span class="project-tag">Mobile</span>
-              <span class="project-tag">Social</span>
-            </div>
-            <div class="project-name">Rumah Yatim</div>
-            <div class="project-desc">
-              A fundraising platform designed with compassion — streamlined
-              donation flows for real impact.
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 3 — Wide Landing Page -->
-        <div class="project-card card-blue wide">
-          <div
-            class="project-bg"
-            style="
-              background-image: url(&quot;https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=1400&q=80&quot;);
-              background-color: #0a1428;
-            "
-          ></div>
-          <div class="project-overlay"></div>
-          <a
-            class="absolute top-0 right-0 bottom-0 left-0 z-20"
-            href="https://www.figma.com/proto/Fu3CpsgPAslyvXrgpw7bBR/traksee?node-id=543-739&starting-point-node-id=543%3A739"
-            target="_blank"
-            rel="noopener"
-          >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path
-                d="M4 12L12 4M12 4H6M12 4v6"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </a>
-          <div class="project-content">
-            <div class="project-tags">
-              <span class="project-tag">Web</span>
-              <span class="project-tag">Landing Page</span>
-            </div>
-            <div class="project-name">SaaS Dashboard</div>
-            <div class="project-desc">
-              Full design system and responsive landing page for a B2B analytics
-              platform.
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 4 — E-commerce -->
-        <div class="project-card card-rose relative">
-            <a
-            class="absolute top-0 right-0 bottom-0 left-0 z-20"
-            href="https://www.figma.com/proto/Fu3CpsgPAslyvXrgpw7bBR/traksee?node-id=543-739&starting-point-node-id=543%3A739"
-            target="_blank"
-            rel="noopener"
-          >
-    
-          </a>
-          <div
-            class="project-bg"
-            style="
-              background-image: url(&quot;https://images.unsplash.com/photo-1555421689-d68471e189f2?w=900&q=80&quot;);
-              background-color: #200a14;
-            "
-          ></div>
-          <div class="project-overlay"></div>
-        
-          <div class="project-content">
-            <div class="project-tags">
-              <span class="project-tag">E-commerce</span>
-              <span class="project-tag">Mobile</span>
-            </div>
-            <div class="project-name">Retail Redesign</div>
-            <div class="project-desc">
-              End-to-end shopping app — research, wireframes to pixel-perfect
-              delivery.
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 5 — Design System -->
-        <div class="project-card card-amber relative">
-          <a
-            class="absolute top-0 right-0 bottom-0 left-0 z-20"
-            href="https://www.figma.com/proto/d4GvtBjvEDlj0OVf7wmSZX/IT-RESOURCE-MANAGEMENT?node-id=1-3&t=4zrdpcMMvlFl3wXv-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A3x"
-            target="_blank"
-            rel="noopener"
-          >
-          </a>
-          <div
-            class="project-bg"
-            style="
-              background-image: url(&quot;https://images.unsplash.com/photo-1559028012-481c04fa702d?w=900&q=80&quot;);
-              background-color: #1e1408;
-            "
-          ></div>
-          <div class="project-overlay"></div>
-
-          <div class="project-content">
-            <div class="project-tags">
-              <span class="project-tag">Dashboard</span>
-              <span class="project-tag">Figma</span>
-            </div>
-            <div class="project-name">Bargo System</div>
-            <div class="project-desc">
-              An enterprise application to meet business needs such as managing
-              employee data, recruitment, payroll, attendance and others.
-            </div>
+        <div class="reveal mt-20 border-t border-line pt-6">
+          <p class="mb-5 text-xs font-semibold uppercase tracking-[.18em] text-muted">Selected collaborations and product explorations</p>
+          <div class="grid grid-cols-2 gap-5 font-display text-lg font-semibold text-muted sm:grid-cols-3 md:grid-cols-6">
+            <span>SaaS</span><span>Fintech</span><span>E-commerce</span><span>Mobile App</span><span>Dashboard</span><span>Web Product</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ABOUT -->
-    <section id="about">
-      <div class="about-grid">
-        <div class="reveal">
-          <div class="section-label">About Me</div>
-          <h2 class="about-title">
-            Craft over<br />template.<br /><em>Always.</em>
-          </h2>
-          <div class="skills-list">
-            <div class="skill-row">
-              <span>UI Design</span>
-              <div class="skill-bar-track">
-                <div class="skill-bar-fill" style="width: 95%"></div>
-              </div>
-            </div>
-            <div class="skill-row">
-              <span>UX Research</span>
-              <div class="skill-bar-track">
-                <div class="skill-bar-fill" style="width: 85%"></div>
-              </div>
-            </div>
-            <div class="skill-row">
-              <span>Prototyping</span>
-              <div class="skill-bar-track">
-                <div class="skill-bar-fill" style="width: 90%"></div>
-              </div>
-            </div>
-            <div class="skill-row">
-              <span>Frontend Dev</span>
-              <div class="skill-bar-track">
-                <div class="skill-bar-fill" style="width: 70%"></div>
-              </div>
-            </div>
-            <div class="skill-row">
-              <span>Design Systems</span>
-              <div class="skill-bar-track">
-                <div class="skill-bar-fill" style="width: 80%"></div>
-              </div>
-            </div>
-          </div>
-          <div class="stat-row" style="margin-top: 28px">
-            <div class="stat-item">
-              <div class="stat-num">5+</div>
-              <div class="stat-label">Years Experience</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-num">10+</div>
-              <div class="stat-label">Projects Done</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-num">15+</div>
-              <div class="stat-label">Happy Clients</div>
-            </div>
-          </div>
+    <section id="work" class="px-5 py-24 md:px-8 md:py-36">
+      <div class="mx-auto max-w-[1400px]">
+        <div class="mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+          <div><p class="text-xs font-semibold uppercase tracking-[.18em] text-muted">Featured case study</p><h2 class="mt-3 font-display text-5xl font-semibold tracking-[-.05em] md:text-8xl">Moota</h2></div>
+          <p class="max-w-md text-lg leading-relaxed text-muted">A financial dashboard experience designed to help businesses monitor transactions, understand cash flow, and manage daily operations more clearly.</p>
         </div>
-
-        <div class="about-visual reveal">
-          <div class="avatar-frame">
-            <div class="avatar-placeholder">F</div>
-            <!-- swap in: <img src="images/fahmi.png" class="avatar-real" alt="Fahmi" /> -->
-            <div class="avatar-tag">
-              <div class="avatar-tag-title">Based in</div>
-              <div class="avatar-tag-value">Johor, Malaysia</div>
+        <div class="grid auto-rows-[220px] gap-4 md:grid-cols-12 md:auto-rows-[260px]">
+          <article class="project-card relative overflow-hidden rounded-[2rem] bg-ink md:col-span-8 md:row-span-2">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=90" alt="Financial dashboard interface designed as a UI UX case study" class="h-full w-full object-cover opacity-90" />
+            <span class="absolute left-5 top-5 rounded-full bg-paper px-4 py-2 text-xs font-semibold">UI/UX Design</span>
+          </article>
+          <article class="project-card relative overflow-hidden rounded-[2rem] bg-lime md:col-span-4">
+            <div class="absolute inset-6 rounded-3xl bg-white p-5 shadow-soft">
+              <div class="mb-5 h-3 w-20 rounded bg-line"></div><div class="space-y-3"><div class="h-12 rounded-xl bg-paper"></div><div class="h-12 rounded-xl bg-paper"></div><div class="h-12 rounded-xl bg-sky"></div></div>
             </div>
-          </div>
-          <p class="about-text" style="margin-top: 40px">
-            I'm a UI/UX designer who believes that great interfaces are
-            invisible — they get out of the way and let people do what they came
-            to do. I combine research-driven thinking with high craft in Figma
-            to create products that are both beautiful and measurably effective.
-          </p>
-          <p class="about-text">
-            When I'm not pushing pixels, I'm documenting design processes on
-            YouTube and contributing to open-source UI kits.
-          </p>
-          <div
-            style="
-              margin-top: 28px;
-              display: flex;
-              gap: 12px;
-              align-items: center;
-            "
-          >
-            <a
-              href="https://www.linkedin.com/in/ffahmi-id/"
-              class="btn-primary text-black"
-              target="_blank"
-              rel="noopener"
-              style="padding: 10px 20px; font-size: 0.8125rem"
-              >LinkedIn</a
-            >
-            <a
-              href="https://github.com/ffahmi"
-              class="btn-ghost"
-              target="_blank"
-              rel="noopener"
-              style="padding: 10px 20px; font-size: 0.8125rem"
-              >GitHub</a
-            >
-            <a
-              href="https://www.youtube.com/@channeltilembur"
-              class="btn-ghost"
-              target="_blank"
-              rel="noopener"
-              style="padding: 10px 20px; font-size: 0.8125rem"
-              >YouTube</a
-            >
-          </div>
+            <span class="absolute bottom-5 left-5 text-xs font-semibold">Responsive experience</span>
+          </article>
+          <article class="noise relative overflow-hidden rounded-[2rem] bg-orange md:col-span-4">
+            <div class="absolute inset-0 grid place-items-center font-display text-7xl font-bold tracking-[-.08em] text-paper">F.</div>
+            <span class="absolute bottom-5 left-5 text-xs font-semibold">Brand system</span>
+          </article>
+          <article class="relative overflow-hidden rounded-[2rem] border border-line bg-white/60 p-7 md:col-span-5">
+            <div class="grid h-full place-items-center">
+              <div class="w-full rounded-2xl border border-line bg-paper p-4"><div class="mb-4 flex gap-2"><i class="h-2 w-2 rounded-full bg-orange"></i><i class="h-2 w-2 rounded-full bg-lime"></i><i class="h-2 w-2 rounded-full bg-sky"></i></div><div class="grid grid-cols-3 gap-3"><div class="col-span-2 h-24 rounded-xl bg-ink"></div><div class="h-24 rounded-xl bg-sky"></div></div></div>
+            </div>
+          </article>
+          <article class="relative overflow-hidden rounded-[2rem] bg-sky p-7 md:col-span-7">
+            <div class="flex h-full flex-col justify-between"><p class="max-w-md font-display text-3xl font-semibold tracking-tight md:text-4xl">A scalable product experience designed to make complex financial information feel simple and actionable.</p><div class="flex flex-wrap gap-2 text-xs font-semibold"><span class="rounded-full border border-ink px-3 py-2">UX Research</span><span class="rounded-full border border-ink px-3 py-2">UI Design</span><span class="rounded-full border border-ink px-3 py-2">Prototype</span></div></div>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- SERVICES -->
-    <section id="services" style="background: var(--bg2)">
-      <div class="reveal">
-        <div class="section-label">What I Do</div>
-        <h2 class="work-title">Services &amp; <em>Expertise</em></h2>
+    <section class="marquee overflow-hidden border-y border-line py-5">
+      <div class="marquee-track flex gap-8 whitespace-nowrap font-display text-3xl font-semibold md:text-5xl">
+        <div class="flex gap-8"><span>UX Research ✦ User Flow ✦ Wireframing ✦ UI Design ✦ Prototyping ✦ Design Systems ✦ Usability Testing ✦ Responsive Design ✦</span></div>
+        <div class="flex gap-8" aria-hidden="true"><span>UX Research ✦ User Flow ✦ Wireframing ✦ UI Design ✦ Prototyping ✦ Design Systems ✦ Usability Testing ✦ Responsive Design ✦</span></div>
       </div>
-      <div class="services-grid reveal">
-        <div class="service-item">
-          <div class="service-num">01</div>
-          <div class="service-name">UI Design</div>
-          <div class="service-desc">
-            Pixel-perfect interfaces that align brand, function, and beauty.
-            From wireframes to final handoff.
-          </div>
+    </section>
+
+    <section class="px-5 py-28 md:px-8 md:py-44">
+      <div class="mx-auto max-w-6xl text-center">
+        <p class="reveal font-display text-4xl font-semibold leading-tight tracking-[-.05em] md:text-7xl">I turn <span class="rounded-xl bg-lime px-3 italic">complex ideas</span> into digital experiences that feel <span class="underline decoration-orange decoration-4 underline-offset-8">clear, useful</span>, and enjoyable to use.</p>
+      </div>
+    </section>
+
+    <section id="services" class="border-t border-line px-5 py-24 md:px-8 md:py-36">
+      <div class="mx-auto grid max-w-[1400px] gap-14 lg:grid-cols-12">
+        <div class="lg:col-span-5"><p class="text-xs font-semibold uppercase tracking-[.18em] text-muted">What I do</p><h2 class="mt-4 max-w-lg font-display text-5xl font-semibold tracking-[-.05em] md:text-7xl">Designing experiences from insight to interface.</h2></div>
+        <div class="lg:col-span-7" id="servicesList"></div>
+      </div>
+    </section>
+
+    <section class="bg-ink px-5 py-24 text-paper md:px-8 md:py-36">
+      <div class="mx-auto max-w-[1400px]">
+        <div class="grid gap-8 border-b border-white/20 pb-16 md:grid-cols-3">
+          <div><div class="counter font-display text-7xl font-semibold" data-target="12">0</div><p class="mt-2 text-white/60">Design projects</p></div>
+          <div><div class="counter font-display text-7xl font-semibold" data-target="100">0</div><p class="mt-2 text-white/60">User-centered focus</p></div>
+          <div><div class="counter font-display text-7xl font-semibold" data-target="3">0</div><p class="mt-2 text-white/60">Core design disciplines</p></div>
         </div>
-        <div class="service-item">
-          <div class="service-num">02</div>
-          <div class="service-name">UX Research</div>
-          <div class="service-desc">
-            User interviews, usability testing, and insight synthesis that turn
-            assumptions into confident decisions.
-          </div>
-        </div>
-        <div class="service-item">
-          <div class="service-num">03</div>
-          <div class="service-name">Design Systems</div>
-          <div class="service-desc">
-            Scalable component libraries and token systems that give your team a
-            shared visual language.
-          </div>
-        </div>
-        <div class="service-item">
-          <div class="service-num">04</div>
-          <div class="service-name">Mobile Apps</div>
-          <div class="service-desc">
-            iOS and Android-native flows designed with thumb zones, platform
-            conventions, and delight in mind.
-          </div>
-        </div>
-        <div class="service-item">
-          <div class="service-num">05</div>
-          <div class="service-name">Web Design</div>
-          <div class="service-desc">
-            Landing pages and dashboards that convert — built on solid
-            information architecture.
-          </div>
-        </div>
-        <div class="service-item">
-          <div class="service-num">06</div>
-          <div class="service-name">Prototyping</div>
-          <div class="service-desc">
-            High-fidelity Figma prototypes for user testing, stakeholder
-            presentations, and developer specs.
-          </div>
+        <div class="pt-16">
+          <div id="testimonial" class="grid gap-10 md:grid-cols-12 md:items-end"></div>
+          <div class="mt-10 flex items-center gap-3"><button id="prevTestimonial" class="grid h-12 w-12 place-items-center rounded-full border border-white/30">←</button><button id="nextTestimonial" class="grid h-12 w-12 place-items-center rounded-full border border-white/30">→</button></div>
         </div>
       </div>
     </section>
 
-    <!-- TOOLS -->
-    <section id="tools">
-      <div class="reveal">
-        <div class="section-label">Tools &amp; Stack</div>
-        <h2 class="work-title">Built with the <em>right</em> tools</h2>
-      </div>
-      <div class="tools-grid reveal">
-        <div class="tool-chip">
-          <div class="tool-icon">
-            <svg
-              width="28"
-              height="28"
-              viewBox="0 0 480 720"
-              fill="none"
-              aria-label="Figma"
-            >
-              <path
-                fill="#24CB71"
-                d="M0 600c0-66.27 53.73-120 120-120h120v120c0 66.27-53.73 120-120 120S0 666.27 0 600"
-              />
-              <path
-                fill="#FF7237"
-                d="M240 0v240h120c66.27 0 120-53.73 120-120S426.27 0 360 0z"
-              />
-              <circle cx="359" cy="360" r="120" fill="#00B6FF" />
-              <path
-                fill="#FF3737"
-                d="M0 120c0 66.27 53.73 120 120 120h120V0H120C53.73 0 0 53.73 0 120"
-              />
-              <path
-                fill="#874FFF"
-                d="M0 360c0 66.27 53.73 120 120 120h120V240H120C53.73 240 0 293.73 0 360"
-              />
-            </svg>
-          </div>
-          <span class="tool-name">Figma</span>
-        </div>
-        <div class="tool-chip">
-          <div class="tool-icon" style="font-size: 1.5rem">
-            <img
-              src="https://download.logo.wine/logo/Adobe_XD/Adobe_XD-Logo.wine.png"
-              width="74"
-              alt="Adobe XD"
-            />
-          </div>
-          <span class="tool-name">Adobe XD</span>
-        </div>
-        <div class="tool-chip">
-          <div class="tool-icon">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/2/20/Photoshop_CC_icon.png"
-              width="40"
-              alt="Photoshop"
-            />
-          </div>
-          <span class="tool-name">Photoshop</span>
-        </div>
-        <div class="tool-chip">
-          <div class="tool-icon">
-            <img
-              src="/images/tailwind-css-logo.png"
-              width="28"
-              height="28"
-              alt="Tailwind"
-            />
-          </div>
-          <span class="tool-name">Tailwind</span>
-        </div>
-        <div class="tool-chip">
-          <div class="tool-icon">
-            <img
-              src="https://www.w3.org/html/logo/downloads/HTML5_Logo_512.png"
-              width="40"
-              alt="HTML5"
-            />
-          </div>
-          <span class="tool-name">HTML / CSS</span>
-        </div>
-        <div class="tool-chip">
-          <div class="tool-icon">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/9/93/Wordpress_Blue_logo.png"
-              width="26"
-              alt="WordPress"
-            />
-          </div>
-          <span class="tool-name">WordPress</span>
+    <section class="px-5 py-24 md:px-8 md:py-36">
+      <div class="mx-auto max-w-[1400px]">
+        <div class="mb-12"><p class="text-xs font-semibold uppercase tracking-[.18em] text-muted">Selected work</p><h2 class="mt-3 font-display text-5xl font-semibold tracking-[-.05em] md:text-8xl">Product case studies</h2></div>
+        <div class="grid gap-6 lg:grid-cols-3">
+          <article class="project-card group overflow-hidden rounded-[2rem] bg-orange"><div class="aspect-[4/5] overflow-hidden"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1000&q=85" alt="Team planning a membership platform" class="h-full w-full object-cover" /></div><div class="p-6"><div class="flex justify-between"><h3 class="font-display text-4xl font-semibold">Traksee</h3><span>01 / 03</span></div><p class="mt-4">An e-commerce platform experience focused on helping businesses build and manage their own online store.</p></div></article>
+          <article class="project-card group overflow-hidden rounded-[2rem] bg-lime"><div class="aspect-[4/5] overflow-hidden"><img src="https://images.unsplash.com/photo-1523742810063-7c35323860d7?auto=format&fit=crop&w=1000&q=85" alt="Agricultural field representing smart farm monitoring" class="h-full w-full object-cover" /></div><div class="p-6"><div class="flex justify-between"><h3 class="font-display text-4xl font-semibold">Moota QRIS</h3><span>02 / 03</span></div><p class="mt-4">A QRIS onboarding and payment management experience built for faster merchant activation.</p></div></article>
+          <article class="project-card group overflow-hidden rounded-[2rem] bg-sky"><div class="aspect-[4/5] overflow-hidden"><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85" alt="Architectural workspace for portfolio collaboration" class="h-full w-full object-cover" /></div><div class="p-6"><div class="flex justify-between"><h3 class="font-display text-4xl font-semibold">Invoice Moota</h3><span>03 / 03</span></div><p class="mt-4">An invoice creation flow designed to make billing and payment collection more practical for businesses.</p></div></article>
         </div>
       </div>
     </section>
 
-    <!-- CTA / CONTACT -->
-    <section id="contact" style="background: var(--bg)">
-      <div class="cta-section reveal">
-        <div class="cta-orb"></div>
-
-        <h2 class="cta-title">
-          Let's build something<br />worth <em>remembering.</em>
-        </h2>
-        <p class="cta-subtitle">
-          I'm currently open to freelance opportunities and full-time roles.
-          Tell me about your project — I'd love to hear it.
-        </p>
-        <div class="cta-actions">
-          <a
-            href="https://wa.me/6289655008922?text=Hello%20Fahmi%2C%20I%27m%20interested%20in%20your%20services"
-            class="btn-primary text-black"
-            target="_blank"
-            rel="noopener"
-          >
-            WhatsApp
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path
-                d="M3 7h8M8 4l3 3-3 3"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </a>
-          <a
-            href="https://www.linkedin.com/in/ffahmi-id/"
-            class="btn-ghost"
-            target="_blank"
-            rel="noopener"
-            >LinkedIn</a
-          >
-        </div>
-        <div class="cta-email">
-          or email me at
-          <a href="mailto:ffaisalfahmi@gmail.com">ffaisalfahmi@gmail.com</a>
+    <section id="process" class="border-y border-line px-5 py-24 md:px-8 md:py-36">
+      <div class="mx-auto max-w-[1400px]">
+        <div class="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end"><div><p class="text-xs font-semibold uppercase tracking-[.18em] text-muted">My design process</p><h2 class="mt-3 font-display text-5xl font-semibold tracking-[-.05em] md:text-8xl">Clear process, thoughtful outcomes.</h2></div><p class="max-w-md text-lg text-muted">A collaborative process that transforms product problems into tested and polished digital experiences.</p></div>
+        <div class="grid gap-8 md:grid-cols-4">
+          <div class="border-t border-ink pt-5"><span class="font-display text-5xl font-semibold">01</span><h3 class="mt-8 text-xl font-semibold">Discover the problem</h3><p class="mt-3 text-muted">Understand users, business goals, constraints, and the core problem worth solving.</p></div>
+          <div class="border-t border-ink pt-5"><span class="font-display text-5xl font-semibold">02</span><h3 class="mt-8 text-xl font-semibold">Define the experience</h3><p class="mt-3 text-muted">Map user flows, information architecture, priorities, and the intended product journey.</p></div>
+          <div class="border-t border-ink pt-5"><span class="font-display text-5xl font-semibold">03</span><h3 class="mt-8 text-xl font-semibold">Design and prototype</h3><p class="mt-3 text-muted">Explore wireframes, visual directions, reusable components, and interactive prototypes.</p></div>
+          <div class="border-t border-ink pt-5"><span class="font-display text-5xl font-semibold">04</span><h3 class="mt-8 text-xl font-semibold">Test and refine</h3><p class="mt-3 text-muted">Validate ideas, gather feedback, refine details, and prepare a clear handoff for development.</p></div>
         </div>
       </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer>
-      <div class="footer-brand">
-        Fahmi · Design <span style="color: var(--ink-dim)">© 2025</span>
+    <section id="faq" class="px-5 py-24 md:px-8 md:py-36">
+      <div class="mx-auto grid max-w-[1400px] gap-14 lg:grid-cols-12">
+        <div class="lg:col-span-4"><p class="text-xs font-semibold uppercase tracking-[.18em] text-muted">FAQ</p><h2 class="mt-3 font-display text-5xl font-semibold tracking-[-.05em] md:text-7xl">A little more about working with me.</h2></div>
+        <div id="faqList" class="lg:col-span-8"></div>
       </div>
-      <div class="footer-links">
-        <a href="https://dribbble.com/ffahmi11" target="_blank">Dribbble</a>
-        <a href="https://github.com/ffahmi" target="_blank">GitHub</a>
-        <a href="https://www.linkedin.com/in/ffahmi-id/" target="_blank"
-          >LinkedIn</a
-        >
-        <a href="https://www.youtube.com/@channeltilembur" target="_blank"
-          >YouTube</a
-        >
-      </div>
-      <div class="footer-copy">Made with intent, not templates.</div>
-    </footer>
+    </section>
 
-    <script>
-      // Section reveal on scroll
-      const reveals = document.querySelectorAll(".reveal");
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting) {
-              e.target.classList.add("visible");
-              io.unobserve(e.target);
-            }
-          });
-        },
-        { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
-      );
-      reveals.forEach((el) => io.observe(el));
-    </script>
-  </body>
+    <section id="contact" class="noise relative overflow-hidden bg-orange px-5 py-28 md:px-8 md:py-44">
+      <div class="relative z-10 mx-auto max-w-[1400px] text-center">
+        <p class="text-xs font-semibold uppercase tracking-[.2em]">Let’s work together</p>
+        <h2 class="mx-auto mt-5 max-w-6xl font-display text-6xl font-semibold leading-[.9] tracking-[-.07em] md:text-[9vw]">Building something useful?</h2>
+        <p class="mx-auto mt-8 max-w-xl text-lg">Let’s shape your product idea into an intuitive experience that works for users and supports your business goals.</p>
+        <a href="mailto:hello@fahmi.design" class="magnetic mt-10 inline-flex rounded-full bg-ink px-7 py-4 font-semibold text-white">Start a conversation ↗</a>
+      </div>
+      <div class="float-b absolute -bottom-20 -left-20 h-72 w-72 rounded-full border-[40px] border-paper/25"></div>
+      <div class="float-a absolute -right-24 top-10 h-64 w-64 rounded-full bg-lime/50"></div>
+    </section>
+  </main>
+
+  <footer class="bg-ink px-5 py-14 text-paper md:px-8">
+    <div class="mx-auto max-w-[1400px]">
+      <div class="grid gap-10 border-b border-white/20 pb-12 md:grid-cols-12">
+        <div class="md:col-span-5"><div class="font-display text-3xl font-bold">FAHMI®</div><p class="mt-4 max-w-sm text-white/60">Digital product design and development for meaningful teams building what comes next.</p></div>
+        <div class="grid grid-cols-2 gap-8 text-sm md:col-span-5 md:col-start-8"><div class="flex flex-col gap-3"><a href="#work">Projects</a><a href="#services">Expertise</a><a href="#process">Process</a><a href="#faq">FAQ</a></div><div class="flex flex-col gap-3"><a href="#">LinkedIn</a><a href="#">Behance</a><a href="#">Instagram</a><a href="mailto:hello@fahmi.design">Email</a></div></div>
+      </div>
+      <div class="flex flex-col gap-4 pt-6 text-xs text-white/50 md:flex-row md:items-center md:justify-between"><span>© 2026 Fahmi. UI/UX Designer. All rights reserved.</span><div class="flex gap-5"><a href="#">Privacy</a><a href="#">Terms</a><a href="#top">Back to top ↑</a></div></div>
+    </div>
+  </footer>
+
+  <script>
+    const services = [
+      ['UX Research','Understand user behavior, pain points, expectations, and the context behind each product decision.'],
+      ['User Flow & IA','Organize journeys, content, and interactions so users can complete tasks with less friction.'],
+      ['Wireframing','Translate early ideas into clear structures before investing in high-fidelity visual design.'],
+      ['UI Design','Create polished, responsive interfaces with strong hierarchy, consistency, and visual clarity.'],
+      ['Interactive Prototyping','Build realistic prototypes to communicate interactions, validate flows, and align stakeholders.'],
+      ['Design Systems','Create reusable components, patterns, and guidelines that help products scale consistently.'],
+      ['Usability Testing','Evaluate design decisions with users and turn observations into practical improvements.'],
+      ['Developer Handoff','Prepare organized files, specifications, states, and design guidance for smoother implementation.']
+    ];    const servicesList = document.getElementById('servicesList');
+    servicesList.innerHTML = services.map((item,i)=>`<button class="service-row w-full border-t border-line py-5 text-left" aria-expanded="false"><div class="flex items-center justify-between gap-4"><div class="flex items-center gap-5"><span class="text-sm text-muted">${String(i+1).padStart(2,'0')}</span><h3 class="font-display text-2xl font-semibold md:text-4xl">${item[0]}</h3></div><span class="arrow text-2xl transition-transform">↘</span></div><p class="service-copy hidden max-w-xl pl-11 pt-4 leading-relaxed text-muted">${item[1]}</p></button>`).join('');
+    document.querySelectorAll('.service-row').forEach(row=>row.addEventListener('click',()=>{
+      const open=row.getAttribute('aria-expanded')==='true';
+      document.querySelectorAll('.service-row').forEach(r=>{r.setAttribute('aria-expanded','false');r.querySelector('.service-copy').classList.add('hidden');r.querySelector('.arrow').classList.remove('rotate-180')});
+      if(!open){row.setAttribute('aria-expanded','true');row.querySelector('.service-copy').classList.remove('hidden');row.querySelector('.arrow').classList.add('rotate-180')}
+    }));
+
+    const faqs = [
+      ['What kind of projects do you work on?','I focus on web applications, SaaS products, dashboards, mobile experiences, landing pages, and other user-centered digital products.'],
+      ['What is your role in a project?','I can support the full UI/UX process, including discovery, user flows, wireframes, interface design, prototypes, design systems, and developer handoff.'],
+      ['Which tools do you use?','My primary tools include Figma and FigJam, supported by prototyping, documentation, collaboration, and analytics tools based on project needs.'],
+      ['Can you improve an existing product?','Yes. I can review an existing experience, identify usability and visual issues, then propose focused improvements without redesigning everything unnecessarily.'],
+      ['Do you design responsive interfaces?','Yes. Each interface is considered across desktop, tablet, and mobile so layouts and interactions remain clear on different screen sizes.'],
+      ['Can you work with an existing design system?','Yes. I can follow, improve, document, or expand an existing design system while keeping the product consistent.'],
+      ['How do you collaborate with developers?','I prepare structured Figma files, component states, responsive behavior, interaction notes, and supporting documentation to reduce implementation ambiguity.'],
+      ['How long does a project take?','Timing depends on scope and complexity. A focused landing page may take days, while a complete product flow or dashboard can require several weeks.'],
+      ['Are you available for freelance work?','Yes. I am open to selected freelance, contract, and collaborative product design opportunities.'],
+      ['How can we start working together?','Send a brief introduction, the product context, current challenge, expected scope, and timeline. We can then discuss the most useful next step.']
+    ];    const faqList=document.getElementById('faqList');
+    faqList.innerHTML=faqs.map((f,i)=>`<div class="faq-item border-t border-line"><button class="faq-btn flex w-full items-center justify-between gap-5 py-6 text-left" aria-expanded="false"><span class="font-display text-xl font-semibold md:text-2xl">${f[0]}</span><span class="faq-icon text-2xl transition-transform">+</span></button><div class="faq-answer hidden max-w-2xl pb-6 leading-relaxed text-muted">${f[1]}</div></div>`).join('');
+    document.querySelectorAll('.faq-btn').forEach(btn=>btn.addEventListener('click',()=>{
+      const item=btn.parentElement, open=btn.getAttribute('aria-expanded')==='true';
+      document.querySelectorAll('.faq-btn').forEach(b=>{b.setAttribute('aria-expanded','false');b.querySelector('.faq-icon').classList.remove('rotate-45');b.parentElement.querySelector('.faq-answer').classList.add('hidden')});
+      if(!open){btn.setAttribute('aria-expanded','true');btn.querySelector('.faq-icon').classList.add('rotate-45');item.querySelector('.faq-answer').classList.remove('hidden')}
+    }));
+
+    const testimonials=[
+      {quote:'Fahmi consistently turns complicated requirements into interfaces that feel structured, understandable, and ready for development.',name:'Product Team',role:'SaaS Collaboration',img:'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=85'},
+      {quote:'His attention to hierarchy, interaction details, and real product constraints helped the team make faster and more confident decisions.',name:'Project Stakeholder',role:'Digital Product Project',img:'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=85'},
+      {quote:'The design process was clear and collaborative. Each iteration improved both usability and the overall visual quality of the product.',name:'Development Team',role:'Product Implementation',img:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=85'}
+    ];    let testimonialIndex=0;
+    function renderTestimonial(){const t=testimonials[testimonialIndex];document.getElementById('testimonial').innerHTML=`<div class="md:col-span-9"><p class="font-display text-4xl font-semibold leading-tight tracking-[-.04em] md:text-6xl">“${t.quote}”</p></div><div class="md:col-span-3"><img src="${t.img}" alt="Portrait of ${t.name}" class="h-20 w-20 rounded-full object-cover"><p class="mt-5 font-semibold">${t.name}</p><p class="text-white/50">${t.role}</p><p class="mt-6 text-xs text-white/50">${String(testimonialIndex+1).padStart(2,'0')} / ${String(testimonials.length).padStart(2,'0')}</p></div>`}
+    renderTestimonial();
+    document.getElementById('nextTestimonial').onclick=()=>{testimonialIndex=(testimonialIndex+1)%testimonials.length;renderTestimonial()};
+    document.getElementById('prevTestimonial').onclick=()=>{testimonialIndex=(testimonialIndex-1+testimonials.length)%testimonials.length;renderTestimonial()};
+
+    const header=document.getElementById('header'),navPanel=document.getElementById('navPanel');
+    addEventListener('scroll',()=>{if(scrollY>30){navPanel.classList.add('bg-paper/90','backdrop-blur-xl','shadow-soft')}else{navPanel.classList.remove('bg-paper/90','backdrop-blur-xl','shadow-soft')}});
+    const menuBtn=document.getElementById('menuBtn'),mobileMenu=document.getElementById('mobileMenu');
+    menuBtn.onclick=()=>mobileMenu.classList.toggle('hidden');
+    document.querySelectorAll('.mobile-link').forEach(a=>a.onclick=()=>mobileMenu.classList.add('hidden'));
+
+    const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+    let counted=false;
+    const counterObserver=new IntersectionObserver(entries=>{if(entries[0].isIntersecting&&!counted){counted=true;document.querySelectorAll('.counter').forEach(el=>{const target=+el.dataset.target;let value=0;const step=Math.max(1,Math.ceil(target/45));const timer=setInterval(()=>{value+=step;if(value>=target){value=target;clearInterval(timer)}el.textContent=value+(target===12?'+':target===100?'%':'')},30)})}}, {threshold:.35});
+    counterObserver.observe(document.querySelector('.counter'));
+
+    document.querySelectorAll('.magnetic').forEach(btn=>{btn.addEventListener('mousemove',e=>{const r=btn.getBoundingClientRect();btn.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.08}px,${(e.clientY-r.top-r.height/2)*.08}px)`});btn.addEventListener('mouseleave',()=>btn.style.transform='')});
+  </script>
+</body>
 </html>
