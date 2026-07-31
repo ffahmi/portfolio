@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A SaaS-focused product design studio landing page inspired by modern editorial agency websites." />
+  <title>Northstar Studio — SaaS Product Design</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fragment+Mono&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#272666',
+            lavender: '#9289C6',
+            mint: '#7ED7CC',
+            sun: '#FFDC39',
+            cloud: '#F4F5F6',
+            line: '#D3D0E7'
+          },
+          fontFamily: {
+            sora: ['Sora', 'sans-serif'],
+            mono: ['Fragment Mono', 'monospace']
+          },
+          boxShadow: {
+            card: '0 24px 60px rgba(39,38,102,.16)'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: Sora, sans-serif; background:#fff; color:#272666; }
+    .grain { position:fixed; inset:0; pointer-events:none; opacity:.035; z-index:80; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E"); }
+    .reveal { opacity:0; transform:translateY(30px); transition:.75s cubic-bezier(.2,.8,.2,1); }
+    .reveal.show { opacity:1; transform:none; }
+    .project-card img, .mock { transition:transform .7s cubic-bezier(.2,.8,.2,1); }
+    .project-card:hover img, .project-card:hover .mock { transform:scale(1.035); }
+    .marquee { overflow:hidden; white-space:nowrap; }
+    .marquee-track { display:inline-flex; animation:marquee 24s linear infinite; }
+    @keyframes marquee { to { transform:translateX(-50%); } }
+    .float { animation:float 5s ease-in-out infinite; }
+    @keyframes float { 50% { transform:translateY(-10px) rotate(1deg); } }
+    .grid-lines { background-image:linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px); background-size:36px 36px; }
+    .outline-text { color:transparent; -webkit-text-stroke:1px rgba(255,255,255,.85); }
+  </style>
+</head>
+<body class="overflow-x-hidden">
+<div class="grain"></div>
+
+<header class="fixed top-0 inset-x-0 z-50 border-b border-white/10 bg-ink/90 backdrop-blur-xl text-white">
+  <div class="mx-auto max-w-[1440px] h-[68px] px-5 md:px-10 flex items-center justify-between">
+    <a href="#home" class="flex items-center gap-3 font-semibold tracking-tight">
+      <span class="grid place-items-center h-9 w-9 rounded-full border border-white/30 bg-white/10">N</span>
+      <span>Northstar Studio</span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-8 text-sm text-white/75">
+      <a class="hover:text-white" href="#work">Work</a>
+      <a class="hover:text-white" href="#services">Services</a>
+      <a class="hover:text-white" href="#expertise">Expertise</a>
+      <a class="hover:text-white" href="#about">About</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <span class="hidden md:flex text-xs items-center gap-2 text-white/70"><span class="text-sun">★</span> 5.0 on Clutch</span>
+      <a href="#contact" class="rounded-full bg-sun px-5 py-3 text-sm font-semibold text-ink transition hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(255,220,57,.35)]">Start Your Project</a>
+      <button id="menuBtn" class="lg:hidden grid place-items-center h-10 w-10 rounded-full border border-white/20" aria-label="Open menu">☰</button>
+    </div>
+  </div>
+  <div id="mobileMenu" class="hidden lg:hidden px-5 pb-5 bg-ink">
+    <div class="rounded-2xl border border-white/10 p-4 flex flex-col gap-4 text-white/80">
+      <a href="#work">Work</a><a href="#services">Services</a><a href="#expertise">Expertise</a><a href="#about">About</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="home" class="bg-ink text-white min-h-screen pt-24 overflow-hidden grid-lines">
+    <div class="mx-auto max-w-[1440px] min-h-[calc(100vh-6rem)] px-5 md:px-10 lg:px-[72px] grid lg:grid-cols-[.9fr_1.1fr] gap-12 items-center">
+      <div class="py-16 lg:sticky lg:top-20 reveal">
+        <div class="flex items-center gap-3 mb-8">
+          <span class="h-2 w-2 rounded-full bg-mint shadow-[0_0_18px_#7ED7CC]"></span>
+          <span class="font-mono text-xs uppercase tracking-[.2em] text-white/70">SaaS-focused product design studio</span>
+        </div>
+        <h1 class="max-w-3xl text-[clamp(3.25rem,7vw,7.5rem)] leading-[.92] tracking-[-.06em] font-semibold">
+          We power SaaS with <span class="text-mint">daily,</span> done-right design.
+        </h1>
+        <p class="mt-8 max-w-xl text-lg md:text-xl leading-8 text-white/70">World-class SaaS UX, one flexible monthly engagement, and a design partner that ships meaningful progress every day.</p>
+        <div class="mt-10 flex flex-wrap gap-4">
+          <a href="#contact" class="rounded-full bg-sun px-7 py-4 font-semibold text-ink transition hover:-translate-y-1">Start Your Project ↗</a>
+          <a href="#work" class="rounded-full border border-white/30 px-7 py-4 font-medium hover:bg-white hover:text-ink transition">Explore Our Work</a>
+        </div>
+        <div class="mt-14 flex flex-wrap items-center gap-6 text-sm text-white/55">
+          <span>90+ happy clients</span><span class="h-1 w-1 rounded-full bg-white/30"></span><span>96+ projects shipped</span><span class="h-1 w-1 rounded-full bg-white/30"></span><span>10+ years expertise</span>
+        </div>
+      </div>
+
+      <div class="relative min-h-[720px] lg:min-h-[900px] py-16 reveal">
+        <div class="absolute top-16 right-0 w-[82%] rounded-[28px] bg-[#f8f7ff] p-4 shadow-card rotate-2 float">
+          <div class="rounded-2xl bg-white overflow-hidden border border-line">
+            <div class="h-12 border-b border-line flex items-center justify-between px-4"><div class="flex gap-1.5"><i class="w-2.5 h-2.5 rounded-full bg-red-300"></i><i class="w-2.5 h-2.5 rounded-full bg-yellow-300"></i><i class="w-2.5 h-2.5 rounded-full bg-green-300"></i></div><span class="font-mono text-[10px] text-ink/45">finance.os</span></div>
+            <div class="grid grid-cols-[82px_1fr] min-h-[430px]">
+              <aside class="bg-ink p-4"><div class="w-9 h-9 rounded-xl bg-mint mb-8"></div><div class="space-y-5"><div class="h-2 rounded-full bg-white/15"></div><div class="h-2 rounded-full bg-white/15"></div><div class="h-2 rounded-full bg-white/15"></div><div class="h-2 rounded-full bg-white/15"></div><div class="h-2 rounded-full bg-white/15"></div><div class="h-2 rounded-full bg-white/15"></div></div></aside>
+              <div class="p-5 bg-cloud">
+                <div class="flex justify-between items-center"><div><div class="h-3 w-24 bg-ink/15 rounded mb-2"></div><div class="h-6 w-36 bg-ink rounded"></div></div><div class="h-9 w-24 bg-sun rounded-full"></div></div>
+                <div class="grid grid-cols-3 gap-3 mt-6"><div class="bg-white rounded-xl p-4 border border-line"><p class="text-[10px] text-ink/40">Metric 1</p><b class="block mt-2 text-ink">$84.2k</b></div><div class="bg-white rounded-xl p-4 border border-line"><p class="text-[10px] text-ink/40">Metric 2</p><b class="block mt-2 text-ink">28.4%</b></div><div class="bg-white rounded-xl p-4 border border-line"><p class="text-[10px] text-ink/40">Metric 3</p><b class="block mt-2 text-ink">1,248</b></div></div>
+                <div class="mt-4 bg-white rounded-xl border border-line p-4 h-52"><div class="flex items-end gap-2 h-full"><div class="flex-1 rounded-t-md bg-lavender/40" style="height:32px"></div><div class="flex-1 rounded-t-md bg-lavender/40" style="height:46px"></div><div class="flex-1 rounded-t-md bg-lavender/40" style="height:40px"></div><div class="flex-1 rounded-t-md bg-lavender/40" style="height:62px"></div><div class="flex-1 rounded-t-md bg-lavender/40" style="height:55px"></div><div class="flex-1 rounded-t-md bg-lavender/40" style="height:74px"></div><div class="flex-1 rounded-t-md bg-lavender/40" style="height:67px"></div><div class="flex-1 rounded-t-md bg-lavender/40" style="height:90px"></div><div class="flex-1 rounded-t-md bg-lavender/40" style="height:82px"></div><div class="flex-1 rounded-t-md bg-mint" style="height:97px"></div><div class="flex-1 rounded-t-md bg-mint" style="height:88px"></div><div class="flex-1 rounded-t-md bg-mint" style="height:105px"></div></div></div>
+                <div class="mt-4 grid grid-cols-[1.3fr_.7fr] gap-4"><div class="h-24 rounded-xl bg-white border border-line"></div><div class="h-24 rounded-xl bg-ink"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="absolute bottom-24 left-0 w-[55%] rounded-[24px] bg-mint p-5 shadow-card -rotate-3">
+          <div class="font-mono text-xs mb-8">DAILY PROGRESS / 04</div>
+          <div class="space-y-3"><div class="bg-white/65 rounded-xl px-4 py-3 flex justify-between text-sm"><span>Research synthesis</span><span>✓</span></div><div class="bg-white/65 rounded-xl px-4 py-3 flex justify-between text-sm"><span>UX flow</span><span>✓</span></div><div class="bg-white/65 rounded-xl px-4 py-3 flex justify-between text-sm"><span>UI exploration</span><span>✓</span></div><div class="bg-white/65 rounded-xl px-4 py-3 flex justify-between text-sm"><span>Prototype handoff</span><span>→</span></div></div>
+        </div>
+        <div class="absolute bottom-10 right-8 h-44 w-44 rounded-full bg-sun grid place-items-center text-ink font-semibold text-center rotate-12"><span>Design.<br>Ship.<br>Scale.</span></div>
+      </div>
+    </div>
+    <div class="border-t border-white/10 marquee py-5 text-white/55 font-mono text-sm uppercase tracking-[.25em]"><div class="marquee-track"><span class="mx-10">Finance</span><span class="mx-10">CRM</span><span class="mx-10">E-commerce</span><span class="mx-10">Healthcare</span><span class="mx-10">HR Tech</span><span class="mx-10">AI Products</span><span class="mx-10">Finance</span><span class="mx-10">CRM</span><span class="mx-10">E-commerce</span><span class="mx-10">Healthcare</span><span class="mx-10">HR Tech</span><span class="mx-10">AI Products</span></div></div>
+  </section>
+
+  <section class="py-24 md:py-36 bg-white">
+    <div class="mx-auto max-w-[1240px] px-5 md:px-10 grid lg:grid-cols-[.8fr_1.2fr] gap-14 items-start reveal">
+      <p class="font-mono text-xs uppercase tracking-[.22em] text-ink/45">Assisting forward-thinking businesses</p>
+      <div><p class="text-[clamp(2.4rem,5vw,5rem)] leading-[1.06] tracking-[-.045em] font-medium">Daily, research-driven <span class="text-lavender">UI/UX.</span> Unlimited revisions. We handle the design while you <span class="italic">scale your SaaS.</span></p><div class="mt-12 h-px bg-line"></div></div>
+    </div>
+  </section>
+
+  <section id="services" class="py-24 md:py-36 bg-cloud">
+    <div class="mx-auto max-w-[1240px] px-5 md:px-10">
+      <div class="flex flex-col md:flex-row justify-between md:items-end gap-8 mb-16 reveal"><div><p class="font-mono text-xs uppercase tracking-[.22em] text-ink/45 mb-5">What we do</p><h2 class="text-[clamp(2.8rem,6vw,6rem)] leading-[.95] tracking-[-.055em] font-semibold">Product design<br><span class="text-lavender">services.</span></h2></div><a href="#contact" class="inline-flex items-center justify-center h-14 px-7 rounded-full bg-ink text-white hover:bg-lavender transition">Let's talk ↗</a></div>
+      <div class="grid md:grid-cols-3 border-y border-line reveal">
+        <article class="py-10 md:px-8 md:first:pl-0 border-b md:border-b-0 md:border-r border-line"><span class="font-mono text-sm text-lavender">01.</span><div class="mt-14 h-40 rounded-2xl bg-ink p-5 overflow-hidden"><div class="h-full rounded-xl border border-white/20 p-4 grid grid-cols-2 gap-3"><div class="bg-mint rounded-xl"></div><div class="space-y-3"><div class="h-5 bg-white/20 rounded"></div><div class="h-12 bg-white rounded"></div><div class="h-8 bg-sun rounded-full"></div></div></div></div><h3 class="mt-8 text-2xl font-semibold">Designing for MVP</h3><p class="mt-4 text-ink/60 leading-7">Turn an early idea into a validated, launch-ready product with scalable flows and investor-ready visuals.</p></article>
+        <article class="py-10 md:px-8 border-b md:border-b-0 md:border-r border-line"><span class="font-mono text-sm text-lavender">02.</span><div class="mt-14 h-40 rounded-2xl bg-mint p-5"><div class="grid grid-cols-2 h-full gap-3"><div class="rounded-xl bg-white/50 border border-white"></div><div class="rounded-xl bg-ink grid place-items-center"><div class="w-14 h-14 rounded-full bg-sun"></div></div></div></div><h3 class="mt-8 text-2xl font-semibold">Total Revamp</h3><p class="mt-4 text-ink/60 leading-7">Refresh outdated UX and visual language to improve clarity, adoption, conversion, and product confidence.</p></article>
+        <article class="py-10 md:px-8 md:last:pr-0"><span class="font-mono text-sm text-lavender">03.</span><div class="mt-14 h-40 rounded-2xl bg-lavender p-5"><div class="h-full rounded-xl bg-white p-4"><div class="flex gap-2 mb-4"><i class="w-8 h-8 rounded-full bg-ink"></i><i class="w-8 h-8 rounded-full bg-mint"></i><i class="w-8 h-8 rounded-full bg-sun"></i></div><div class="space-y-3"><div class="h-3 rounded bg-line"></div><div class="h-3 w-2/3 rounded bg-line"></div><div class="h-9 rounded-full bg-ink"></div></div></div></div><h3 class="mt-8 text-2xl font-semibold">Ongoing Design Support</h3><p class="mt-4 text-ink/60 leading-7">A dedicated design partner embedded in your workflow, without the hiring delay or long-term lock-in.</p></article>
+      </div>
+      <p class="mt-10 text-ink/50 reveal">Additional capabilities: <span class="text-ink underline underline-offset-4">Web development</span>, <span class="text-ink underline underline-offset-4">Brand identity</span>, and <span class="text-ink underline underline-offset-4">Custom illustrations</span>.</p>
+    </div>
+  </section>
+
+  <section id="work" class="py-24 md:py-36 bg-ink text-white overflow-hidden">
+    <div class="mx-auto max-w-[1240px] px-5 md:px-10">
+      <div class="max-w-3xl reveal"><p class="font-mono text-xs uppercase tracking-[.22em] text-white/45 mb-5">Selected work</p><h2 class="text-[clamp(3rem,7vw,7rem)] leading-[.92] tracking-[-.055em] font-semibold">Products people <span class="outline-text">love.</span></h2></div>
+      <div class="mt-20 space-y-10">
+        <article class="project-card grid lg:grid-cols-[.75fr_1.25fr] gap-8 items-center reveal"><div><span class="font-mono text-xs text-mint">FINTECH · 2026</span><h3 class="mt-4 text-4xl font-semibold">Atlas Finance</h3><p class="mt-5 text-white/60 leading-7 max-w-md">A unified finance workspace redesigned to make reporting, forecasting, and team decisions feel effortless.</p><a href="#" class="inline-block mt-8 border-b border-white pb-1">View case study ↗</a></div><div class="rounded-2xl overflow-hidden border border-white/20 bg-[#d4eeeb] p-7"><div class="mock aspect-[1.5] rounded-xl bg-white shadow-card p-4 text-ink"><div class="h-full grid grid-cols-[18%_82%]"><div class="bg-ink rounded-l-lg p-4"><div class="w-9 h-9 rounded-lg bg-sun"></div></div><div class="bg-cloud rounded-r-lg p-5"><div class="grid grid-cols-3 gap-4"><div class="h-20 bg-white rounded-xl border border-line"></div><div class="h-20 bg-white rounded-xl border border-line"></div><div class="h-20 bg-mint rounded-xl"></div></div><div class="mt-4 grid grid-cols-[1.4fr_.6fr] gap-4 h-[65%]"><div class="bg-white rounded-xl border border-line flex items-end p-5 gap-3"><i class="flex-1 bg-lavender/50 rounded-t" style="height:40px"></i><i class="flex-1 bg-lavender/50 rounded-t" style="height:70px"></i><i class="flex-1 bg-lavender/50 rounded-t" style="height:50px"></i><i class="flex-1 bg-lavender/50 rounded-t" style="height:90px"></i><i class="flex-1 bg-lavender/50 rounded-t" style="height:80px"></i><i class="flex-1 bg-lavender/50 rounded-t" style="height:120px"></i><i class="flex-1 bg-lavender/50 rounded-t" style="height:105px"></i></div><div class="bg-ink rounded-xl"></div></div></div></div></div></div></article>
+        <article class="project-card grid lg:grid-cols-[1.25fr_.75fr] gap-8 items-center reveal"><div class="lg:order-2"><span class="font-mono text-xs text-sun">HEALTHCARE · 2026</span><h3 class="mt-4 text-4xl font-semibold">Nova Health</h3><p class="mt-5 text-white/60 leading-7 max-w-md">A calm clinical workspace that helps care teams organize cases, collaborate securely, and act faster.</p><a href="#" class="inline-block mt-8 border-b border-white pb-1">View case study ↗</a></div><div class="rounded-2xl overflow-hidden border border-white/20 bg-[#fdf1bf] p-7"><div class="mock aspect-[1.5] rounded-xl bg-white shadow-card p-5 text-ink"><div class="flex justify-between"><div class="w-28 h-6 bg-ink rounded"></div><div class="w-24 h-9 bg-mint rounded-full"></div></div><div class="mt-6 grid grid-cols-3 gap-3"><div class="col-span-2 h-56 bg-cloud rounded-xl p-5"><div class="grid grid-cols-2 gap-3 h-full"><div class="bg-white rounded-xl"></div><div class="bg-lavender/30 rounded-xl"></div></div></div><div class="h-56 bg-ink rounded-xl p-4"><div class="w-12 h-12 rounded-full bg-sun"></div></div></div></div></div></article>
+        <article class="project-card grid lg:grid-cols-[.75fr_1.25fr] gap-8 items-center reveal"><div><span class="font-mono text-xs text-lavender">CRM · 2025</span><h3 class="mt-4 text-4xl font-semibold">Orbit CRM</h3><p class="mt-5 text-white/60 leading-7 max-w-md">A sales command center designed around focus, next actions, and a dramatically cleaner pipeline workflow.</p><a href="#" class="inline-block mt-8 border-b border-white pb-1">View case study ↗</a></div><div class="rounded-2xl overflow-hidden border border-white/20 bg-[#d3d0e7] p-7"><div class="mock aspect-[1.5] rounded-xl bg-white shadow-card p-5 text-ink"><div class="grid grid-cols-4 gap-3 h-full"><div class="bg-cloud rounded-xl p-3"><b class="text-xs">Lead</b><div class="mt-3 bg-white border border-line rounded-lg p-3"><div class="h-3 bg-ink/20 rounded"></div><div class="mt-5 flex justify-between"><i class="w-6 h-6 rounded-full bg-lavender/60"></i><i class="w-10 h-3 rounded bg-line"></i></div></div><div class="mt-3 bg-white border border-line rounded-lg p-3"><div class="h-3 bg-ink/10 rounded"></div><div class="mt-5 flex justify-between"><i class="w-6 h-6 rounded-full bg-lavender/60"></i><i class="w-10 h-3 rounded bg-line"></i></div></div><div class="mt-3 bg-white border border-line rounded-lg p-3"><div class="h-3 bg-ink/10 rounded"></div><div class="mt-5 flex justify-between"><i class="w-6 h-6 rounded-full bg-lavender/60"></i><i class="w-10 h-3 rounded bg-line"></i></div></div></div><div class="bg-cloud rounded-xl p-3"><b class="text-xs">Qualified</b><div class="mt-3 bg-white border border-line rounded-lg p-3"><div class="h-3 bg-ink/20 rounded"></div><div class="mt-5 flex justify-between"><i class="w-6 h-6 rounded-full bg-lavender/60"></i><i class="w-10 h-3 rounded bg-line"></i></div></div><div class="mt-3 bg-white border border-line rounded-lg p-3"><div class="h-3 bg-ink/10 rounded"></div><div class="mt-5 flex justify-between"><i class="w-6 h-6 rounded-full bg-lavender/60"></i><i class="w-10 h-3 rounded bg-line"></i></div></div></div><div class="bg-cloud rounded-xl p-3"><b class="text-xs">Proposal</b><div class="mt-3 bg-white border border-line rounded-lg p-3"><div class="h-3 bg-ink/20 rounded"></div><div class="mt-5 flex justify-between"><i class="w-6 h-6 rounded-full bg-lavender/60"></i><i class="w-10 h-3 rounded bg-line"></i></div></div><div class="mt-3 bg-white border border-line rounded-lg p-3"><div class="h-3 bg-ink/10 rounded"></div><div class="mt-5 flex justify-between"><i class="w-6 h-6 rounded-full bg-lavender/60"></i><i class="w-10 h-3 rounded bg-line"></i></div></div><div class="mt-3 bg-white border border-line rounded-lg p-3"><div class="h-3 bg-ink/10 rounded"></div><div class="mt-5 flex justify-between"><i class="w-6 h-6 rounded-full bg-lavender/60"></i><i class="w-10 h-3 rounded bg-line"></i></div></div></div><div class="bg-cloud rounded-xl p-3"><b class="text-xs">Won</b><div class="mt-3 bg-white border border-line rounded-lg p-3"><div class="h-3 bg-ink/20 rounded"></div><div class="mt-5 flex justify-between"><i class="w-6 h-6 rounded-full bg-mint/60"></i><i class="w-10 h-3 rounded bg-line"></i></div></div><div class="mt-3 bg-white border border-line rounded-lg p-3"><div class="h-3 bg-ink/10 rounded"></div><div class="mt-5 flex justify-between"><i class="w-6 h-6 rounded-full bg-mint/60"></i><i class="w-10 h-3 rounded bg-line"></i></div></div></div></div>`).join('')}</div></div></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="expertise" class="py-24 md:py-36 bg-white">
+    <div class="mx-auto max-w-[1240px] px-5 md:px-10">
+      <div class="grid lg:grid-cols-2 gap-16 items-start"><div class="reveal lg:sticky lg:top-28"><p class="font-mono text-xs uppercase tracking-[.22em] text-ink/45">Our expertise</p><h2 class="mt-5 text-[clamp(3rem,6vw,6rem)] leading-[.95] tracking-[-.055em] font-semibold">Facilitating your <span class="text-lavender">innovation.</span></h2><p class="mt-8 text-lg text-ink/60 max-w-lg leading-8">A practical design system, a reliable delivery rhythm, and domain expertise shaped by complex SaaS products.</p></div><div class="divide-y divide-line border-y border-line reveal"><article class="group py-8 grid grid-cols-[60px_1fr] gap-3"><span class="font-mono text-xs text-lavender">01</span><div><h3 class="text-2xl font-semibold group-hover:translate-x-2 transition">Daily turnaround</h3><p class="mt-3 text-ink/55 leading-7">Get visible daily progress and focused delivery that keeps momentum high.</p></div></article><article class="group py-8 grid grid-cols-[60px_1fr] gap-3"><span class="font-mono text-xs text-lavender">02</span><div><h3 class="text-2xl font-semibold group-hover:translate-x-2 transition">Flat monthly engagement</h3><p class="mt-3 text-ink/55 leading-7">Prioritize unlimited design tasks without renegotiating every small change.</p></div></article><article class="group py-8 grid grid-cols-[60px_1fr] gap-3"><span class="font-mono text-xs text-lavender">03</span><div><h3 class="text-2xl font-semibold group-hover:translate-x-2 transition">Dedicated designer + PM</h3><p class="mt-3 text-ink/55 leading-7">Work with a consistent team that understands both product and business context.</p></div></article><article class="group py-8 grid grid-cols-[60px_1fr] gap-3"><span class="font-mono text-xs text-lavender">04</span><div><h3 class="text-2xl font-semibold group-hover:translate-x-2 transition">Tailored workflow</h3><p class="mt-3 text-ink/55 leading-7">Use Slack, Figma, Linear, Notion, or the tools your team already prefers.</p></div></article><article class="group py-8 grid grid-cols-[60px_1fr] gap-3"><span class="font-mono text-xs text-lavender">05</span><div><h3 class="text-2xl font-semibold group-hover:translate-x-2 transition">Cross-industry SaaS expertise</h3><p class="mt-3 text-ink/55 leading-7">Finance, CRM, HR, healthcare, inventory, operations, learning, and AI.</p></div></article><article class="group py-8 grid grid-cols-[60px_1fr] gap-3"><span class="font-mono text-xs text-lavender">06</span><div><h3 class="text-2xl font-semibold group-hover:translate-x-2 transition">Custom icons & illustrations</h3><p class="mt-3 text-ink/55 leading-7">Receive product-specific visual assets that strengthen clarity and brand recall.</p></div></article></div></div>
+    </div>
+  </section>
+
+  <section class="py-24 md:py-36 bg-mint overflow-hidden">
+    <div class="mx-auto max-w-[1240px] px-5 md:px-10">
+      <div class="reveal"><p class="font-mono text-xs uppercase tracking-[.22em] text-ink/55">Client impact</p><h2 class="mt-5 text-[clamp(3rem,7vw,7rem)] leading-[.93] tracking-[-.055em] font-semibold">We empower clients to scale today while building for the future.</h2></div>
+      <div class="mt-16 grid md:grid-cols-3 gap-px bg-ink/15 border border-ink/15 reveal">
+        <div class="bg-mint p-8 md:p-10"><strong class="text-6xl md:text-8xl tracking-[-.06em]">90+</strong><p class="mt-4 text-ink/60">Happy clients across the globe</p></div>
+        <div class="bg-mint p-8 md:p-10"><strong class="text-6xl md:text-8xl tracking-[-.06em]">$100M+</strong><p class="mt-4 text-ink/60">Funding raised by selected clients</p></div>
+        <div class="bg-mint p-8 md:p-10"><strong class="text-6xl md:text-8xl tracking-[-.06em]">96+</strong><p class="mt-4 text-ink/60">Successful projects completed</p></div>
+      </div>
+      <div class="mt-12 grid lg:grid-cols-3 gap-6 reveal">
+        <blockquote class="rounded-2xl bg-white p-8 shadow-card "><div class="text-sun text-2xl">★★★★★</div><p class="mt-8 text-xl leading-8">“Amazingly talented. Their systematic UI/UX approach consistently creates exceptional results.”</p><footer class="mt-10"><b>Matt Fruge</b><p class="text-sm text-ink/50">CEO, Squaredash</p></footer></blockquote><blockquote class="rounded-2xl bg-white p-8 shadow-card lg:-translate-y-8"><div class="text-sun text-2xl">★★★★★</div><p class="mt-8 text-xl leading-8">“They understood our business quickly and elevated the product far beyond the original requirements.”</p><footer class="mt-10"><b>Tao Lei</b><p class="text-sm text-ink/50">CEO, Marco Payroll</p></footer></blockquote><blockquote class="rounded-2xl bg-white p-8 shadow-card "><div class="text-sun text-2xl">★★★★★</div><p class="mt-8 text-xl leading-8">“Reliable, creative, and highly accommodating. They always delivered on time.”</p><footer class="mt-10"><b>Jason Morjaria</b><p class="text-sm text-ink/50">Founder, Commusoft</p></footer></blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="py-24 md:py-36 bg-cloud">
+    <div class="mx-auto max-w-[1240px] px-5 md:px-10 grid lg:grid-cols-2 gap-16 items-center">
+      <div class="reveal"><p class="font-mono text-xs uppercase tracking-[.22em] text-ink/45">Working remotely</p><h2 class="mt-5 text-[clamp(3rem,6vw,6rem)] leading-[.95] tracking-[-.055em] font-semibold">Small senior team. <span class="text-lavender">Global mindset.</span></h2><p class="mt-8 text-lg leading-8 text-ink/60">We combine senior product thinking, high craft, and lightweight communication to feel like an internal team—without adding organizational drag.</p><a href="#contact" class="mt-10 inline-flex h-14 items-center px-7 rounded-full bg-ink text-white">Meet the studio ↗</a></div>
+      <div class="grid grid-cols-2 gap-4 reveal"><div class="rounded-2xl bg-ink h-72 p-6 text-white flex flex-col justify-between"><span class="font-mono text-xs">001</span><div><div class="w-20 h-20 rounded-full bg-mint mb-5"></div><b class="text-xl">Creative Director</b><p class="text-white/50">Product strategy & art direction</p></div></div><div class="rounded-2xl bg-lavender h-72 p-6 flex flex-col justify-between"><span class="font-mono text-xs">002</span><div><div class="w-20 h-20 rounded-full bg-sun mb-5"></div><b class="text-xl">Product Designer</b><p class="text-ink/60">UX systems & interaction</p></div></div><div class="col-span-2 rounded-2xl bg-white border border-line min-h-52 p-7 flex flex-col md:flex-row gap-8 items-center"><div class="flex -space-x-4"><div class="w-20 h-20 rounded-full border-4 border-white bg-ink"></div><div class="w-20 h-20 rounded-full border-4 border-white bg-mint"></div><div class="w-20 h-20 rounded-full border-4 border-white bg-sun"></div><div class="w-20 h-20 rounded-full border-4 border-white bg-lavender"></div></div><div><b class="text-2xl">A distributed specialist network</b><p class="mt-2 text-ink/55">Project management, motion, development, icons, and brand support when needed.</p></div></div></div>
+    </div>
+  </section>
+
+  <section id="contact" class="bg-ink text-white py-24 md:py-36 relative overflow-hidden grid-lines">
+    <div class="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-lavender blur-[100px] opacity-40"></div>
+    <div class="mx-auto max-w-[1240px] px-5 md:px-10 relative reveal"><p class="font-mono text-xs uppercase tracking-[.22em] text-white/45">Interested in working together?</p><h2 class="mt-7 max-w-5xl text-[clamp(3.5rem,8vw,8rem)] leading-[.9] tracking-[-.06em] font-semibold">Elevate your business with <span class="text-mint">creative solutions.</span></h2><div class="mt-12 flex flex-wrap gap-4"><a href="mailto:hello@northstar.studio" class="rounded-full bg-sun text-ink px-8 py-4 font-semibold hover:-translate-y-1 transition">Start Your Project ↗</a><a href="mailto:hello@northstar.studio" class="rounded-full border border-white/25 px-8 py-4">hello@northstar.studio</a></div></div>
+  </section>
+</main>
+
+<footer class="bg-ink text-white border-t border-white/10 py-12">
+  <div class="mx-auto max-w-[1240px] px-5 md:px-10 grid md:grid-cols-3 gap-8 text-sm text-white/55"><div><div class="text-white font-semibold">Northstar Studio</div><p class="mt-2">SaaS-focused product design studio.</p></div><div class="flex gap-5 md:justify-center"><a href="https://dribbble.com/ffahmi11">Dribbble</a><a href="https://www.linkedin.com/in/ffahmi-id/">LinkedIn</a></div><div class="md:text-right"><p>© 2026 Northstar Studio</p><p class="mt-2">Privacy · Terms</p></div></div>
+</footer>
+
+<script>
+  const menuBtn=document.getElementById('menuBtn');
+  const mobileMenu=document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click',()=>mobileMenu.classList.toggle('hidden'));
+  mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mobileMenu.classList.add('hidden')));
+  const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
