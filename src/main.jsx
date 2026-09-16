@@ -24,6 +24,8 @@ const readPublicMenu=()=>{try{const value=JSON.parse(localStorage.getItem('publi
 const defaultFavicon='/images/favicon.ico';
 const readFavicon=()=>localStorage.getItem('site-favicon')||defaultFavicon;
 const applyFavicon=()=>{let link=document.head.querySelector('link[data-site-favicon]');if(!link){link=document.createElement('link');link.rel='icon';link.dataset.siteFavicon='true';document.head.appendChild(link)}link.href=readFavicon()};
+const defaultLogo='';
+const readLogo=()=>localStorage.getItem('site-logo')||defaultLogo;
 const defaultSocialLinks=[{id:'linkedin',label:'LinkedIn',url:'https://linkedin.com',icon:'Linkedin',enabled:true},{id:'github',label:'GitHub',url:'https://github.com',icon:'Github',enabled:true},{id:'dribbble',label:'Dribbble',url:'https://dribbble.com',icon:'Dribbble',enabled:true},{id:'custom-social',label:'Custom social media',url:'',icon:'ExternalLink',enabled:false,customIcon:''}];
 const socialIcons={Linkedin,Github,Dribbble,Instagram,ExternalLink};
 const readSocialLinks=()=>{try{const value=JSON.parse(localStorage.getItem('social-links'));return Array.isArray(value)?value:defaultSocialLinks}catch{return defaultSocialLinks}};
@@ -35,9 +37,141 @@ const readAdminPassword=()=>{if(localStorage.getItem('admin-password-version')!=
 
 function useSEO({title='Fahmi — Product Designer',description='Fahmi is a product designer creating clear, thoughtful digital experiences.',type='website',image='/images/fahmi.png'}={}){const settings=readSEOSettings();let articleSEO=null;if(type==='article'){try{const articles=JSON.parse(localStorage.getItem('articles'))||[];articleSEO=articles.find(article=>location.pathname.endsWith(article.slug))||null}catch{}}const resolvedTitle=articleSEO?.seoTitle||((title===defaultSEOSettings.title&&settings.title)?settings.title:title);const resolvedDescription=articleSEO?.seoDescription||((description===defaultSEOSettings.description&&settings.description)?settings.description:description);const resolvedImage=articleSEO?.seoImage||((image===defaultSEOSettings.image&&settings.image)?settings.image:image);const resolvedKeywords=articleSEO?.seoKeywords||settings.keywords;const resolvedImageUrl=new URL(resolvedImage,location.origin).href;const resolvedType=type==='article'?'article':'website';useEffect(()=>{document.title=resolvedTitle;applyFavicon(); const setMeta=(attribute,key,value)=>{let e=document.head.querySelector(`meta[${attribute}="${key}"]`);if(!e){e=document.createElement('meta');e.setAttribute(attribute,key);document.head.appendChild(e)}e.setAttribute('content',value)};setMeta('name','description',resolvedDescription);setMeta('name','keywords',resolvedKeywords);setMeta('property','og:title',resolvedTitle);setMeta('property','og:description',resolvedDescription);setMeta('property','og:image',resolvedImageUrl);setMeta('property','og:image:alt',resolvedTitle);setMeta('property','og:type',resolvedType);setMeta('property','og:url',location.href);setMeta('name','twitter:card','summary_large_image');setMeta('name','twitter:title',resolvedTitle);setMeta('name','twitter:description',resolvedDescription);setMeta('name','twitter:image',resolvedImageUrl);let old=document.getElementById('jsonld');if(old)old.remove();let s=document.createElement('script');s.id='jsonld';s.type='application/ld+json';s.textContent=JSON.stringify({"@context":'https://schema.org',"@type":type==='article'?'Article':'Person',name:'Fahmi',url:location.href,description:resolvedDescription,image:resolvedImageUrl});document.head.appendChild(s);return()=>s.remove()},[resolvedTitle,resolvedDescription,resolvedImageUrl,resolvedKeywords,resolvedType,type])}
 function ThemeToggle(){const [light,setLight]=useState(()=>localStorage.getItem('theme')==='light');useEffect(()=>{document.documentElement.classList.toggle('light-mode',light);localStorage.setItem('theme',light?'light':'dark')},[light]);return <button type="button" onClick={()=>setLight(value=>!value)} aria-label={light?'Switch to dark mode':'Switch to light mode'} title={light?'Switch to dark mode':'Switch to light mode'} className="theme-toggle grid h-10 w-10 place-items-center rounded-full border border-white/10 text-slate-300 hover:border-accent hover:text-white">{light?<Moon size={17}/>:<Sun size={17}/>}</button>}
-function Shell({children,admin=false}){const [open,setOpen]=useState(false);const publicMenu=readPublicMenu().filter(item=>item.enabled);return <div className="min-h-screen bg-ink text-slate-100"><header className="sticky top-0 z-40 border-b border-white/10 bg-ink/85 backdrop-blur-xl"><div className="container flex h-20 items-center justify-between"><Link to="/" className="flex items-center gap-3 font-semibold tracking-tight"><span className="grid h-10 w-10 place-items-center rounded-2xl bg-gradient-to-br from-accent to-cyan text-lg text-ink">F</span><span>Fahmi<span className="text-accent">.</span></span></Link>{admin?<AdminNav/>:<><nav className="hidden items-center gap-8 text-sm text-slate-400 md:flex">{publicMenu.map(item=><Link className="public-nav-link transition hover:text-white" to={item.path} key={item.id}>{item.label}</Link>)}</nav><div className="flex items-center gap-3"><ThemeToggle/><Link to="/contact" className="hidden rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-ink transition hover:bg-cyan md:inline-flex">Let's work together <ArrowUpRight size={16}/></Link><button className="md:hidden" onClick={()=>setOpen(!open)}>{open?<X/>:<Menu/>}</button></div></>}</div>{open&&<nav className="container flex flex-col gap-4 border-t border-white/10 py-5 md:hidden">{publicMenu.map(item=><Link className="public-nav-link" onClick={()=>setOpen(false)} to={item.path} key={item.id}>{item.label}</Link>)}<ThemeToggle/></nav>}</header><main>{children}</main>{!admin&&<Footer/>}</div>}
-function Footer(){const links=readSocialLinks().filter(link=>link.enabled&&link.url);return <footer className="border-t border-white/10"><div className="container flex flex-col gap-8 py-12 md:flex-row md:items-end md:justify-between"><div><p className="text-2xl font-semibold">Have a good project in mind?</p><Link to="/contact" className="mt-3 inline-flex items-center gap-2 text-accent">Let's talk <ArrowRight size={17}/></Link></div><div className="text-sm text-slate-500 md:text-right"><p>© {new Date().getFullYear()} Fahmi. Designed with intent.</p><div className="mt-3 flex gap-4 md:justify-end">{links.map(link=>{const Icon=socialIcons[link.icon]||ExternalLink;return <a key={link.id} href={link.url} target="_blank" rel="noreferrer" aria-label={link.label} className="hover:text-accent">{link.customIcon?<img src={link.customIcon} alt="" className="h-[17px] w-[17px] object-contain"/>:<Icon size={17}/>}</a>})}</div></div></div></footer>}
-function Button({children,to,variant='primary',...p}){let c=variant==='primary'?'bg-white text-ink hover:bg-cyan':'border border-white/15 text-white hover:border-accent hover:text-accent';return to?<Link className={`inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition ${c}`} to={to}>{children}</Link>:<button className={`inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition ${c}`} {...p}>{children}</button>}
+function BrandMark({compact=false}){const logo=readLogo();return logo?<img src={logo} alt="Fahmi" className={compact?'h-9 w-9 rounded-xl object-contain':'h-10 w-10 rounded-2xl object-contain'}/>:<span className={compact?'grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-accent to-cyan text-ink':'grid h-10 w-10 place-items-center rounded-2xl bg-gradient-to-br from-accent to-cyan text-lg text-ink'}>F</span>}
+function Shell({ children, admin = false }) {
+  const [open, setOpen] = useState(false);
+  const publicMenu = readPublicMenu().filter((item) => item.enabled);
+  return (
+    <div className="min-h-screen bg-ink text-slate-100">
+      <header className="sticky top-0 z-40 border-b border-white/10 bg-ink/85 backdrop-blur-xl">
+        <div className="container flex h-20 items-center justify-between">
+          <Link
+            to="/"
+            className="flex items-center gap-3 font-semibold tracking-tight"
+          >
+            <BrandMark />
+            <span>
+              Fahmi<span className="text-accent">.</span>
+            </span>
+          </Link>
+          {admin ? (
+            <AdminNav />
+          ) : (
+            <>
+              <nav className="hidden items-center gap-8 text-sm text-slate-400 md:flex">
+                {publicMenu.map((item) => (
+                  <Link
+                    className="public-nav-link transition hover:text-white"
+                    to={item.path}
+                    key={item.id}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </nav>
+              <div className="flex items-center gap-3">
+                <ThemeToggle />
+                <Link
+                  to="/contact"
+                  className="hidden rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-ink transition hover:bg-cyan md:inline-flex"
+                >
+                  Let's work together <ArrowUpRight size={16} />
+                </Link>
+                <button className="md:hidden" onClick={() => setOpen(!open)}>
+                  {open ? <X /> : <Menu />}
+                </button>
+              </div>
+            </>
+          )}
+        </div>
+        {open && (
+          <nav className="container flex flex-col gap-4 border-t border-white/10 py-5 md:hidden">
+            {publicMenu.map((item) => (
+              <Link
+                className="public-nav-link"
+                onClick={() => setOpen(false)}
+                to={item.path}
+                key={item.id}
+              >
+                {item.label}
+              </Link>
+            ))}
+            <ThemeToggle />
+          </nav>
+        )}
+      </header>
+      <main>{children}</main>
+      {!admin && <Footer />}
+    </div>
+  );
+}
+function Footer() {
+  const links = readSocialLinks().filter((link) => link.enabled && link.url);
+  return (
+    <footer className="border-t border-white/10">
+      <div className="container flex flex-col gap-8 py-12 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p className="text-2xl font-semibold">Have a good project in mind?</p>
+          <Link
+            to="/contact"
+            className="mt-3 inline-flex items-center gap-2 text-accent"
+          >
+            Let's talk <ArrowRight size={17} />
+          </Link>
+        </div>
+        <div className="text-sm text-slate-500 md:text-right">
+          <p>© {new Date().getFullYear()} Fahmi. Designed with intent.</p>
+          <div className="mt-3 flex gap-4 md:justify-end">
+            {links.map((link) => {
+              const Icon = socialIcons[link.icon] || ExternalLink;
+              return (
+                <a
+                  key={link.id}
+                  href={link.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={link.label}
+                  className="hover:text-accent"
+                >
+                  {link.customIcon ? (
+                    <img
+                      src={link.customIcon}
+                      alt=""
+                      className="h-[17px] w-[17px] object-contain"
+                    />
+                  ) : (
+                    <Icon size={17} />
+                  )}
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+function Button({ children, to, variant = "primary", ...p }) {
+  let c =
+    variant === "primary"
+      ? "bg-white text-ink hover:bg-cyan"
+      : "border border-white/15 text-white hover:border-accent hover:text-accent";
+  return to ? (
+    <Link
+      className={`inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition ${c}`}
+      to={to}
+    >
+      {children}
+    </Link>
+  ) : (
+    <button
+      className={`inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition ${c}`}
+      {...p}
+    >
+      {children}
+    </button>
+  );
+}
 function Home(){useSEO({title:'Fahmi — Product Designer'});return <Shell><section className="relative overflow-hidden"><div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(139,124,255,.2),transparent_34%),radial-gradient(circle_at_20%_80%,rgba(77,216,210,.1),transparent_30%)]"/><div className="container relative grid min-h-[680px] items-center gap-14 py-24 lg:grid-cols-[1.1fr_.9fr]"><div><p className="mb-7 flex items-center gap-2 text-sm uppercase tracking-[.22em] text-cyan"><span className="h-2 w-2 rounded-full bg-cyan"/> Available for select projects</p><h1 className="max-w-3xl text-5xl font-semibold leading-[1.03] tracking-[-.05em] sm:text-7xl">I design digital products that <span className="text-accent">move people forward.</span></h1><p className="mt-8 max-w-xl text-lg leading-8 text-slate-400">I'm Fahmi, a product designer focused on turning complex problems into clear, useful, and memorable experiences.</p><div className="mt-10 flex flex-wrap gap-3"><Button to="/projects">View my work <ArrowUpRight size={17}/></Button><Button to="/contact" variant="secondary">Let's talk <ArrowRight size={17}/></Button></div><div className="mt-14 flex gap-8 text-sm text-slate-500"><span><strong className="block text-2xl text-white">8+</strong> years designing</span><span><strong className="block text-2xl text-white">40</strong> products shipped</span><span><strong className="block text-2xl text-white">12</strong> happy teams</span></div></div><div className="relative mx-auto w-full max-w-md"><div className="absolute -inset-8 rounded-full bg-accent/10 blur-3xl"/><div className="relative overflow-hidden rounded-[2rem] border border-white/15 bg-white/5 p-3 shadow-glow"><img src={img('fahmi.png')} alt="Fahmi" className="aspect-[4/5] w-full rounded-[1.5rem] object-cover"/><div className="absolute bottom-8 left-8 right-8 rounded-2xl border border-white/15 bg-ink/80 p-4 backdrop-blur"><p className="text-sm text-slate-400">Currently designing at</p><p className="mt-1 font-medium">The intersection of people & technology</p></div></div></div></div></section><section className="border-y border-white/10 bg-white/[.03]"><div className="container grid gap-8 py-16 md:grid-cols-[1fr_1.4fr] md:items-center"><p className="text-sm uppercase tracking-[.2em] text-slate-500">A little about me</p><div><p className="text-2xl leading-relaxed text-slate-200 md:text-3xl">I partner with ambitious teams to make products simpler, more useful, and a joy to use.</p><Link className="mt-6 inline-flex items-center gap-2 text-accent" to="/about">More about me <ArrowRight size={17}/></Link></div></div></section><section className="container py-24"><div className="flex items-end justify-between"><div><p className="eyebrow">Selected work</p><h2 className="section-title">A few things I've made</h2></div><Link className="hidden items-center gap-2 text-sm text-accent sm:flex" to="/projects">View all projects <ArrowRight size={16}/></Link></div><div className="mt-10 grid gap-6 md:grid-cols-2">{seedProjects.slice(0,4).map(p=><ProjectCard key={p.id} project={p}/>)}</div></section><section className="container pb-28"><div className="rounded-[2rem] border border-white/10 bg-gradient-to-br from-accent/20 to-cyan/10 p-8 md:p-14"><p className="eyebrow">Let's create</p><h2 className="mt-4 max-w-2xl text-4xl font-semibold tracking-tight md:text-6xl">Good work starts with a good conversation.</h2><Button to="/contact" className="mt-8">Start a conversation <ArrowUpRight size={17}/></Button></div></section></Shell>}
 function ProjectCard({project}){return <Link to={`/projects/${project.slug}`} className="group block"><div className="overflow-hidden rounded-3xl border border-white/10 bg-white/[.04]"><div className="aspect-[16/10] overflow-hidden bg-slate-800"><img loading="lazy" src={project.cover} alt={project.title} className="h-full w-full object-cover transition duration-700 group-hover:scale-105"/></div><div className="p-5"><div className="flex items-center justify-between text-xs uppercase tracking-wider text-slate-500"><span>{project.category}</span><span>{project.year}</span></div><h3 className="mt-3 text-xl font-medium">{project.title}</h3><p className="mt-2 text-sm leading-6 text-slate-400">{project.description}</p><span className="mt-5 inline-flex items-center gap-2 text-sm text-accent">View case study <ArrowUpRight size={15}/></span></div></div></Link>}
 function About(){useSEO({title:'About — Fahmi'});return <Shell><PageIntro eyebrow="About me" title="Designing with clarity, curiosity, and care." text="I'm a product designer based in Johor, Indonesia. I work across strategy, UX, and visual design to help teams build things that matter."/><section className="container grid gap-14 pb-24 lg:grid-cols-[.8fr_1.2fr]"><img src={img('fahmi.png')} alt="Fahmi at work" className="aspect-[4/5] max-h-[560px] w-full rounded-3xl object-cover"/><div className="space-y-8 text-lg leading-8 text-slate-400"><p>I've spent the last eight years helping startups and established companies turn fuzzy ideas into confident product decisions. My favorite part is the messy middle: asking better questions, finding the signal, and making it tangible.</p><p>When I'm not pushing pixels, you'll find me reading about cities, sketching in cafés, or helping young designers find their voice.</p><div className="grid grid-cols-2 gap-4 pt-5"><Stat n="8+" l="Years experience"/><Stat n="40" l="Products shipped"/><Stat n="12" l="Countries worked with"/><Stat n="∞" l="Curiosity"/></div></div></section><section className="border-y border-white/10 bg-white/[.03]"><div className="container py-20"><p className="eyebrow">What I bring</p><div className="mt-8 grid gap-5 md:grid-cols-3">{[['01','Product thinking','Connecting user needs to business outcomes.'],['02','Systems mindset','Building foundations that help teams move faster.'],['03','Careful craft','Sweating the details that make an experience feel right.']].map(x=><div className="rounded-2xl border border-white/10 p-6" key={x[0]}><span className="text-accent">{x[0]}</span><h3 className="mt-7 text-xl">{x[1]}</h3><p className="mt-3 text-sm leading-6 text-slate-400">{x[2]}</p></div>)}</div></div></section></Shell>}
@@ -54,13 +188,399 @@ function NotFound(){return <Shell><div className="container py-40 text-center"><
 function AdminNav(){const [open,setOpen]=useState(false);const nav=useNavigate();const logout=()=>{localStorage.removeItem('admin-auth');nav('/admin/login')};return <nav className="hidden items-center gap-5 text-sm text-slate-400 md:flex"><Link to="/admin">Dashboard</Link><Link to="/admin/articles">Articles</Link><Link to="/admin/projects">Projects</Link><Link to="/admin/categories">Categories</Link><Link to="/admin/media">Media</Link><div className="relative"><button onClick={()=>setOpen(!open)} className="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-2 hover:border-white/30 hover:text-white"><span className="grid h-6 w-6 place-items-center rounded-full bg-accent/20 text-accent"><User size={14}/></span><span>Account</span><ChevronDown size={14}/></button>{open&&<div className="absolute right-0 top-12 z-50 w-52 rounded-2xl border border-white/10 bg-[#111936] p-2 shadow-2xl"><Link to="/admin/settings" className="flex items-center gap-3 rounded-xl px-3 py-2.5 hover:bg-white/10 hover:text-white"><Settings size={16}/> Settings</Link><Link to="/admin/appearance" className="flex items-center gap-3 rounded-xl px-3 py-2.5 hover:bg-white/10 hover:text-white"><Palette size={16}/> Appearance</Link><button type="button" onClick={logout} className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-red-300 hover:bg-white/10 hover:text-red-200"><LogOut size={16}/> Logout</button></div>}</div><Link to="/" className="text-accent">View site ↗</Link></nav>}
 function AdminLayout({children}){const nav=useNavigate();const logout=()=>{localStorage.removeItem('admin-auth');nav('/admin/login')};return <Shell admin><div className="container flex items-center justify-end gap-4 border-b border-white/10 py-3 text-sm"><span className="text-slate-500">Local CMS preview</span><button onClick={logout} className="inline-flex items-center gap-1 text-slate-300 hover:text-white"><LogOut size={15}/> Logout</button></div><div className="container py-12">{children}</div></Shell>}
 function RequireAuth({children}){return localStorage.getItem('admin-auth')?<>{children}</>:<Navigate to="/admin/login" replace/>}
-function AdminLogin(){const nav=useNavigate();const [email,setEmail]=useState('');const [password,setPassword]=useState('');const [showPassword,setShowPassword]=useState(false);const [error,setError]=useState('');const submit=e=>{e.preventDefault();setError('');if(email.trim().toLowerCase()!==ADMIN_EMAIL||password!==readAdminPassword()){setError('Incorrect email or password.');return}localStorage.setItem('admin-auth','1');localStorage.setItem('admin-email',ADMIN_EMAIL);nav('/admin')};return <div className="relative grid min-h-screen overflow-hidden bg-ink px-5 py-10 text-white md:grid-cols-2 md:px-10 lg:px-20"><div className="pointer-events-none absolute -left-32 -top-32 h-96 w-96 rounded-full bg-accent/20 blur-3xl"/><div className="pointer-events-none absolute -bottom-40 -right-20 h-96 w-96 rounded-full bg-cyan/10 blur-3xl"/><div className="relative hidden flex-col justify-between py-6 md:flex"><div><Link to="/" className="flex items-center gap-3 font-semibold tracking-tight"><span className="grid h-10 w-10 place-items-center rounded-2xl bg-gradient-to-br from-accent to-cyan text-lg text-ink">F</span><span>Fahmi<span className="text-accent">.</span></span></Link><div className="mt-24 max-w-lg"><p className="eyebrow">Content studio</p><h1 className="mt-5 text-5xl font-semibold leading-tight tracking-[-.05em] lg:text-7xl">Build a portfolio that keeps moving.</h1><p className="mt-7 max-w-md text-lg leading-8 text-slate-400">Manage projects, publish articles, and keep your story fresh from one focused workspace.</p></div></div><p className="text-sm text-slate-500">© {new Date().getFullYear()} Fahmi Design</p></div><div className="relative flex items-center justify-center"><form onSubmit={submit} className="w-full max-w-md rounded-[2rem] border border-white/10 bg-white/[.05] p-7 shadow-2xl backdrop-blur-xl sm:p-10"><div className="mb-8 flex items-center justify-between md:hidden"><Link to="/" className="flex items-center gap-3 font-semibold"><span className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-accent to-cyan text-ink">F</span> Fahmi<span className="text-accent">.</span></Link><span className="text-xs text-slate-500">CMS</span></div><div className="mb-8"><div className="mb-5 grid h-12 w-12 place-items-center rounded-2xl bg-accent/15 text-accent"><LockKeyhole size={22}/></div><h2 className="text-3xl font-semibold tracking-tight">Welcome back</h2><p className="mt-2 text-slate-400">Sign in to your content studio.</p></div><div className="space-y-5"><div><label htmlFor="admin-email" className="mb-2 block">Email address</label><input id="admin-email" name="email" type="email" autoComplete="email" value={email} onChange={e=>setEmail(e.target.value)} className="field" placeholder="you@example.com"/></div><div><div className="mb-2 flex items-center justify-between"><label htmlFor="admin-password">Password</label><button type="button" className="text-xs text-accent hover:text-cyan" onClick={()=>setError('Password reset is available after Supabase is connected.')}>Forgot password?</button></div><div className="relative"><input id="admin-password" name="password" type={showPassword?'text':'password'} autoComplete="current-password" value={password} onChange={e=>setPassword(e.target.value)} className="field pr-12" placeholder="Enter your password"/><button type="button" aria-label={showPassword?'Hide password':'Show password'} onClick={()=>setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white">{showPassword?<EyeOff size={18}/>:<Eye size={18}/>}</button></div></div>{error&&<p role="alert" className="rounded-xl border border-red-300/20 bg-red-300/10 px-3 py-2 text-sm text-red-200">{error}</p>}<button type="submit" className="flex w-full items-center justify-center gap-2 rounded-full bg-white py-3.5 font-semibold text-ink hover:bg-cyan"><span>Sign in to CMS</span><ArrowRight size={17}/></button></div><div className="mt-7 flex items-start gap-3 border-t border-white/10 pt-6 text-xs leading-5 text-slate-500"><ShieldCheck size={17} className="mt-0.5 shrink-0 text-cyan"/><span>Your session is protected. Authentication is stored only in this browser preview.</span></div><p className="mt-5 text-center text-xs text-slate-600">Supabase-ready authentication layer</p></form></div></div>}
-const getStore=(key,seed)=>{try{const v=JSON.parse(localStorage.getItem(key));return v||seed}catch{return seed}};
-function Admin(){return <AdminLayout><AdminHeader title="Good morning, Fahmi." text="Here's what's happening across your portfolio."/><div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{[['Projects',seedProjects.length],['Articles',seedArticles.length],['Published',seedArticles.length],['Views','12.8k']].map(x=><Stat key={x[0]} n={x[1]} l={x[0]}/>)}</div><div className="mt-10 grid gap-6 lg:grid-cols-2"><div className="rounded-2xl border border-white/10 p-6"><p className="eyebrow">Quick actions</p><div className="mt-5 flex flex-wrap gap-3"><Button to="/admin/articles">Manage articles</Button><Button to="/admin/projects" variant="secondary">Manage projects</Button><Button to="/admin/settings" variant="secondary">Account settings</Button></div></div><div className="rounded-2xl border border-white/10 p-6"><p className="eyebrow">Service status</p><p className="mt-4 flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-cyan"/> Local mock data active</p><p className="mt-2 text-sm text-slate-500">Connect Supabase by setting VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.</p></div></div></AdminLayout>}
-function AdminSettings(){const [current,setCurrent]=useState('');const [next,setNext]=useState('');const [confirm,setConfirm]=useState('');const [seo,setSeo]=useState(readSEOSettings);const [message,setMessage]=useState('');const [error,setError]=useState('');const savePassword=e=>{e.preventDefault();setError('');if(current!==localStorage.getItem('admin-password')){setError('Current password is incorrect.');return}if(next.length<6){setError('New password must be at least 6 characters.');return}if(next!==confirm){setError('New passwords do not match.');return}localStorage.setItem('admin-password',next);setCurrent('');setNext('');setConfirm('');setMessage('Password updated successfully.')};const saveSEO=e=>{e.preventDefault();localStorage.setItem('site-seo',JSON.stringify(seo));setMessage('Default SEO settings saved.')};const updateSEO=(key,value)=>setSeo(current=>({...current,[key]:value}));return <AdminLayout><AdminHeader title="Account settings" text="Manage your account and default website SEO."/><div className="mt-10 grid max-w-5xl gap-6 lg:grid-cols-2"><div className="rounded-3xl border border-white/10 bg-white/[.03] p-6 sm:p-8"><div className="flex items-start gap-4 border-b border-white/10 pb-6"><div className="grid h-11 w-11 place-items-center rounded-2xl bg-accent/15 text-accent"><LockKeyhole size={20}/></div><div><h2 className="text-xl font-medium">Change password</h2><p className="mt-1 text-sm leading-6 text-slate-400">Update the password used for this local CMS preview.</p></div></div><form onSubmit={savePassword} className="mt-7 space-y-5"><div><label htmlFor="current-password" className="mb-2 block">Current password</label><input id="current-password" type="password" required className="field" value={current} onChange={e=>setCurrent(e.target.value)}/></div><div><label htmlFor="new-password" className="mb-2 block">New password</label><input id="new-password" type="password" minLength="6" required className="field" value={next} onChange={e=>setNext(e.target.value)}/></div><div><label htmlFor="confirm-password" className="mb-2 block">Confirm new password</label><input id="confirm-password" type="password" minLength="6" required className="field" value={confirm} onChange={e=>setConfirm(e.target.value)}/></div>{error&&<p role="alert" className="text-sm text-red-200">{error}</p>}<button className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-ink hover:bg-cyan">Update password</button></form></div><div className="rounded-3xl border border-white/10 bg-white/[.03] p-6 sm:p-8"><div className="flex items-start gap-4 border-b border-white/10 pb-6"><div className="grid h-11 w-11 place-items-center rounded-2xl bg-cyan/15 text-cyan"><Settings size={20}/></div><div><h2 className="text-xl font-medium">Default SEO</h2><p className="mt-1 text-sm leading-6 text-slate-400">These values apply to pages without custom SEO settings.</p></div></div><form onSubmit={saveSEO} className="mt-7 space-y-5"><div><label htmlFor="seo-title" className="mb-2 block">Default meta title</label><input id="seo-title" required className="field" value={seo.title} onChange={e=>updateSEO('title',e.target.value)}/></div><div><label htmlFor="seo-description" className="mb-2 block">Default meta description</label><textarea id="seo-description" required rows="4" className="field" value={seo.description} onChange={e=>updateSEO('description',e.target.value)}/></div><div><label htmlFor="seo-keywords" className="mb-2 block">Default keywords</label><input id="seo-keywords" className="field" value={seo.keywords} onChange={e=>updateSEO('keywords',e.target.value)}/></div><div><label htmlFor="seo-image" className="mb-2 block">Default social image URL</label><input id="seo-image" className="field" value={seo.image} onChange={e=>updateSEO('image',e.target.value)}/></div><button className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-ink hover:bg-cyan">Save SEO settings</button>{message&&<p role="status" className="text-sm text-cyan">{message}</p>}</form></div></div></AdminLayout>}
+function AdminLogin() {
+  const nav = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
+  const submit = (e) => {
+    e.preventDefault();
+    setError("");
+    if (
+      email.trim().toLowerCase() !== ADMIN_EMAIL ||
+      password !== readAdminPassword()
+    ) {
+      setError("Incorrect email or password.");
+      return;
+    }
+    localStorage.setItem("admin-auth", "1");
+    localStorage.setItem("admin-email", ADMIN_EMAIL);
+    nav("/admin");
+  };
+  return (
+    <div className="relative grid min-h-screen overflow-hidden bg-ink px-5 py-10 text-white md:grid-cols-2 md:px-10 lg:px-20">
+      <div className="pointer-events-none absolute -left-32 -top-32 h-96 w-96 rounded-full bg-accent/20 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-40 -right-20 h-96 w-96 rounded-full bg-cyan/10 blur-3xl" />
+      <div className="relative hidden flex-col justify-between py-6 md:flex">
+        <div>
+          <Link
+            to="/"
+            className="flex items-center gap-3 font-semibold tracking-tight"
+          >
+            <BrandMark />
+            <span>
+              Fahmi<span className="text-accent">.</span>
+            </span>
+          </Link>
+          <div className="mt-24 max-w-lg">
+            <p className="eyebrow">Content studio</p>
+            <h1 className="mt-5 text-5xl font-semibold leading-tight tracking-[-.05em] lg:text-7xl">
+              Build a portfolio that keeps moving.
+            </h1>
+            <p className="mt-7 max-w-md text-lg leading-8 text-slate-400">
+              Manage projects, publish articles, and keep your story fresh from
+              one focused workspace.
+            </p>
+          </div>
+        </div>
+        <p className="text-sm text-slate-500">
+          © {new Date().getFullYear()} Fahmi Design
+        </p>
+      </div>
+      <div className="relative flex items-center justify-center">
+        <form
+          onSubmit={submit}
+          className="w-full max-w-md rounded-[2rem] border border-white/10 bg-white/[.05] p-7 shadow-2xl backdrop-blur-xl sm:p-10"
+        >
+          <div className="mb-8 flex items-center justify-between md:hidden">
+            <Link to="/" className="flex items-center gap-3 font-semibold">
+              <BrandMark compact />{" "}
+              Fahmi<span className="text-accent">.</span>
+            </Link>
+            <span className="text-xs text-slate-500">CMS</span>
+          </div>
+          <div className="mb-8">
+            <div className="mb-5 grid h-12 w-12 place-items-center rounded-2xl bg-accent/15 text-accent">
+              <LockKeyhole size={22} />
+            </div>
+            <h2 className="text-3xl font-semibold tracking-tight">
+              Welcome back
+            </h2>
+            <p className="mt-2 text-slate-400">
+              Sign in to your content studio.
+            </p>
+          </div>
+          <div className="space-y-5">
+            <div>
+              <label htmlFor="admin-email" className="mb-2 block">
+                Email address
+              </label>
+              <input
+                id="admin-email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="field"
+                placeholder="you@example.com"
+              />
+            </div>
+            <div>
+              <div className="mb-2 flex items-center justify-between">
+                <label htmlFor="admin-password">Password</label>
+                <button
+                  type="button"
+                  className="text-xs text-accent hover:text-cyan"
+                  onClick={() =>
+                    setError(
+                      "Password reset is available after Supabase is connected.",
+                    )
+                  }
+                >
+                  Forgot password?
+                </button>
+              </div>
+              <div className="relative">
+                <input
+                  id="admin-password"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  autoComplete="current-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="field pr-12"
+                  placeholder="Enter your password"
+                />
+                <button
+                  type="button"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white"
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
+            </div>
+            {error && (
+              <p
+                role="alert"
+                className="rounded-xl border border-red-300/20 bg-red-300/10 px-3 py-2 text-sm text-red-200"
+              >
+                {error}
+              </p>
+            )}
+            <button
+              type="submit"
+              className="flex w-full items-center justify-center gap-2 rounded-full bg-white py-3.5 font-semibold text-ink hover:bg-cyan"
+            >
+              <span>Sign in to CMS</span>
+              <ArrowRight size={17} />
+            </button>
+          </div>
+          <div className="mt-7 flex items-start gap-3 border-t border-white/10 pt-6 text-xs leading-5 text-slate-500">
+            <ShieldCheck size={17} className="mt-0.5 shrink-0 text-cyan" />
+            <span>
+              Your session is protected. Authentication is stored only in this
+              browser preview.
+            </span>
+          </div>
+          <p className="mt-5 text-center text-xs text-slate-600">
+            Supabase-ready authentication layer
+          </p>
+        </form>
+      </div>
+    </div>
+  );
+}
+const getStore = (key, seed) => {
+  try {
+    const v = JSON.parse(localStorage.getItem(key));
+    return v || seed;
+  } catch {
+    return seed;
+  }
+};
+function Admin() {
+  return (
+    <AdminLayout>
+      <AdminHeader
+        title="Good morning, Fahmi."
+        text="Here's what's happening across your portfolio."
+      />
+      <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          ["Projects", seedProjects.length],
+          ["Articles", seedArticles.length],
+          ["Published", seedArticles.length],
+          ["Views", "12.8k"],
+        ].map((x) => (
+          <Stat key={x[0]} n={x[1]} l={x[0]} />
+        ))}
+      </div>
+      <div className="mt-10 grid gap-6 lg:grid-cols-2">
+        <div className="rounded-2xl border border-white/10 p-6">
+          <p className="eyebrow">Quick actions</p>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <Button to="/admin/articles">Manage articles</Button>
+            <Button to="/admin/projects" variant="secondary">
+              Manage projects
+            </Button>
+            <Button to="/admin/settings" variant="secondary">
+              Account settings
+            </Button>
+          </div>
+        </div>
+        <div className="rounded-2xl border border-white/10 p-6">
+          <p className="eyebrow">Service status</p>
+          <p className="mt-4 flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-cyan" /> Local mock data
+            active
+          </p>
+          <p className="mt-2 text-sm text-slate-500">
+            Connect Supabase by setting VITE_SUPABASE_URL and
+            VITE_SUPABASE_ANON_KEY.
+          </p>
+        </div>
+      </div>
+    </AdminLayout>
+  );
+}
+function AdminSettings() {
+  const [current, setCurrent] = useState("");
+  const [next, setNext] = useState("");
+  const [confirm, setConfirm] = useState("");
+  const [seo, setSeo] = useState(readSEOSettings);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+  const savePassword = (e) => {
+    e.preventDefault();
+    setError("");
+    if (current !== localStorage.getItem("admin-password")) {
+      setError("Current password is incorrect.");
+      return;
+    }
+    if (next.length < 6) {
+      setError("New password must be at least 6 characters.");
+      return;
+    }
+    if (next !== confirm) {
+      setError("New passwords do not match.");
+      return;
+    }
+    localStorage.setItem("admin-password", next);
+    setCurrent("");
+    setNext("");
+    setConfirm("");
+    setMessage("Password updated successfully.");
+  };
+  const saveSEO = (e) => {
+    e.preventDefault();
+    localStorage.setItem("site-seo", JSON.stringify(seo));
+    setMessage("Default SEO settings saved.");
+  };
+  const updateSEO = (key, value) =>
+    setSeo((current) => ({ ...current, [key]: value }));
+  return (
+    <AdminLayout>
+      <AdminHeader
+        title="Account settings"
+        text="Manage your account and default website SEO."
+      />
+      <div className="mt-10 grid max-w-5xl gap-6 lg:grid-cols-2">
+        <div className="rounded-3xl border border-white/10 bg-white/[.03] p-6 sm:p-8">
+          <div className="flex items-start gap-4 border-b border-white/10 pb-6">
+            <div className="grid h-11 w-11 place-items-center rounded-2xl bg-accent/15 text-accent">
+              <LockKeyhole size={20} />
+            </div>
+            <div>
+              <h2 className="text-xl font-medium">Change password</h2>
+              <p className="mt-1 text-sm leading-6 text-slate-400">
+                Update the password used for this local CMS preview.
+              </p>
+            </div>
+          </div>
+          <form onSubmit={savePassword} className="mt-7 space-y-5">
+            <div>
+              <label htmlFor="current-password" className="mb-2 block">
+                Current password
+              </label>
+              <input
+                id="current-password"
+                type="password"
+                required
+                className="field"
+                value={current}
+                onChange={(e) => setCurrent(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="new-password" className="mb-2 block">
+                New password
+              </label>
+              <input
+                id="new-password"
+                type="password"
+                minLength="6"
+                required
+                className="field"
+                value={next}
+                onChange={(e) => setNext(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="confirm-password" className="mb-2 block">
+                Confirm new password
+              </label>
+              <input
+                id="confirm-password"
+                type="password"
+                minLength="6"
+                required
+                className="field"
+                value={confirm}
+                onChange={(e) => setConfirm(e.target.value)}
+              />
+            </div>
+            {error && (
+              <p role="alert" className="text-sm text-red-200">
+                {error}
+              </p>
+            )}
+            <button className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-ink hover:bg-cyan">
+              Update password
+            </button>
+          </form>
+        </div>
+        <div className="rounded-3xl border border-white/10 bg-white/[.03] p-6 sm:p-8">
+          <div className="flex items-start gap-4 border-b border-white/10 pb-6">
+            <div className="grid h-11 w-11 place-items-center rounded-2xl bg-cyan/15 text-cyan">
+              <Settings size={20} />
+            </div>
+            <div>
+              <h2 className="text-xl font-medium">Default SEO</h2>
+              <p className="mt-1 text-sm leading-6 text-slate-400">
+                These values apply to pages without custom SEO settings.
+              </p>
+            </div>
+          </div>
+          <form onSubmit={saveSEO} className="mt-7 space-y-5">
+            <div>
+              <label htmlFor="seo-title" className="mb-2 block">
+                Default meta title
+              </label>
+              <input
+                id="seo-title"
+                required
+                className="field"
+                value={seo.title}
+                onChange={(e) => updateSEO("title", e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="seo-description" className="mb-2 block">
+                Default meta description
+              </label>
+              <textarea
+                id="seo-description"
+                required
+                rows="4"
+                className="field"
+                value={seo.description}
+                onChange={(e) => updateSEO("description", e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="seo-keywords" className="mb-2 block">
+                Default keywords
+              </label>
+              <input
+                id="seo-keywords"
+                className="field"
+                value={seo.keywords}
+                onChange={(e) => updateSEO("keywords", e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="seo-image" className="mb-2 block">
+                Default social image URL
+              </label>
+              <input
+                id="seo-image"
+                className="field"
+                value={seo.image}
+                onChange={(e) => updateSEO("image", e.target.value)}
+              />
+            </div>
+            <button className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-ink hover:bg-cyan">
+              Save SEO settings
+            </button>
+            {message && (
+              <p role="status" className="text-sm text-cyan">
+                {message}
+              </p>
+            )}
+          </form>
+        </div>
+      </div>
+    </AdminLayout>
+  );
+}
 function AdminAppearance() {
   const [items, setItems] = useState(readPublicMenu);
   const [favicon, setFavicon] = useState(readFavicon);
+  const [logo, setLogo] = useState(readLogo);
   const [socials, setSocials] = useState(readSocialLinks);
   const [message, setMessage] = useState("");
   const update = (id, key, value) =>
@@ -75,6 +595,24 @@ function AdminAppearance() {
         item.id === id ? { ...item, [key]: value } : item,
       ),
     );
+  const chooseLogo = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => setLogo(reader.result);
+    reader.readAsDataURL(file);
+  };
+  const saveLogo = (e) => {
+    e.preventDefault();
+    if (logo) localStorage.setItem("site-logo", logo);
+    else localStorage.removeItem("site-logo");
+    setMessage("Logo berhasil disimpan.");
+  };
+  const resetLogo = () => {
+    localStorage.removeItem("site-logo");
+    setLogo(defaultLogo);
+    setMessage("Logo dikembalikan ke default.");
+  };
   const addSocial = () =>
     setSocials((current) => [
       ...current,
@@ -271,13 +809,38 @@ function AdminAppearance() {
         <div className="rounded-3xl border border-white/10 bg-white/[.03] p-6 sm:p-8">
           <div className="flex items-start gap-4 border-b border-white/10 pb-6">
             <div className="grid h-11 w-11 place-items-center rounded-2xl bg-accent/15 text-accent">
+              <ImageIcon size={20} />
+            </div>
+            <div>
+              <h2 className="text-xl font-medium">Web logo</h2>
+              <p className="mt-1 text-sm leading-6 text-slate-400">
+                Upload logo yang tampil di header website dan halaman login admin.
+              </p>
+            </div>
+          </div>
+          <form onSubmit={saveLogo} className="mt-7 flex flex-wrap items-center gap-5">
+            <div className="grid h-20 w-20 place-items-center overflow-hidden rounded-2xl border border-white/10 bg-white p-3">
+              {logo ? <img src={logo} alt="Logo preview" className="h-full w-full object-contain" /> : <BrandMark />}
+            </div>
+            <div className="flex-1">
+              <input type="file" accept="image/png,image/jpeg,image/svg+xml,image/webp" onChange={chooseLogo} className="field" />
+              <p className="mt-2 text-xs text-slate-500">Gunakan PNG, JPG, SVG, atau WEBP. Disimpan di browser ini sebagai local preview.</p>
+            </div>
+            <div className="flex gap-3">
+              <button className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-ink hover:bg-cyan">Save logo</button>
+              <button type="button" onClick={resetLogo} className="rounded-full border border-white/15 px-5 py-3 text-sm text-slate-300 hover:border-accent hover:text-accent">Reset</button>
+            </div>
+          </form>
+        </div>
+        <div className="rounded-3xl border border-white/10 bg-white/[.03] p-6 sm:p-8">
+          <div className="flex items-start gap-4 border-b border-white/10 pb-6">
+            <div className="grid h-11 w-11 place-items-center rounded-2xl bg-accent/15 text-accent">
               <ExternalLink size={20} />
             </div>
             <div>
               <h2 className="text-xl font-medium">Social media</h2>
               <p className="mt-1 text-sm leading-6 text-slate-400">
-                Atur URL, label, ikon, dan visibilitas link social media di
-                footer.
+                Atur URL, label, ikon, dan visibilitas link social media di footer.
               </p>
             </div>
           </div>
