@@ -50,9 +50,6 @@ function Shell({ children, admin = false }) {
             className="flex items-center gap-3 font-semibold tracking-tight"
           >
             <BrandMark />
-            <span>
-              Fahmi<span className="text-accent">.</span>
-            </span>
           </Link>
           {admin ? (
             <AdminNav />
