@@ -24,6 +24,9 @@ const readPublicMenu=()=>{try{const value=JSON.parse(localStorage.getItem('publi
 const defaultFavicon='/images/favicon.ico';
 const readFavicon=()=>localStorage.getItem('site-favicon')||defaultFavicon;
 const applyFavicon=()=>{let link=document.head.querySelector('link[data-site-favicon]');if(!link){link=document.createElement('link');link.rel='icon';link.dataset.siteFavicon='true';document.head.appendChild(link)}link.href=readFavicon()};
+const defaultSocialLinks=[{id:'linkedin',label:'LinkedIn',url:'https://linkedin.com',icon:'Linkedin',enabled:true},{id:'github',label:'GitHub',url:'https://github.com',icon:'Github',enabled:true},{id:'dribbble',label:'Dribbble',url:'https://dribbble.com',icon:'Dribbble',enabled:true},{id:'custom-social',label:'Custom social media',url:'',icon:'ExternalLink',enabled:false,customIcon:''}];
+const socialIcons={Linkedin,Github,Dribbble,Instagram,ExternalLink};
+const readSocialLinks=()=>{try{const value=JSON.parse(localStorage.getItem('social-links'));return Array.isArray(value)?value:defaultSocialLinks}catch{return defaultSocialLinks}};
 const defaultSEOSettings={title:'Fahmi — Product Designer',description:'Fahmi is a product designer creating clear, thoughtful digital experiences.',keywords:'product design, UX, UI/UX, digital products',image:'/images/fahmi.png'};
 const readSEOSettings=()=>{try{return {...defaultSEOSettings,...JSON.parse(localStorage.getItem('site-seo'))}}catch{return defaultSEOSettings}};
 const ADMIN_EMAIL='ffaisalfahmi@gmail.com';
@@ -33,7 +36,7 @@ const readAdminPassword=()=>{if(localStorage.getItem('admin-password-version')!=
 function useSEO({title='Fahmi — Product Designer',description='Fahmi is a product designer creating clear, thoughtful digital experiences.',type='website',image='/images/fahmi.png'}={}){const settings=readSEOSettings();let articleSEO=null;if(type==='article'){try{const articles=JSON.parse(localStorage.getItem('articles'))||[];articleSEO=articles.find(article=>location.pathname.endsWith(article.slug))||null}catch{}}const resolvedTitle=articleSEO?.seoTitle||((title===defaultSEOSettings.title&&settings.title)?settings.title:title);const resolvedDescription=articleSEO?.seoDescription||((description===defaultSEOSettings.description&&settings.description)?settings.description:description);const resolvedImage=articleSEO?.seoImage||((image===defaultSEOSettings.image&&settings.image)?settings.image:image);const resolvedKeywords=articleSEO?.seoKeywords||settings.keywords;const resolvedImageUrl=new URL(resolvedImage,location.origin).href;const resolvedType=type==='article'?'article':'website';useEffect(()=>{document.title=resolvedTitle;applyFavicon(); const setMeta=(attribute,key,value)=>{let e=document.head.querySelector(`meta[${attribute}="${key}"]`);if(!e){e=document.createElement('meta');e.setAttribute(attribute,key);document.head.appendChild(e)}e.setAttribute('content',value)};setMeta('name','description',resolvedDescription);setMeta('name','keywords',resolvedKeywords);setMeta('property','og:title',resolvedTitle);setMeta('property','og:description',resolvedDescription);setMeta('property','og:image',resolvedImageUrl);setMeta('property','og:image:alt',resolvedTitle);setMeta('property','og:type',resolvedType);setMeta('property','og:url',location.href);setMeta('name','twitter:card','summary_large_image');setMeta('name','twitter:title',resolvedTitle);setMeta('name','twitter:description',resolvedDescription);setMeta('name','twitter:image',resolvedImageUrl);let old=document.getElementById('jsonld');if(old)old.remove();let s=document.createElement('script');s.id='jsonld';s.type='application/ld+json';s.textContent=JSON.stringify({"@context":'https://schema.org',"@type":type==='article'?'Article':'Person',name:'Fahmi',url:location.href,description:resolvedDescription,image:resolvedImageUrl});document.head.appendChild(s);return()=>s.remove()},[resolvedTitle,resolvedDescription,resolvedImageUrl,resolvedKeywords,resolvedType,type])}
 function ThemeToggle(){const [light,setLight]=useState(()=>localStorage.getItem('theme')==='light');useEffect(()=>{document.documentElement.classList.toggle('light-mode',light);localStorage.setItem('theme',light?'light':'dark')},[light]);return <button type="button" onClick={()=>setLight(value=>!value)} aria-label={light?'Switch to dark mode':'Switch to light mode'} title={light?'Switch to dark mode':'Switch to light mode'} className="theme-toggle grid h-10 w-10 place-items-center rounded-full border border-white/10 text-slate-300 hover:border-accent hover:text-white">{light?<Moon size={17}/>:<Sun size={17}/>}</button>}
 function Shell({children,admin=false}){const [open,setOpen]=useState(false);const publicMenu=readPublicMenu().filter(item=>item.enabled);return <div className="min-h-screen bg-ink text-slate-100"><header className="sticky top-0 z-40 border-b border-white/10 bg-ink/85 backdrop-blur-xl"><div className="container flex h-20 items-center justify-between"><Link to="/" className="flex items-center gap-3 font-semibold tracking-tight"><span className="grid h-10 w-10 place-items-center rounded-2xl bg-gradient-to-br from-accent to-cyan text-lg text-ink">F</span><span>Fahmi<span className="text-accent">.</span></span></Link>{admin?<AdminNav/>:<><nav className="hidden items-center gap-8 text-sm text-slate-400 md:flex">{publicMenu.map(item=><Link className="public-nav-link transition hover:text-white" to={item.path} key={item.id}>{item.label}</Link>)}</nav><div className="flex items-center gap-3"><ThemeToggle/><Link to="/contact" className="hidden rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-ink transition hover:bg-cyan md:inline-flex">Let's work together <ArrowUpRight size={16}/></Link><button className="md:hidden" onClick={()=>setOpen(!open)}>{open?<X/>:<Menu/>}</button></div></>}</div>{open&&<nav className="container flex flex-col gap-4 border-t border-white/10 py-5 md:hidden">{publicMenu.map(item=><Link className="public-nav-link" onClick={()=>setOpen(false)} to={item.path} key={item.id}>{item.label}</Link>)}<ThemeToggle/></nav>}</header><main>{children}</main>{!admin&&<Footer/>}</div>}
-function Footer(){return <footer className="border-t border-white/10"><div className="container flex flex-col gap-8 py-12 md:flex-row md:items-end md:justify-between"><div><p className="text-2xl font-semibold">Have a good project in mind?</p><Link to="/contact" className="mt-3 inline-flex items-center gap-2 text-accent">Let's talk <ArrowRight size={17}/></Link></div><div className="text-sm text-slate-500 md:text-right"><p>© {new Date().getFullYear()} Fahmi. Designed with intent.</p><div className="mt-3 flex gap-4 md:justify-end"><a href="https://linkedin.com" aria-label="LinkedIn"><Linkedin size={17}/></a><a href="https://github.com" aria-label="GitHub"><Github size={17}/></a><a href="https://dribbble.com" aria-label="Dribbble"><Dribbble size={17}/></a></div></div></div></footer>}
+function Footer(){const links=readSocialLinks().filter(link=>link.enabled&&link.url);return <footer className="border-t border-white/10"><div className="container flex flex-col gap-8 py-12 md:flex-row md:items-end md:justify-between"><div><p className="text-2xl font-semibold">Have a good project in mind?</p><Link to="/contact" className="mt-3 inline-flex items-center gap-2 text-accent">Let's talk <ArrowRight size={17}/></Link></div><div className="text-sm text-slate-500 md:text-right"><p>© {new Date().getFullYear()} Fahmi. Designed with intent.</p><div className="mt-3 flex gap-4 md:justify-end">{links.map(link=>{const Icon=socialIcons[link.icon]||ExternalLink;return <a key={link.id} href={link.url} target="_blank" rel="noreferrer" aria-label={link.label} className="hover:text-accent">{link.customIcon?<img src={link.customIcon} alt="" className="h-[17px] w-[17px] object-contain"/>:<Icon size={17}/>}</a>})}</div></div></div></footer>}
 function Button({children,to,variant='primary',...p}){let c=variant==='primary'?'bg-white text-ink hover:bg-cyan':'border border-white/15 text-white hover:border-accent hover:text-accent';return to?<Link className={`inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition ${c}`} to={to}>{children}</Link>:<button className={`inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition ${c}`} {...p}>{children}</button>}
 function Home(){useSEO({title:'Fahmi — Product Designer'});return <Shell><section className="relative overflow-hidden"><div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(139,124,255,.2),transparent_34%),radial-gradient(circle_at_20%_80%,rgba(77,216,210,.1),transparent_30%)]"/><div className="container relative grid min-h-[680px] items-center gap-14 py-24 lg:grid-cols-[1.1fr_.9fr]"><div><p className="mb-7 flex items-center gap-2 text-sm uppercase tracking-[.22em] text-cyan"><span className="h-2 w-2 rounded-full bg-cyan"/> Available for select projects</p><h1 className="max-w-3xl text-5xl font-semibold leading-[1.03] tracking-[-.05em] sm:text-7xl">I design digital products that <span className="text-accent">move people forward.</span></h1><p className="mt-8 max-w-xl text-lg leading-8 text-slate-400">I'm Fahmi, a product designer focused on turning complex problems into clear, useful, and memorable experiences.</p><div className="mt-10 flex flex-wrap gap-3"><Button to="/projects">View my work <ArrowUpRight size={17}/></Button><Button to="/contact" variant="secondary">Let's talk <ArrowRight size={17}/></Button></div><div className="mt-14 flex gap-8 text-sm text-slate-500"><span><strong className="block text-2xl text-white">8+</strong> years designing</span><span><strong className="block text-2xl text-white">40</strong> products shipped</span><span><strong className="block text-2xl text-white">12</strong> happy teams</span></div></div><div className="relative mx-auto w-full max-w-md"><div className="absolute -inset-8 rounded-full bg-accent/10 blur-3xl"/><div className="relative overflow-hidden rounded-[2rem] border border-white/15 bg-white/5 p-3 shadow-glow"><img src={img('fahmi.png')} alt="Fahmi" className="aspect-[4/5] w-full rounded-[1.5rem] object-cover"/><div className="absolute bottom-8 left-8 right-8 rounded-2xl border border-white/15 bg-ink/80 p-4 backdrop-blur"><p className="text-sm text-slate-400">Currently designing at</p><p className="mt-1 font-medium">The intersection of people & technology</p></div></div></div></div></section><section className="border-y border-white/10 bg-white/[.03]"><div className="container grid gap-8 py-16 md:grid-cols-[1fr_1.4fr] md:items-center"><p className="text-sm uppercase tracking-[.2em] text-slate-500">A little about me</p><div><p className="text-2xl leading-relaxed text-slate-200 md:text-3xl">I partner with ambitious teams to make products simpler, more useful, and a joy to use.</p><Link className="mt-6 inline-flex items-center gap-2 text-accent" to="/about">More about me <ArrowRight size={17}/></Link></div></div></section><section className="container py-24"><div className="flex items-end justify-between"><div><p className="eyebrow">Selected work</p><h2 className="section-title">A few things I've made</h2></div><Link className="hidden items-center gap-2 text-sm text-accent sm:flex" to="/projects">View all projects <ArrowRight size={16}/></Link></div><div className="mt-10 grid gap-6 md:grid-cols-2">{seedProjects.slice(0,4).map(p=><ProjectCard key={p.id} project={p}/>)}</div></section><section className="container pb-28"><div className="rounded-[2rem] border border-white/10 bg-gradient-to-br from-accent/20 to-cyan/10 p-8 md:p-14"><p className="eyebrow">Let's create</p><h2 className="mt-4 max-w-2xl text-4xl font-semibold tracking-tight md:text-6xl">Good work starts with a good conversation.</h2><Button to="/contact" className="mt-8">Start a conversation <ArrowUpRight size={17}/></Button></div></section></Shell>}
 function ProjectCard({project}){return <Link to={`/projects/${project.slug}`} className="group block"><div className="overflow-hidden rounded-3xl border border-white/10 bg-white/[.04]"><div className="aspect-[16/10] overflow-hidden bg-slate-800"><img loading="lazy" src={project.cover} alt={project.title} className="h-full w-full object-cover transition duration-700 group-hover:scale-105"/></div><div className="p-5"><div className="flex items-center justify-between text-xs uppercase tracking-wider text-slate-500"><span>{project.category}</span><span>{project.year}</span></div><h3 className="mt-3 text-xl font-medium">{project.title}</h3><p className="mt-2 text-sm leading-6 text-slate-400">{project.description}</p><span className="mt-5 inline-flex items-center gap-2 text-sm text-accent">View case study <ArrowUpRight size={15}/></span></div></div></Link>}
@@ -55,10 +58,768 @@ function AdminLogin(){const nav=useNavigate();const [email,setEmail]=useState(''
 const getStore=(key,seed)=>{try{const v=JSON.parse(localStorage.getItem(key));return v||seed}catch{return seed}};
 function Admin(){return <AdminLayout><AdminHeader title="Good morning, Fahmi." text="Here's what's happening across your portfolio."/><div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{[['Projects',seedProjects.length],['Articles',seedArticles.length],['Published',seedArticles.length],['Views','12.8k']].map(x=><Stat key={x[0]} n={x[1]} l={x[0]}/>)}</div><div className="mt-10 grid gap-6 lg:grid-cols-2"><div className="rounded-2xl border border-white/10 p-6"><p className="eyebrow">Quick actions</p><div className="mt-5 flex flex-wrap gap-3"><Button to="/admin/articles">Manage articles</Button><Button to="/admin/projects" variant="secondary">Manage projects</Button><Button to="/admin/settings" variant="secondary">Account settings</Button></div></div><div className="rounded-2xl border border-white/10 p-6"><p className="eyebrow">Service status</p><p className="mt-4 flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-cyan"/> Local mock data active</p><p className="mt-2 text-sm text-slate-500">Connect Supabase by setting VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.</p></div></div></AdminLayout>}
 function AdminSettings(){const [current,setCurrent]=useState('');const [next,setNext]=useState('');const [confirm,setConfirm]=useState('');const [seo,setSeo]=useState(readSEOSettings);const [message,setMessage]=useState('');const [error,setError]=useState('');const savePassword=e=>{e.preventDefault();setError('');if(current!==localStorage.getItem('admin-password')){setError('Current password is incorrect.');return}if(next.length<6){setError('New password must be at least 6 characters.');return}if(next!==confirm){setError('New passwords do not match.');return}localStorage.setItem('admin-password',next);setCurrent('');setNext('');setConfirm('');setMessage('Password updated successfully.')};const saveSEO=e=>{e.preventDefault();localStorage.setItem('site-seo',JSON.stringify(seo));setMessage('Default SEO settings saved.')};const updateSEO=(key,value)=>setSeo(current=>({...current,[key]:value}));return <AdminLayout><AdminHeader title="Account settings" text="Manage your account and default website SEO."/><div className="mt-10 grid max-w-5xl gap-6 lg:grid-cols-2"><div className="rounded-3xl border border-white/10 bg-white/[.03] p-6 sm:p-8"><div className="flex items-start gap-4 border-b border-white/10 pb-6"><div className="grid h-11 w-11 place-items-center rounded-2xl bg-accent/15 text-accent"><LockKeyhole size={20}/></div><div><h2 className="text-xl font-medium">Change password</h2><p className="mt-1 text-sm leading-6 text-slate-400">Update the password used for this local CMS preview.</p></div></div><form onSubmit={savePassword} className="mt-7 space-y-5"><div><label htmlFor="current-password" className="mb-2 block">Current password</label><input id="current-password" type="password" required className="field" value={current} onChange={e=>setCurrent(e.target.value)}/></div><div><label htmlFor="new-password" className="mb-2 block">New password</label><input id="new-password" type="password" minLength="6" required className="field" value={next} onChange={e=>setNext(e.target.value)}/></div><div><label htmlFor="confirm-password" className="mb-2 block">Confirm new password</label><input id="confirm-password" type="password" minLength="6" required className="field" value={confirm} onChange={e=>setConfirm(e.target.value)}/></div>{error&&<p role="alert" className="text-sm text-red-200">{error}</p>}<button className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-ink hover:bg-cyan">Update password</button></form></div><div className="rounded-3xl border border-white/10 bg-white/[.03] p-6 sm:p-8"><div className="flex items-start gap-4 border-b border-white/10 pb-6"><div className="grid h-11 w-11 place-items-center rounded-2xl bg-cyan/15 text-cyan"><Settings size={20}/></div><div><h2 className="text-xl font-medium">Default SEO</h2><p className="mt-1 text-sm leading-6 text-slate-400">These values apply to pages without custom SEO settings.</p></div></div><form onSubmit={saveSEO} className="mt-7 space-y-5"><div><label htmlFor="seo-title" className="mb-2 block">Default meta title</label><input id="seo-title" required className="field" value={seo.title} onChange={e=>updateSEO('title',e.target.value)}/></div><div><label htmlFor="seo-description" className="mb-2 block">Default meta description</label><textarea id="seo-description" required rows="4" className="field" value={seo.description} onChange={e=>updateSEO('description',e.target.value)}/></div><div><label htmlFor="seo-keywords" className="mb-2 block">Default keywords</label><input id="seo-keywords" className="field" value={seo.keywords} onChange={e=>updateSEO('keywords',e.target.value)}/></div><div><label htmlFor="seo-image" className="mb-2 block">Default social image URL</label><input id="seo-image" className="field" value={seo.image} onChange={e=>updateSEO('image',e.target.value)}/></div><button className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-ink hover:bg-cyan">Save SEO settings</button>{message&&<p role="status" className="text-sm text-cyan">{message}</p>}</form></div></div></AdminLayout>}
-function AdminAppearance(){const [items,setItems]=useState(readPublicMenu);const [favicon,setFavicon]=useState(readFavicon);const [message,setMessage]=useState('');const update=(id,key,value)=>setItems(current=>current.map(item=>item.id===id?{...item,[key]:value}:item));const move=(index,direction)=>{const next=[...items];const target=index+direction;if(target<0||target>=next.length)return;[next[index],next[target]]=[next[target],next[index]];setItems(next)};const saveMenu=e=>{e.preventDefault();localStorage.setItem('public-menu',JSON.stringify(items));setMessage('Menu frontend berhasil disimpan.')};const saveFavicon=e=>{e.preventDefault();if(favicon===defaultFavicon)localStorage.removeItem('site-favicon');else localStorage.setItem('site-favicon',favicon);applyFavicon();setMessage('Favicon berhasil disimpan.')};const chooseFavicon=e=>{const file=e.target.files?.[0];if(!file)return;const reader=new FileReader();reader.onload=()=>setFavicon(reader.result);reader.readAsDataURL(file)};const resetFavicon=()=>{localStorage.removeItem('site-favicon');setFavicon(defaultFavicon);applyFavicon();setMessage('Favicon dikembalikan ke default.')};return <AdminLayout><AdminHeader title="Appearance" text="Atur menu navigasi dan identitas visual website publik."/><div className="mt-10 max-w-3xl space-y-6"><div className="rounded-3xl border border-white/10 bg-white/[.03] p-6 sm:p-8"><div className="flex items-start gap-4 border-b border-white/10 pb-6"><div className="grid h-11 w-11 place-items-center rounded-2xl bg-cyan/15 text-cyan"><Palette size={20}/></div><div><h2 className="text-xl font-medium">Public navigation</h2><p className="mt-1 text-sm leading-6 text-slate-400">Aktifkan, nonaktifkan, dan urutkan menu yang terlihat di header frontend.</p></div></div><form onSubmit={saveMenu} className="mt-7 space-y-3">{items.map((item,index)=><div key={item.id} className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[.03] p-3"><GripVertical size={18} className="shrink-0 text-slate-600"/><div className="grid flex-1 gap-2 sm:grid-cols-[1fr_1fr]"><input aria-label={`${item.id} label`} className="field" value={item.label} onChange={e=>update(item.id,'label',e.target.value)}/><input aria-label={`${item.id} path`} className="field" value={item.path} onChange={e=>update(item.id,'path',e.target.value)}/></div><label className="flex items-center gap-2 text-xs text-slate-400"><input type="checkbox" checked={item.enabled} onChange={e=>update(item.id,'enabled',e.target.checked)}/> Show</label><div className="flex flex-col gap-1"><button type="button" aria-label={`Move ${item.label} up`} disabled={index===0} onClick={()=>move(index,-1)} className="rounded p-1 text-slate-400 hover:bg-white/10 hover:text-white disabled:opacity-30">↑</button><button type="button" aria-label={`Move ${item.label} down`} disabled={index===items.length-1} onClick={()=>move(index,1)} className="rounded p-1 text-slate-400 hover:bg-white/10 hover:text-white disabled:opacity-30">↓</button></div></div>)}<div className="flex flex-wrap items-center gap-4 pt-5"><button className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-ink hover:bg-cyan">Save menu</button>{message&&<p role="status" className="text-sm text-cyan">{message}</p>}</div></form></div><div className="rounded-3xl border border-white/10 bg-white/[.03] p-6 sm:p-8"><div className="flex items-start gap-4 border-b border-white/10 pb-6"><div className="grid h-11 w-11 place-items-center rounded-2xl bg-accent/15 text-accent"><ImageIcon size={20}/></div><div><h2 className="text-xl font-medium">Favicon</h2><p className="mt-1 text-sm leading-6 text-slate-400">Pilih gambar yang akan tampil di tab browser. Gunakan PNG, ICO, atau SVG.</p></div></div><form onSubmit={saveFavicon} className="mt-7 flex flex-col gap-5 sm:flex-row sm:items-center"><div className="grid h-20 w-20 shrink-0 place-items-center overflow-hidden rounded-2xl border border-white/10 bg-white"><img src={favicon} alt="Favicon preview" className="h-full w-full object-contain p-3"/></div><div className="flex-1"><input id="favicon-upload" type="file" accept="image/png,image/jpeg,image/svg+xml,image/x-icon,.ico" onChange={chooseFavicon} className="field"/><p className="mt-2 text-xs text-slate-500">File disimpan di browser ini sebagai local preview.</p></div><div className="flex flex-wrap gap-3"><button className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-ink hover:bg-cyan">Save favicon</button><button type="button" onClick={resetFavicon} className="rounded-full border border-white/15 px-5 py-3 text-sm text-slate-300 hover:border-accent hover:text-accent">Reset</button></div></form></div></div></AdminLayout>}
-function AdminHeader({title,text,action}){return <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between"><div><p className="eyebrow">Admin studio</p><h1 className="mt-3 text-4xl font-semibold tracking-tight">{title}</h1>{text&&<p className="mt-2 text-slate-400">{text}</p>}</div>{action}</div>}
-function AdminArticles(){const [items,setItems]=useState(()=>getStore('articles',seedArticles));const [q,setQ]=useState('');const remove=id=>{const x=items.filter(a=>a.id!==id);setItems(x);localStorage.setItem('articles',JSON.stringify(x))};return <AdminLayout><AdminHeader title="Articles" text="Create, edit, and publish your writing." action={<Button to="/admin/articles/create"><Plus size={16}/> New article</Button>}/><div className="mt-8 flex items-center gap-3"><Search size={18} className="text-slate-500"/><input value={q} onChange={e=>setQ(e.target.value)} className="field" placeholder="Search articles"/></div><div className="mt-6 overflow-hidden rounded-2xl border border-white/10"><table className="w-full text-left text-sm"><thead className="bg-white/[.04] text-slate-500"><tr><th className="p-4">Title</th><th className="p-4">Category</th><th className="p-4">Status</th><th className="p-4">Actions</th></tr></thead><tbody>{items.filter(a=>a.title.toLowerCase().includes(q.toLowerCase())).map(a=><tr className="border-t border-white/10" key={a.id}><td className="p-4 font-medium">{a.title}</td><td className="p-4 text-slate-400">{a.category}</td><td className="p-4"><span className="rounded-full bg-cyan/15 px-2 py-1 text-xs text-cyan">Published</span></td><td className="flex gap-3 p-4"><Link to={`/admin/articles/${a.id}/edit`} className="text-accent"><Edit3 size={16}/></Link><button onClick={()=>remove(a.id)} className="text-red-300"><Trash2 size={16}/></button></td></tr>)}</tbody></table></div></AdminLayout>}
-function ArticleEditor(){const {id}=useParams();const nav=useNavigate();const existing=getStore('articles',seedArticles).find(a=>a.id===id);const [form,setForm]=useState(existing||{title:'',slug:'',excerpt:'',category:'UI/UX',date:new Date().toISOString().slice(0,16),read:'5',tags:[],cover:'/images/fahmi.png',status:'Draft',author:'Fahmi',featured:'',seoTitle:'',seoDescription:'',seoKeywords:'',seoImage:'',content:['']});const update=(k,v)=>setForm(f=>({...f,[k]:v}));const chooseCover=e=>{const file=e.target.files?.[0];if(!file)return;const reader=new FileReader();reader.onload=()=>setForm(f=>({...f,cover:reader.result}));reader.readAsDataURL(file)};const save=e=>{e.preventDefault();const items=getStore('articles',seedArticles);const next={...form,id:id||String(Date.now()),tags:typeof form.tags==='string'?form.tags.split(',').map(x=>x.trim()).filter(Boolean):form.tags,content:typeof form.content==='string'?form.content.split('\n').filter(Boolean):form.content};localStorage.setItem('articles',JSON.stringify(id?items.map(x=>x.id===id?next:x):[next,...items]));nav('/admin/articles')};return <AdminLayout><AdminHeader title={id?'Edit article':'Create post'} text="Create and optimize your article from one focused workspace."/><form onSubmit={save} className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]"><section className="overflow-hidden rounded-2xl border border-white/10 bg-white/[.03]"><div className="flex items-center gap-3 border-b border-white/10 px-5 py-4"><Edit3 size={17} className="text-accent"/><div><h2 className="font-medium">Konten utama</h2><p className="text-xs text-slate-500">Tulis dan susun artikel kamu.</p></div></div><div className="space-y-5 p-5"><div className="grid gap-5 md:grid-cols-2"><label>Judul artikel<span className="text-red-300">*</span><input required className="field mt-2" value={form.title} onChange={e=>update('title',e.target.value)} placeholder="Masukkan judul artikel..."/></label><label>Slug URL<span className="text-red-300">*</span><input required className="field mt-2" value={form.slug} onChange={e=>update('slug',e.target.value)} placeholder="judul-artikel"/></label></div><label>Ringkasan / Excerpt<textarea rows="3" className="field mt-2" value={form.excerpt} onChange={e=>update('excerpt',e.target.value)} placeholder="Ringkasan singkat untuk kartu artikel..."/></label><label>Isi artikel<span className="text-red-300">*</span><div className="mt-2 overflow-hidden rounded-xl border border-white/15"><div className="flex flex-wrap gap-4 border-b border-white/15 bg-white/[.03] px-4 py-3 text-sm text-slate-400"><button type="button" className="font-semibold hover:text-white">B</button><button type="button" className="italic hover:text-white">I</button><button type="button" className="underline hover:text-white">U</button><span className="text-slate-600">|</span><span>Link</span><span>H1</span><span>Quote</span><span>List</span><span>Image</span></div><textarea required rows="14" className="field rounded-none border-0 bg-transparent" value={Array.isArray(form.content)?form.content.join('\n'):form.content} onChange={e=>update('content',e.target.value)} placeholder="Tulis isi artikel di sini..."/></div></label></div></section><aside className="space-y-5"><section className="rounded-2xl border border-white/10 bg-white/[.03] p-5"><div className="flex items-center gap-3 border-b border-white/10 pb-4"><ImageIcon size={17} className="text-accent"/><h2 className="font-medium">Visual</h2></div><label className="mt-5 block">Foto utama<span className="text-red-300">*</span><div className="mt-2 overflow-hidden rounded-xl border border-dashed border-white/20 bg-white/[.03]"><img src={form.cover} alt="Cover preview" className="h-32 w-full object-cover"/><div className="flex items-center justify-between gap-3 border-t border-white/10 p-3"><span className="truncate text-xs text-slate-400">Cover image</span><label htmlFor="cover-upload" className="cursor-pointer text-xs text-accent hover:text-cyan">Pilih gambar<input id="cover-upload" type="file" accept="image/*" onChange={chooseCover} className="hidden"/></label></div></div></label><input className="field mt-3" value={typeof form.cover==='string'&&form.cover.startsWith('data:')?'':form.cover} onChange={e=>update('cover',e.target.value)} placeholder="Atau masukkan URL gambar"/></section><section className="rounded-2xl border border-white/10 bg-white/[.03] p-5"><div className="flex items-center gap-3 border-b border-white/10 pb-4"><Settings size={17} className="text-accent"/><h2 className="font-medium">Publikasi</h2></div><label className="mt-5 block">Status<select className="field mt-2" value={form.status||'Draft'} onChange={e=>update('status',e.target.value)}><option>Draft</option><option>Published</option><option>Archived</option></select></label><label className="mt-4 block">Penulis<input className="field mt-2" value={form.author||''} onChange={e=>update('author',e.target.value)} placeholder="Nama penulis"/></label><label className="mt-4 block">Tanggal terbit<input type="datetime-local" className="field mt-2" value={form.date} onChange={e=>update('date',e.target.value)}/></label><label className="mt-4 flex items-center gap-2 text-sm"><input type="checkbox" checked={Boolean(form.featured)} onChange={e=>update('featured',e.target.checked)}/> Ditampilkan pada featured</label></section><section className="rounded-2xl border border-white/10 bg-white/[.03] p-5"><div className="flex items-center gap-3 border-b border-white/10 pb-4"><Palette size={17} className="text-accent"/><h2 className="font-medium">Klasifikasi</h2></div><label className="mt-5 block">Kategori<select className="field mt-2" value={form.category} onChange={e=>update('category',e.target.value)}>{articleCategories.filter(x=>x!=='All').map(x=><option key={x}>{x}</option>)}</select></label><label className="mt-4 block">Tags<input className="field mt-2" value={Array.isArray(form.tags)?form.tags.join(', '):form.tags} onChange={e=>update('tags',e.target.value)} placeholder="design, ux, product"/></label><label className="mt-4 block">Estimasi baca<div className="mt-2 flex"><input type="number" min="1" className="field rounded-r-none" value={String(form.read).replace(/\D/g,'')} onChange={e=>update('read',`${e.target.value} min`)}/><span className="grid place-items-center rounded-r-xl border border-l-0 border-white/15 px-3 text-xs text-slate-500">Menit</span></div></label></section><section className="rounded-2xl border border-white/10 bg-white/[.03] p-5"><div className="flex items-center gap-3 border-b border-white/10 pb-4"><Search size={17} className="text-accent"/><h2 className="font-medium">SEO & Metadata</h2></div><div className="mt-5 space-y-4"><label>SEO title<input className="field mt-2" value={form.seoTitle||''} onChange={e=>update('seoTitle',e.target.value)} placeholder="Kosongkan untuk memakai default"/></label><label>SEO description<textarea rows="3" className="field mt-2" value={form.seoDescription||''} onChange={e=>update('seoDescription',e.target.value)} placeholder="Deskripsi untuk mesin pencari"/></label><label>Meta keywords<input className="field mt-2" value={form.seoKeywords||''} onChange={e=>update('seoKeywords',e.target.value)} placeholder="keyword, lainnya"/></label><label>Social image URL<input className="field mt-2" value={form.seoImage||''} onChange={e=>update('seoImage',e.target.value)} placeholder="/images/share.jpg"/></label></div></section></aside><div className="flex flex-wrap gap-3 lg:col-span-2"><Button>{id?'Save changes':'Create'}</Button>{!id&&<Button variant="secondary" type="button" onClick={()=>{setForm(f=>({...f,status:'Draft'}));}}>Create & create another</Button>}<Button to="/admin/articles" variant="secondary">Cancel</Button></div></form></AdminLayout>}
+function AdminAppearance() {
+  const [items, setItems] = useState(readPublicMenu);
+  const [favicon, setFavicon] = useState(readFavicon);
+  const [socials, setSocials] = useState(readSocialLinks);
+  const [message, setMessage] = useState("");
+  const update = (id, key, value) =>
+    setItems((current) =>
+      current.map((item) =>
+        item.id === id ? { ...item, [key]: value } : item,
+      ),
+    );
+  const updateSocial = (id, key, value) =>
+    setSocials((current) =>
+      current.map((item) =>
+        item.id === id ? { ...item, [key]: value } : item,
+      ),
+    );
+  const addSocial = () =>
+    setSocials((current) => [
+      ...current,
+      {
+        id: `social-${Date.now()}`,
+        label: "New social media",
+        url: "",
+        icon: "ExternalLink",
+        enabled: true,
+        customIcon: "",
+      },
+    ]);
+  const removeSocial = (id) =>
+    setSocials((current) => current.filter((item) => item.id !== id));
+  const chooseSocialIcon = (id, event) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => updateSocial(id, "customIcon", reader.result);
+    reader.readAsDataURL(file);
+  };
+  const move = (index, direction) => {
+    const next = [...items];
+    const target = index + direction;
+    if (target < 0 || target >= next.length) return;
+    [next[index], next[target]] = [next[target], next[index]];
+    setItems(next);
+  };
+  const saveMenu = (e) => {
+    e.preventDefault();
+    localStorage.setItem("public-menu", JSON.stringify(items));
+    setMessage("Menu frontend berhasil disimpan.");
+  };
+  const saveFavicon = (e) => {
+    e.preventDefault();
+    if (favicon === defaultFavicon) localStorage.removeItem("site-favicon");
+    else localStorage.setItem("site-favicon", favicon);
+    applyFavicon();
+    setMessage("Favicon berhasil disimpan.");
+  };
+  const saveSocials = (e) => {
+    e.preventDefault();
+    localStorage.setItem("social-links", JSON.stringify(socials));
+    setMessage("Social media berhasil disimpan.");
+  };
+  const chooseFavicon = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => setFavicon(reader.result);
+    reader.readAsDataURL(file);
+  };
+  const resetFavicon = () => {
+    localStorage.removeItem("site-favicon");
+    setFavicon(defaultFavicon);
+    applyFavicon();
+    setMessage("Favicon dikembalikan ke default.");
+  };
+  return (
+    <AdminLayout>
+      <AdminHeader
+        title="Appearance"
+        text="Atur menu navigasi, favicon, dan social media website publik."
+      />
+      <div className="mt-10 max-w-3xl space-y-6">
+        <div className="rounded-3xl border border-white/10 bg-white/[.03] p-6 sm:p-8">
+          <div className="flex items-start gap-4 border-b border-white/10 pb-6">
+            <div className="grid h-11 w-11 place-items-center rounded-2xl bg-cyan/15 text-cyan">
+              <Palette size={20} />
+            </div>
+            <div>
+              <h2 className="text-xl font-medium">Public navigation</h2>
+              <p className="mt-1 text-sm leading-6 text-slate-400">
+                Aktifkan, nonaktifkan, dan urutkan menu yang terlihat di header
+                frontend.
+              </p>
+            </div>
+          </div>
+          <form onSubmit={saveMenu} className="mt-7 space-y-3">
+            {items.map((item, index) => (
+              <div
+                key={item.id}
+                className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[.03] p-3"
+              >
+                <GripVertical size={18} className="shrink-0 text-slate-600" />
+                <div className="grid flex-1 gap-2 sm:grid-cols-[1fr_1fr]">
+                  <input
+                    aria-label={`${item.id} label`}
+                    className="field"
+                    value={item.label}
+                    onChange={(e) => update(item.id, "label", e.target.value)}
+                  />
+                  <input
+                    aria-label={`${item.id} path`}
+                    className="field"
+                    value={item.path}
+                    onChange={(e) => update(item.id, "path", e.target.value)}
+                  />
+                </div>
+                <label className="flex items-center gap-2 text-xs text-slate-400">
+                  <input
+                    type="checkbox"
+                    checked={item.enabled}
+                    onChange={(e) =>
+                      update(item.id, "enabled", e.target.checked)
+                    }
+                  />{" "}
+                  Show
+                </label>
+                <div className="flex flex-col gap-1">
+                  <button
+                    type="button"
+                    aria-label={`Move ${item.label} up`}
+                    disabled={index === 0}
+                    onClick={() => move(index, -1)}
+                    className="rounded p-1 text-slate-400 hover:bg-white/10 hover:text-white disabled:opacity-30"
+                  >
+                    ↑
+                  </button>
+                  <button
+                    type="button"
+                    aria-label={`Move ${item.label} down`}
+                    disabled={index === items.length - 1}
+                    onClick={() => move(index, 1)}
+                    className="rounded p-1 text-slate-400 hover:bg-white/10 hover:text-white disabled:opacity-30"
+                  >
+                    ↓
+                  </button>
+                </div>
+              </div>
+            ))}
+            <div className="flex flex-wrap items-center gap-4 pt-5">
+              <button className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-ink hover:bg-cyan">
+                Save menu
+              </button>
+              {message && (
+                <p role="status" className="text-sm text-cyan">
+                  {message}
+                </p>
+              )}
+            </div>
+          </form>
+        </div>
+        <div className="rounded-3xl border border-white/10 bg-white/[.03] p-6 sm:p-8">
+          <div className="flex items-start gap-4 border-b border-white/10 pb-6">
+            <div className="grid h-11 w-11 place-items-center rounded-2xl bg-accent/15 text-accent">
+              <ImageIcon size={20} />
+            </div>
+            <div>
+              <h2 className="text-xl font-medium">Favicon</h2>
+              <p className="mt-1 text-sm leading-6 text-slate-400">
+                Pilih gambar yang akan tampil di tab browser. Gunakan PNG, ICO,
+                atau SVG.
+              </p>
+            </div>
+          </div>
+          <form
+            onSubmit={saveFavicon}
+            className="mt-7 flex flex-col gap-5 sm:flex-row sm:items-center"
+          >
+            <div className="grid h-20 w-20 shrink-0 place-items-center overflow-hidden rounded-2xl border border-white/10 bg-white">
+              <img
+                src={favicon}
+                alt="Favicon preview"
+                className="h-full w-full object-contain p-3"
+              />
+            </div>
+            <div className="flex-1">
+              <input
+                id="favicon-upload"
+                type="file"
+                accept="image/png,image/jpeg,image/svg+xml,image/x-icon,.ico"
+                onChange={chooseFavicon}
+                className="field"
+              />
+              <p className="mt-2 text-xs text-slate-500">
+                File disimpan di browser ini sebagai local preview.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <button className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-ink hover:bg-cyan">
+                Save favicon
+              </button>
+              <button
+                type="button"
+                onClick={resetFavicon}
+                className="rounded-full border border-white/15 px-5 py-3 text-sm text-slate-300 hover:border-accent hover:text-accent"
+              >
+                Reset
+              </button>
+            </div>
+          </form>
+        </div>
+        <div className="rounded-3xl border border-white/10 bg-white/[.03] p-6 sm:p-8">
+          <div className="flex items-start gap-4 border-b border-white/10 pb-6">
+            <div className="grid h-11 w-11 place-items-center rounded-2xl bg-accent/15 text-accent">
+              <ExternalLink size={20} />
+            </div>
+            <div>
+              <h2 className="text-xl font-medium">Social media</h2>
+              <p className="mt-1 text-sm leading-6 text-slate-400">
+                Atur URL, label, ikon, dan visibilitas link social media di
+                footer.
+              </p>
+            </div>
+          </div>
+          <form onSubmit={saveSocials} className="mt-7 space-y-4">
+            {socials.map((social) => {
+              const Icon = socialIcons[social.icon] || ExternalLink;
+              return (
+                <div
+                  key={social.id}
+                  className="rounded-2xl border border-white/10 bg-white/[.03] p-4"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="grid h-9 w-9 place-items-center rounded-xl bg-accent/15 text-accent">
+                      {social.customIcon ? (
+                        <img src={social.customIcon} alt="" className="h-5 w-5 object-contain" />
+                      ) : (
+                        <Icon size={17} />
+                      )}
+                    </span>
+                    <input
+                      className="field"
+                      value={social.label}
+                      onChange={(e) =>
+                        updateSocial(social.id, "label", e.target.value)
+                      }
+                      placeholder="Label"
+                    />
+                    <label className="flex shrink-0 items-center gap-2 text-xs text-slate-400">
+                      <input
+                        type="checkbox"
+                        checked={social.enabled}
+                        onChange={(e) =>
+                          updateSocial(social.id, "enabled", e.target.checked)
+                        }
+                      />{" "}
+                      Show
+                    </label>
+                  </div>
+                  <div className="mt-3 grid gap-3 sm:grid-cols-[1fr_150px]">
+                    <input
+                      type="url"
+                      className="field"
+                      value={social.url}
+                      onChange={(e) =>
+                        updateSocial(social.id, "url", e.target.value)
+                      }
+                      placeholder="https://..."
+                    />
+                    <select
+                      className="field"
+                      value={social.icon}
+                      onChange={(e) =>
+                        updateSocial(social.id, "icon", e.target.value)
+                      }
+                    >
+                      <option>Linkedin</option>
+                      <option>Github</option>
+                      <option>Dribbble</option>
+                      <option>Instagram</option>
+                      <option>ExternalLink</option>
+                    </select>
+                  </div>
+                  <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
+                    <label className="cursor-pointer text-xs text-accent hover:text-cyan">
+                      {social.customIcon ? "Ganti custom icon" : "Upload custom icon"}
+                      <input
+                        type="file"
+                        accept="image/png,image/jpeg,image/svg+xml,image/webp"
+                        onChange={(e) => chooseSocialIcon(social.id, e)}
+                        className="hidden"
+                      />
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => removeSocial(social.id)}
+                      className="text-xs text-red-300 hover:text-red-200"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <button
+                type="button"
+                onClick={addSocial}
+                className="rounded-full border border-white/15 px-5 py-3 text-sm text-slate-300 hover:border-accent hover:text-accent"
+              >
+                Add social media
+              </button>
+              <button className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-ink hover:bg-cyan">
+                Save social media
+              </button>
+              {message && (
+                <p role="status" className="text-sm text-cyan">
+                  {message}
+                </p>
+              )}
+            </div>
+          </form>
+        </div>
+      </div>
+    </AdminLayout>
+  );
+}
+function AdminHeader({ title, text, action }) {
+  return (
+    <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <p className="eyebrow">Admin studio</p>
+        <h1 className="mt-3 text-4xl font-semibold tracking-tight">{title}</h1>
+        {text && <p className="mt-2 text-slate-400">{text}</p>}
+      </div>
+      {action}
+    </div>
+  );
+}
+function AdminArticles() {
+  const [items, setItems] = useState(() => getStore("articles", seedArticles));
+  const [q, setQ] = useState("");
+  const remove = (id) => {
+    const x = items.filter((a) => a.id !== id);
+    setItems(x);
+    localStorage.setItem("articles", JSON.stringify(x));
+  };
+  return (
+    <AdminLayout>
+      <AdminHeader
+        title="Articles"
+        text="Create, edit, and publish your writing."
+        action={
+          <Button to="/admin/articles/create">
+            <Plus size={16} /> New article
+          </Button>
+        }
+      />
+      <div className="mt-8 flex items-center gap-3">
+        <Search size={18} className="text-slate-500" />
+        <input
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          className="field"
+          placeholder="Search articles"
+        />
+      </div>
+      <div className="mt-6 overflow-hidden rounded-2xl border border-white/10">
+        <table className="w-full text-left text-sm">
+          <thead className="bg-white/[.04] text-slate-500">
+            <tr>
+              <th className="p-4">Title</th>
+              <th className="p-4">Category</th>
+              <th className="p-4">Status</th>
+              <th className="p-4">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {items
+              .filter((a) => a.title.toLowerCase().includes(q.toLowerCase()))
+              .map((a) => (
+                <tr className="border-t border-white/10" key={a.id}>
+                  <td className="p-4 font-medium">{a.title}</td>
+                  <td className="p-4 text-slate-400">{a.category}</td>
+                  <td className="p-4">
+                    <span className="rounded-full bg-cyan/15 px-2 py-1 text-xs text-cyan">
+                      Published
+                    </span>
+                  </td>
+                  <td className="flex gap-3 p-4">
+                    <Link
+                      to={`/admin/articles/${a.id}/edit`}
+                      className="text-accent"
+                    >
+                      <Edit3 size={16} />
+                    </Link>
+                    <button
+                      onClick={() => remove(a.id)}
+                      className="text-red-300"
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
+    </AdminLayout>
+  );
+}
+function ArticleEditor() {
+  const { id } = useParams();
+  const nav = useNavigate();
+  const existing = getStore("articles", seedArticles).find((a) => a.id === id);
+  const [form, setForm] = useState(
+    existing || {
+      title: "",
+      slug: "",
+      excerpt: "",
+      category: "UI/UX",
+      date: new Date().toISOString().slice(0, 16),
+      read: "5",
+      tags: [],
+      cover: "/images/fahmi.png",
+      status: "Draft",
+      author: "Fahmi",
+      featured: "",
+      seoTitle: "",
+      seoDescription: "",
+      seoKeywords: "",
+      seoImage: "",
+      content: [""],
+    },
+  );
+  const update = (k, v) => setForm((f) => ({ ...f, [k]: v }));
+  const chooseCover = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => setForm((f) => ({ ...f, cover: reader.result }));
+    reader.readAsDataURL(file);
+  };
+  const save = (e) => {
+    e.preventDefault();
+    const items = getStore("articles", seedArticles);
+    const next = {
+      ...form,
+      id: id || String(Date.now()),
+      tags:
+        typeof form.tags === "string"
+          ? form.tags
+              .split(",")
+              .map((x) => x.trim())
+              .filter(Boolean)
+          : form.tags,
+      content:
+        typeof form.content === "string"
+          ? form.content.split("\n").filter(Boolean)
+          : form.content,
+    };
+    localStorage.setItem(
+      "articles",
+      JSON.stringify(
+        id ? items.map((x) => (x.id === id ? next : x)) : [next, ...items],
+      ),
+    );
+    nav("/admin/articles");
+  };
+  return (
+    <AdminLayout>
+      <AdminHeader
+        title={id ? "Edit article" : "Create post"}
+        text="Create and optimize your article from one focused workspace."
+      />
+      <form
+        onSubmit={save}
+        className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]"
+      >
+        <section className="overflow-hidden rounded-2xl border border-white/10 bg-white/[.03]">
+          <div className="flex items-center gap-3 border-b border-white/10 px-5 py-4">
+            <Edit3 size={17} className="text-accent" />
+            <div>
+              <h2 className="font-medium">Konten utama</h2>
+              <p className="text-xs text-slate-500">
+                Tulis dan susun artikel kamu.
+              </p>
+            </div>
+          </div>
+          <div className="space-y-5 p-5">
+            <div className="grid gap-5 md:grid-cols-2">
+              <label>
+                Judul artikel<span className="text-red-300">*</span>
+                <input
+                  required
+                  className="field mt-2"
+                  value={form.title}
+                  onChange={(e) => update("title", e.target.value)}
+                  placeholder="Masukkan judul artikel..."
+                />
+              </label>
+              <label>
+                Slug URL<span className="text-red-300">*</span>
+                <input
+                  required
+                  className="field mt-2"
+                  value={form.slug}
+                  onChange={(e) => update("slug", e.target.value)}
+                  placeholder="judul-artikel"
+                />
+              </label>
+            </div>
+            <label>
+              Ringkasan / Excerpt
+              <textarea
+                rows="3"
+                className="field mt-2"
+                value={form.excerpt}
+                onChange={(e) => update("excerpt", e.target.value)}
+                placeholder="Ringkasan singkat untuk kartu artikel..."
+              />
+            </label>
+            <label>
+              Isi artikel<span className="text-red-300">*</span>
+              <div className="mt-2 overflow-hidden rounded-xl border border-white/15">
+                <div className="flex flex-wrap gap-4 border-b border-white/15 bg-white/[.03] px-4 py-3 text-sm text-slate-400">
+                  <button
+                    type="button"
+                    className="font-semibold hover:text-white"
+                  >
+                    B
+                  </button>
+                  <button type="button" className="italic hover:text-white">
+                    I
+                  </button>
+                  <button type="button" className="underline hover:text-white">
+                    U
+                  </button>
+                  <span className="text-slate-600">|</span>
+                  <span>Link</span>
+                  <span>H1</span>
+                  <span>Quote</span>
+                  <span>List</span>
+                  <span>Image</span>
+                </div>
+                <textarea
+                  required
+                  rows="14"
+                  className="field rounded-none border-0 bg-transparent"
+                  value={
+                    Array.isArray(form.content)
+                      ? form.content.join("\n")
+                      : form.content
+                  }
+                  onChange={(e) => update("content", e.target.value)}
+                  placeholder="Tulis isi artikel di sini..."
+                />
+              </div>
+            </label>
+          </div>
+        </section>
+        <aside className="space-y-5">
+          <section className="rounded-2xl border border-white/10 bg-white/[.03] p-5">
+            <div className="flex items-center gap-3 border-b border-white/10 pb-4">
+              <ImageIcon size={17} className="text-accent" />
+              <h2 className="font-medium">Visual</h2>
+            </div>
+            <label className="mt-5 block">
+              Foto utama<span className="text-red-300">*</span>
+              <div className="mt-2 overflow-hidden rounded-xl border border-dashed border-white/20 bg-white/[.03]">
+                <img
+                  src={form.cover}
+                  alt="Cover preview"
+                  className="h-32 w-full object-cover"
+                />
+                <div className="flex items-center justify-between gap-3 border-t border-white/10 p-3">
+                  <span className="truncate text-xs text-slate-400">
+                    Cover image
+                  </span>
+                  <label
+                    htmlFor="cover-upload"
+                    className="cursor-pointer text-xs text-accent hover:text-cyan"
+                  >
+                    Pilih gambar
+                    <input
+                      id="cover-upload"
+                      type="file"
+                      accept="image/*"
+                      onChange={chooseCover}
+                      className="hidden"
+                    />
+                  </label>
+                </div>
+              </div>
+            </label>
+            <input
+              className="field mt-3"
+              value={
+                typeof form.cover === "string" && form.cover.startsWith("data:")
+                  ? ""
+                  : form.cover
+              }
+              onChange={(e) => update("cover", e.target.value)}
+              placeholder="Atau masukkan URL gambar"
+            />
+          </section>
+          <section className="rounded-2xl border border-white/10 bg-white/[.03] p-5">
+            <div className="flex items-center gap-3 border-b border-white/10 pb-4">
+              <Settings size={17} className="text-accent" />
+              <h2 className="font-medium">Publikasi</h2>
+            </div>
+            <label className="mt-5 block">
+              Status
+              <select
+                className="field mt-2"
+                value={form.status || "Draft"}
+                onChange={(e) => update("status", e.target.value)}
+              >
+                <option>Draft</option>
+                <option>Published</option>
+                <option>Archived</option>
+              </select>
+            </label>
+            <label className="mt-4 block">
+              Penulis
+              <input
+                className="field mt-2"
+                value={form.author || ""}
+                onChange={(e) => update("author", e.target.value)}
+                placeholder="Nama penulis"
+              />
+            </label>
+            <label className="mt-4 block">
+              Tanggal terbit
+              <input
+                type="datetime-local"
+                className="field mt-2"
+                value={form.date}
+                onChange={(e) => update("date", e.target.value)}
+              />
+            </label>
+            <label className="mt-4 flex items-center gap-2 text-sm">
+              <input
+                type="checkbox"
+                checked={Boolean(form.featured)}
+                onChange={(e) => update("featured", e.target.checked)}
+              />{" "}
+              Ditampilkan pada featured
+            </label>
+          </section>
+          <section className="rounded-2xl border border-white/10 bg-white/[.03] p-5">
+            <div className="flex items-center gap-3 border-b border-white/10 pb-4">
+              <Palette size={17} className="text-accent" />
+              <h2 className="font-medium">Klasifikasi</h2>
+            </div>
+            <label className="mt-5 block">
+              Kategori
+              <select
+                className="field mt-2"
+                value={form.category}
+                onChange={(e) => update("category", e.target.value)}
+              >
+                {articleCategories
+                  .filter((x) => x !== "All")
+                  .map((x) => (
+                    <option key={x}>{x}</option>
+                  ))}
+              </select>
+            </label>
+            <label className="mt-4 block">
+              Tags
+              <input
+                className="field mt-2"
+                value={
+                  Array.isArray(form.tags) ? form.tags.join(", ") : form.tags
+                }
+                onChange={(e) => update("tags", e.target.value)}
+                placeholder="design, ux, product"
+              />
+            </label>
+            <label className="mt-4 block">
+              Estimasi baca
+              <div className="mt-2 flex">
+                <input
+                  type="number"
+                  min="1"
+                  className="field rounded-r-none"
+                  value={String(form.read).replace(/\D/g, "")}
+                  onChange={(e) => update("read", `${e.target.value} min`)}
+                />
+                <span className="grid place-items-center rounded-r-xl border border-l-0 border-white/15 px-3 text-xs text-slate-500">
+                  Menit
+                </span>
+              </div>
+            </label>
+          </section>
+          <section className="rounded-2xl border border-white/10 bg-white/[.03] p-5">
+            <div className="flex items-center gap-3 border-b border-white/10 pb-4">
+              <Search size={17} className="text-accent" />
+              <h2 className="font-medium">SEO & Metadata</h2>
+            </div>
+            <div className="mt-5 space-y-4">
+              <label>
+                SEO title
+                <input
+                  className="field mt-2"
+                  value={form.seoTitle || ""}
+                  onChange={(e) => update("seoTitle", e.target.value)}
+                  placeholder="Kosongkan untuk memakai default"
+                />
+              </label>
+              <label>
+                SEO description
+                <textarea
+                  rows="3"
+                  className="field mt-2"
+                  value={form.seoDescription || ""}
+                  onChange={(e) => update("seoDescription", e.target.value)}
+                  placeholder="Deskripsi untuk mesin pencari"
+                />
+              </label>
+              <label>
+                Meta keywords
+                <input
+                  className="field mt-2"
+                  value={form.seoKeywords || ""}
+                  onChange={(e) => update("seoKeywords", e.target.value)}
+                  placeholder="keyword, lainnya"
+                />
+              </label>
+              <label>
+                Social image URL
+                <input
+                  className="field mt-2"
+                  value={form.seoImage || ""}
+                  onChange={(e) => update("seoImage", e.target.value)}
+                  placeholder="/images/share.jpg"
+                />
+              </label>
+            </div>
+          </section>
+        </aside>
+        <div className="flex flex-wrap gap-3 lg:col-span-2">
+          <Button>{id ? "Save changes" : "Create"}</Button>
+          {!id && (
+            <Button
+              variant="secondary"
+              type="button"
+              onClick={() => {
+                setForm((f) => ({ ...f, status: "Draft" }));
+              }}
+            >
+              Create & create another
+            </Button>
+          )}
+          <Button to="/admin/articles" variant="secondary">
+            Cancel
+          </Button>
+        </div>
+      </form>
+    </AdminLayout>
+  );
+}
 function AdminProjects(){const [items,setItems]=useState(()=>getStore('projects',seedProjects));const remove=id=>{const x=items.filter(p=>p.id!==id);setItems(x);localStorage.setItem('projects',JSON.stringify(x))};return <AdminLayout><AdminHeader title="Projects" text="Keep your case studies fresh." action={<Button to="/admin/projects/create"><Plus size={16}/> New project</Button>}/><div className="mt-8 grid gap-4 md:grid-cols-2">{items.map(p=><div className="flex items-center gap-4 rounded-2xl border border-white/10 p-4" key={p.id}><img src={p.cover} className="h-20 w-24 rounded-xl object-cover"/><div className="min-w-0 flex-1"><p className="font-medium">{p.title}</p><p className="mt-1 text-sm text-slate-500">{p.category} · {p.year}</p></div><Link to={`/admin/projects/${p.id}/edit`} className="text-accent"><Edit3 size={16}/></Link><button onClick={()=>remove(p.id)} className="text-red-300"><Trash2 size={16}/></button></div>)}</div></AdminLayout>}
 function ProjectEditor(){const {id}=useParams();const nav=useNavigate();const existing=getStore('projects',seedProjects).find(p=>p.id===id);const [form,setForm]=useState(existing||{title:'',slug:'',category:'UI/UX',year:String(new Date().getFullYear()),description:'',cover:'/images/fahmi.png',client:'',role:'',duration:'',tools:[]});const update=(k,v)=>setForm(f=>({...f,[k]:v}));const save=e=>{e.preventDefault();const items=getStore('projects',seedProjects);const next={...form,id:id||String(Date.now()),tools:typeof form.tools==='string'?form.tools.split(',').map(x=>x.trim()).filter(Boolean):form.tools,gallery:existing?.gallery||[form.cover]};localStorage.setItem('projects',JSON.stringify(id?items.map(x=>x.id===id?next:x):[next,...items]));nav('/admin/projects')};return <AdminLayout><AdminHeader title={id?'Edit project':'New project'} text="Changes are saved to local mock storage."/><form onSubmit={save} className="mt-8 max-w-3xl space-y-5"><input required className="field" value={form.title} onChange={e=>update('title',e.target.value)} placeholder="Project title"/><input required className="field" value={form.slug} onChange={e=>update('slug',e.target.value)} placeholder="slug"/><textarea required rows="4" className="field" value={form.description} onChange={e=>update('description',e.target.value)} placeholder="Short description"/><div className="grid gap-5 md:grid-cols-2"><input className="field" value={form.category} onChange={e=>update('category',e.target.value)} placeholder="Category"/><input className="field" value={form.year} onChange={e=>update('year',e.target.value)} placeholder="Year"/></div><div className="grid gap-5 md:grid-cols-2"><input className="field" value={form.client} onChange={e=>update('client',e.target.value)} placeholder="Client"/><input className="field" value={form.role} onChange={e=>update('role',e.target.value)} placeholder="Role"/></div><input className="field" value={form.cover} onChange={e=>update('cover',e.target.value)} placeholder="Cover image URL"/><input className="field" value={Array.isArray(form.tools)?form.tools.join(', '):form.tools} onChange={e=>update('tools',e.target.value)} placeholder="Tools, comma separated"/><div className="flex gap-3"><Button>Save project</Button><Button to="/admin/projects" variant="secondary">Cancel</Button></div></form></AdminLayout>}
 function AdminCategories(){const [cats,setCats]=useState(['UI/UX','Product Design','Web Development','Fintech','SaaS','Mobile App']);const [name,setName]=useState('');return <AdminLayout><AdminHeader title="Categories" text="Organize your articles and projects."/><div className="mt-8 flex gap-3"><input value={name} onChange={e=>setName(e.target.value)} className="field max-w-sm" placeholder="New category"/><Button onClick={()=>{if(name){setCats([...cats,name]);setName('')}}}><Plus size={16}/> Add</Button></div><div className="mt-6 flex flex-wrap gap-3">{cats.map(c=><span key={c} className="rounded-full border border-white/10 px-4 py-2 text-sm">{c}</span>)}</div></AdminLayout>}
