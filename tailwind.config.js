@@ -7,11 +7,11 @@ export default {
       },
       colors: {
         ink: "#0b1020",
-        accent: "#8b7cff",
+        accent: "#0C8EFF",
         cyan: "#4dd8d2",
       },
       boxShadow: {
-        glow: "0 0 60px rgba(139,124,255,.18)",
+        glow: "0 0 60px rgba(12,142,255,.18)",
       },
     },
   },

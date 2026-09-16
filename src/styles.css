@@ -54,8 +54,8 @@ body {
 }
 
 .field:focus {
-  border-color: #8b7cff;
-  box-shadow: 0 0 0 3px rgba(139, 124, 255, 0.15);
+  border-color: #0C8EFF;
+  box-shadow: 0 0 0 3px rgba(12, 142, 255, 0.15);
 }
 
 label {
@@ -82,6 +82,10 @@ a {
   color: #cbd5e1;
   font-size: 1.16rem;
   line-height: 1.9;
+}
+
+main > section:first-child > div:first-child {
+  background-image: radial-gradient(circle at 80% 20%, rgba(12, 142, 255, 0.2), transparent 34%), radial-gradient(circle at 20% 80%, rgba(77, 216, 210, 0.1), transparent 30%);
 }
 
 .theme-toggle {
