@@ -185,7 +185,7 @@ function About(){useSEO({title:'About — Fahmi'});return <Shell><PageIntro eyeb
 function Stat({n,l}){return <div className="rounded-2xl border border-white/10 p-4"><p className="text-3xl font-semibold text-white">{n}</p><p className="mt-1 text-xs text-slate-500">{l}</p></div>}
 function PageIntro({eyebrow,title,text}){return <div className="container py-24 md:py-32"><p className="eyebrow">{eyebrow}</p><h1 className="mt-5 max-w-4xl text-5xl font-semibold tracking-[-.05em] md:text-7xl">{title}</h1>{text&&<p className="mt-7 max-w-2xl text-lg leading-8 text-slate-400">{text}</p>}</div>}
 function Projects(){const [filter,setFilter]=useState('All');useSEO({title:'Projects — Fahmi'});const list=filter==='All'?seedProjects:seedProjects.filter(p=>[p.category,p.type].includes(filter));return <Shell><PageIntro eyebrow="Selected work" title="Projects built around real people and real outcomes." text="A selection of product, brand, and digital experiences I've helped bring to life."/><section className="container pb-24"><div className="mb-10 flex flex-wrap gap-2">{categories.map(c=><button key={c} onClick={()=>setFilter(c)} className={`rounded-full px-4 py-2 text-sm transition ${filter===c?'bg-white text-ink':'border border-white/10 text-slate-400 hover:border-white/40 hover:text-white'}`}>{c}</button>)}</div><div className="grid gap-6 md:grid-cols-2">{list.map(p=><ProjectCard key={p.id} project={p}/>)}</div></section></Shell>}
-function ProjectDetail(){const {slug}=useParams();const p=seedProjects.find(x=>x.slug===slug);if(!p)return <NotFound/>;useSEO({title:`${p.title} — Fahmi`,description:p.description,type:'project',image:p.cover});const next=seedProjects[(seedProjects.indexOf(p)+1)%seedProjects.length];return <Shell><article className="container pb-24"><div className="py-16"><Link to="/projects" className="text-sm text-slate-500 hover:text-white">← Back to projects</Link><p className="eyebrow mt-14">{p.category} · {p.year}</p><h1 className="mt-4 max-w-4xl text-5xl font-semibold tracking-[-.05em] md:text-7xl">{p.title}</h1><p className="mt-6 max-w-2xl text-xl leading-8 text-slate-400">{p.description}</p></div><img src={p.cover} alt={p.title} className="max-h-[620px] w-full rounded-3xl object-cover"/><div className="mt-12 grid gap-10 lg:grid-cols-[.7fr_1.3fr]"><aside className="grid h-fit grid-cols-2 gap-5 text-sm md:grid-cols-4 lg:block lg:space-y-6">{[['Client',p.client],['Role',p.role],['Duration',p.duration],['Tools',p.tools.join(', ')]].map(x=><div key={x[0]}><p className="text-slate-500">{x[0]}</p><p className="mt-1 text-slate-200">{x[1]}</p></div>)}</aside><div className="space-y-8 text-lg leading-8 text-slate-300"><SectionBlock title="Overview">{p.description} We worked closely with the team to turn a complex workflow into an experience that feels calm, fast, and easy to understand.</SectionBlock><SectionBlock title="The approach">We combined interviews, journey mapping, rapid prototyping, and weekly critique to make decisions visible and keep everyone aligned.</SectionBlock><div className="grid gap-5">{p.gallery.map((g,i)=><img key={g} loading="lazy" src={g} alt={`${p.title} screen ${i+1}`} className="max-h-[600px] w-full rounded-2xl object-cover"/>)}</div><SectionBlock title="Outcome">A stronger foundation for the product, clearer stories for customers, and a team that can keep shipping with confidence.</SectionBlock></div></div><Link to={`/projects/${next.slug}`} className="mt-20 flex items-center justify-between border-t border-white/10 pt-7 text-lg">Next project <ArrowRight className="text-accent"/></Link></article></Shell>}
+function ProjectDetail(){const {slug}=useParams();const p=seedProjects.find(x=>x.slug===slug);if(!p)return <NotFound/>;useSEO({title:`${p.title} — Fahmi`,description:p.description,type:'project',image:p.seoImage||p.cover});const next=seedProjects[(seedProjects.indexOf(p)+1)%seedProjects.length];return <Shell><article className="container pb-24"><div className="py-16"><Link to="/projects" className="text-sm text-slate-500 hover:text-white">← Back to projects</Link><p className="eyebrow mt-14">{p.category} · {p.year}</p><h1 className="mt-4 max-w-4xl text-5xl font-semibold tracking-[-.05em] md:text-7xl">{p.title}</h1><p className="mt-6 max-w-2xl text-xl leading-8 text-slate-400">{p.description}</p></div><img src={p.cover} alt={p.title} className="max-h-[620px] w-full rounded-3xl object-cover"/><div className="mt-12 grid gap-10 lg:grid-cols-[.7fr_1.3fr]"><aside className="grid h-fit grid-cols-2 gap-5 text-sm md:grid-cols-4 lg:block lg:space-y-6">{[['Client',p.client],['Role',p.role],['Duration',p.duration],['Tools',p.tools.join(', ')]].map(x=><div key={x[0]}><p className="text-slate-500">{x[0]}</p><p className="mt-1 text-slate-200">{x[1]}</p></div>)}</aside><div className="space-y-8 text-lg leading-8 text-slate-300"><SectionBlock title="Overview">{p.description} We worked closely with the team to turn a complex workflow into an experience that feels calm, fast, and easy to understand.</SectionBlock><SectionBlock title="The approach">We combined interviews, journey mapping, rapid prototyping, and weekly critique to make decisions visible and keep everyone aligned.</SectionBlock><div className="grid gap-5">{p.gallery.map((g,i)=><img key={g} loading="lazy" src={g} alt={`${p.title} screen ${i+1}`} className="max-h-[600px] w-full rounded-2xl object-cover"/>)}</div><SectionBlock title="Outcome">A stronger foundation for the product, clearer stories for customers, and a team that can keep shipping with confidence.</SectionBlock></div></div><Link to={`/projects/${next.slug}`} className="mt-20 flex items-center justify-between border-t border-white/10 pt-7 text-lg">Next project <ArrowRight className="text-accent"/></Link></article></Shell>}
 function SectionBlock({title,children}){return <section><h2 className="mb-3 text-2xl font-medium text-white">{title}</h2><p>{children}</p></section>}
 function Articles(){const {category:routeCategory}=useParams();const params=new URLSearchParams(useLocation().search);const initialCategory=routeCategory?routeCategory.replaceAll('-',' '):params.get('category')||'All';const [search,setSearch]=useState(params.get('search')||'');const [cat,setCat]=useState(initialCategory);const [visible,setVisible]=useState(4);useSEO({title:'Articles — Fahmi'});const filtered=seedArticles.filter(a=>(cat==='All'||a.category===cat)&&`${a.title} ${a.excerpt} ${a.content.join(' ')} ${a.tags.join(' ')}`.toLowerCase().includes(search.toLowerCase()));useEffect(()=>setVisible(4),[search,cat]);return <Shell><PageIntro eyebrow="Notes & ideas" title="Writing about the work behind the work." text="Thoughts on product design, collaboration, and making digital things feel a little more human."/><section className="container pb-24"><div className="flex flex-col gap-4 border-b border-white/10 pb-7 md:flex-row"><label className="relative flex-1"><Search className="absolute left-4 top-3.5 text-slate-500" size={18}/><input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search articles..." className="field pl-11"/></label><div className="flex gap-2 overflow-auto">{articleCategories.map(c=><button key={c} onClick={()=>setCat(c)} className={`whitespace-nowrap rounded-full px-4 py-2 text-sm ${cat===c?'bg-white text-ink':'border border-white/10 text-slate-400'}`}>{c}</button>)}</div></div>{filtered.length?<><div className="mt-10 grid gap-8 md:grid-cols-2">{filtered.slice(0,visible).map(a=><ArticleCard key={a.id} article={a}/>)}</div>{visible<filtered.length&&<button onClick={()=>setVisible(v=>v+4)} className="mx-auto mt-10 flex rounded-full border border-white/15 px-5 py-3 text-sm hover:border-accent hover:text-accent">Load more articles <ArrowRight size={16}/></button>}</>:<Empty text="No articles match that search."/>}</section></Shell>}
 function ArticleCard({article}){return <Link to={`/articles/${article.slug}`} className="group h-full"><div className="flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[.03]"><img loading="lazy" src={article.cover} alt="" className="aspect-[16/9] w-full shrink-0 object-cover transition duration-500 group-hover:scale-105"/><div className="flex flex-1 flex-col p-5"><div className="flex justify-between text-xs uppercase tracking-wider text-slate-500"><span>{article.category}</span><span>{article.read}</span></div><h2 className="mt-3 text-2xl font-medium">{article.title}</h2><p className="mt-2 text-sm leading-6 text-slate-400">{article.excerpt}</p><p className="mt-auto pt-5 text-sm text-accent">Read article →</p></div></div></Link>}
@@ -1391,7 +1391,97 @@ function ArticleEditor() {
   );
 }
 function AdminProjects(){const [items,setItems]=useState(()=>getStore('projects',seedProjects));const remove=id=>{const x=items.filter(p=>p.id!==id);setItems(x);localStorage.setItem('projects',JSON.stringify(x))};return <AdminLayout><AdminHeader title="Projects" text="Keep your case studies fresh." action={<Button to="/admin/projects/create"><Plus size={16}/> New project</Button>}/><div className="mt-8 grid gap-4 md:grid-cols-2">{items.map(p=><div className="flex items-center gap-4 rounded-2xl border border-white/10 p-4" key={p.id}><img src={p.cover} className="h-20 w-24 rounded-xl object-cover"/><div className="min-w-0 flex-1"><p className="font-medium">{p.title}</p><p className="mt-1 text-sm text-slate-500">{p.category} · {p.year}</p></div><Link to={`/admin/projects/${p.id}/edit`} className="text-accent"><Edit3 size={16}/></Link><button onClick={()=>remove(p.id)} className="text-red-300"><Trash2 size={16}/></button></div>)}</div></AdminLayout>}
-function ProjectEditor(){const {id}=useParams();const nav=useNavigate();const existing=getStore('projects',seedProjects).find(p=>p.id===id);const [form,setForm]=useState(existing||{title:'',slug:'',category:'UI/UX',year:String(new Date().getFullYear()),description:'',cover:'/images/fahmi.png',client:'',role:'',duration:'',tools:[]});const update=(k,v)=>setForm(f=>({...f,[k]:v}));const save=e=>{e.preventDefault();const items=getStore('projects',seedProjects);const next={...form,id:id||String(Date.now()),tools:typeof form.tools==='string'?form.tools.split(',').map(x=>x.trim()).filter(Boolean):form.tools,gallery:existing?.gallery||[form.cover]};localStorage.setItem('projects',JSON.stringify(id?items.map(x=>x.id===id?next:x):[next,...items]));nav('/admin/projects')};return <AdminLayout><AdminHeader title={id?'Edit project':'New project'} text="Changes are saved to local mock storage."/><form onSubmit={save} className="mt-8 max-w-3xl space-y-5"><input required className="field" value={form.title} onChange={e=>update('title',e.target.value)} placeholder="Project title"/><input required className="field" value={form.slug} onChange={e=>update('slug',e.target.value)} placeholder="slug"/><textarea required rows="4" className="field" value={form.description} onChange={e=>update('description',e.target.value)} placeholder="Short description"/><div className="grid gap-5 md:grid-cols-2"><input className="field" value={form.category} onChange={e=>update('category',e.target.value)} placeholder="Category"/><input className="field" value={form.year} onChange={e=>update('year',e.target.value)} placeholder="Year"/></div><div className="grid gap-5 md:grid-cols-2"><input className="field" value={form.client} onChange={e=>update('client',e.target.value)} placeholder="Client"/><input className="field" value={form.role} onChange={e=>update('role',e.target.value)} placeholder="Role"/></div><input className="field" value={form.cover} onChange={e=>update('cover',e.target.value)} placeholder="Cover image URL"/><input className="field" value={Array.isArray(form.tools)?form.tools.join(', '):form.tools} onChange={e=>update('tools',e.target.value)} placeholder="Tools, comma separated"/><div className="flex gap-3"><Button>Save project</Button><Button to="/admin/projects" variant="secondary">Cancel</Button></div></form></AdminLayout>}
+function ProjectEditor() {
+  const { id } = useParams();
+  const nav = useNavigate();
+  const existing = getStore("projects", seedProjects).find((p) => p.id === id);
+  const [form, setForm] = useState(
+    existing || {
+      title: "",
+      slug: "",
+      category: "UI/UX",
+      year: String(new Date().getFullYear()),
+      description: "",
+      cover: "/images/fahmi.png",
+      client: "",
+      role: "",
+      duration: "",
+      tools: [],
+      seoImage: "",
+    },
+  );
+  const update = (k, v) => setForm((f) => ({ ...f, [k]: v }));
+  const chooseImage = (key, event) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => update(key, reader.result);
+    reader.readAsDataURL(file);
+  };
+  const save = (e) => {
+    e.preventDefault();
+    const items = getStore("projects", seedProjects);
+    const next = {
+      ...form,
+      id: id || String(Date.now()),
+      tools:
+        typeof form.tools === "string"
+          ? form.tools
+              .split(",")
+              .map((x) => x.trim())
+              .filter(Boolean)
+          : form.tools,
+      gallery: existing?.gallery || [form.cover],
+    };
+    localStorage.setItem(
+      "projects",
+      JSON.stringify(
+        id ? items.map((x) => (x.id === id ? next : x)) : [next, ...items],
+      ),
+    );
+    nav("/admin/projects");
+  };
+  return (
+    <AdminLayout>
+      <AdminHeader
+        title={id ? "Edit project" : "New project"}
+        text="Changes are saved to local mock storage."
+      />
+      <form onSubmit={save} className="mt-8 max-w-3xl space-y-5">
+        <label>
+          Project title<span className="text-red-300">*</span>
+          <input required className="field mt-2" value={form.title} onChange={(e) => update("title", e.target.value)} placeholder="Project title" />
+        </label>
+        <label>
+          URL slug<span className="text-red-300">*</span>
+          <input required className="field mt-2" value={form.slug} onChange={(e) => update("slug", e.target.value)} placeholder="project-slug" />
+        </label>
+        <label>
+          Description<span className="text-red-300">*</span>
+          <textarea required rows="4" className="field mt-2" value={form.description} onChange={(e) => update("description", e.target.value)} placeholder="Short project description" />
+        </label>
+        <div className="grid gap-5 md:grid-cols-2">
+          <label>Category<input className="field mt-2" value={form.category} onChange={(e) => update("category", e.target.value)} placeholder="Category" /></label>
+          <label>Year<input className="field mt-2" value={form.year} onChange={(e) => update("year", e.target.value)} placeholder="Year" /></label>
+        </div>
+        <div className="grid gap-5 md:grid-cols-2">
+          <label>Client<input className="field mt-2" value={form.client} onChange={(e) => update("client", e.target.value)} placeholder="Client name" /></label>
+          <label>Role<input className="field mt-2" value={form.role} onChange={(e) => update("role", e.target.value)} placeholder="Your role" /></label>
+        </div>
+        <label>Duration<input className="field mt-2" value={form.duration} onChange={(e) => update("duration", e.target.value)} placeholder="e.g. 6 months" /></label>
+        <label>Cover project image<div className="mt-2 rounded-2xl border border-white/10 bg-white/[.03] p-3"><img src={form.cover} alt="Project cover preview" className="h-40 w-full rounded-xl object-cover" /><input type="file" accept="image/*" onChange={(e) => chooseImage("cover", e)} className="field mt-3" /><input className="field mt-3" value={typeof form.cover === "string" && form.cover.startsWith("data:") ? "" : form.cover} onChange={(e) => update("cover", e.target.value)} placeholder="Or enter cover image URL" /></div></label>
+        <label>Social share image<div className="mt-2 rounded-2xl border border-white/10 bg-white/[.03] p-3"><img src={form.seoImage || form.cover} alt="Social share preview" className="h-40 w-full rounded-xl object-cover" /><input type="file" accept="image/*" onChange={(e) => chooseImage("seoImage", e)} className="field mt-3" /><input className="field mt-3" value={typeof form.seoImage === "string" && form.seoImage.startsWith("data:") ? "" : form.seoImage || ""} onChange={(e) => update("seoImage", e.target.value)} placeholder="Or enter social image URL" /></div></label>
+        <label>Tools<input className="field mt-2" value={Array.isArray(form.tools) ? form.tools.join(", ") : form.tools} onChange={(e) => update("tools", e.target.value)} placeholder="Figma, React, Research" /></label>
+        <div className="flex gap-3">
+          <Button>Save project</Button>
+          <Button to="/admin/projects" variant="secondary">
+            Cancel
+          </Button>
+        </div>
+      </form>
+    </AdminLayout>
+  );
+}
 function AdminCategories(){const [cats,setCats]=useState(['UI/UX','Product Design','Web Development','Fintech','SaaS','Mobile App']);const [name,setName]=useState('');return <AdminLayout><AdminHeader title="Categories" text="Organize your articles and projects."/><div className="mt-8 flex gap-3"><input value={name} onChange={e=>setName(e.target.value)} className="field max-w-sm" placeholder="New category"/><Button onClick={()=>{if(name){setCats([...cats,name]);setName('')}}}><Plus size={16}/> Add</Button></div><div className="mt-6 flex flex-wrap gap-3">{cats.map(c=><span key={c} className="rounded-full border border-white/10 px-4 py-2 text-sm">{c}</span>)}</div></AdminLayout>}
 function AdminMedia(){const [files,setFiles]=useState([]);return <AdminLayout><AdminHeader title="Media library" text="Upload and manage visual assets."/><label className="mt-8 flex cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-white/20 p-12 text-center hover:border-accent"><ImageIcon className="text-accent"/><span className="mt-3">Choose images to upload</span><span className="mt-1 text-sm text-slate-500">JPG, PNG, WEBP, SVG · max 10MB</span><input type="file" multiple accept="image/*" className="hidden" onChange={e=>setFiles(Array.from(e.target.files||[]))}/></label>{files.length>0&&<div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4">{files.map(f=><div key={f.name} className="rounded-xl border border-white/10 p-3 text-sm"><p className="truncate">{f.name}</p><p className="mt-1 text-xs text-slate-500">Ready for Supabase Storage</p></div>)}</div>}</AdminLayout>}
 function Empty({text}){return <div className="py-20 text-center text-slate-500">{text}</div>}
